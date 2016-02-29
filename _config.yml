@@ -17,3 +17,13 @@ github_username:  selivan
 
 # Build settings
 markdown: kramdown
+gems:
+  # RSS feeds
+  - jekyll-feed
+  # https://help.github.com/articles/redirects-on-github-pages/
+  - jekyll-redirect-from
+  # GitHub Emoji
+  - jemoji
+  # GitHub @mentions
+  - jekyll-mentions
+
