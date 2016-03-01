@@ -17,13 +17,17 @@ github_username:  selivan
 
 # Build settings
 markdown: kramdown
+#
+timezone: Europe/Moscow
 gems:
   # RSS feeds
   - jekyll-feed
   # https://help.github.com/articles/redirects-on-github-pages/
   - jekyll-redirect-from
-  # GitHub Emoji
+  # GitHub Emoji https://help.github.com/articles/emoji-on-github-pages/
+  # Example: :+1:
   - jemoji
-  # GitHub @mentions
+  # GitHub @mentions https://help.github.com/articles/mentions-on-github-pages/
   - jekyll-mentions
-
+  # GitHub Sitemap https://help.github.com/articles/sitemaps-for-github-pages/
+  - jekyll-sitemap
