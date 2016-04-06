@@ -27,7 +27,7 @@ done
 
 Yes, you can use associative arrays in bash >= 4.0.
 
-Terminate all background tasks of main script was interrupted by Ctrl+C:
+Terminate all background tasks if main script was interrupted by Ctrl+C:
 
 ```bash
 function term_all_processes() {
