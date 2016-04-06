@@ -15,12 +15,12 @@ url: "https://selivan.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 github_username:  selivan
 
-# Publish posts with date in future
+# Publish posts with a future date
 future: true
 
-# Build settings
 markdown: kramdown
-#
+kramdown:
+  input: GFM
 timezone: Europe/Moscow
 gems:
   # RSS feeds
