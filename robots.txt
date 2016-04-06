@@ -1,5 +1,6 @@
+---
+layout: none
+---
 # http://vdaubry.github.io/2014/10/21/SEO-for-your-Jekyll-blog
 User-agent: *
-# This doesn't work for some reason :(
 #Sitemap: {{ site.url }}/sitemap.xml
-Sitemap: https://selivan.github.io/sitemap.xml
