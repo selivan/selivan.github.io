@@ -19,6 +19,7 @@ github_username:  selivan
 future: true
 
 markdown: kramdown
+# use Github Flavored Markdown
 kramdown:
   input: GFM
 timezone: Europe/Moscow
