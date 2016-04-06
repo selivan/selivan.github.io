@@ -1,5 +1,5 @@
 #!/bin/bash
-# I use jekyll and dependant ruby gems installed in home dir to keep system clean
+# I have jekyll and dependant ruby gems installed in home dir to keep base system clean
 
 export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 jekyll serve -w
