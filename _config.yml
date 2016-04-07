@@ -3,7 +3,7 @@
 
 # Site settings
 title: selivan.github.io
-#email: selivan2@gmail.com
+#email: selivan.at.github@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Just another IT blog.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -15,7 +15,7 @@ github_username:  selivan
 future: true
 
 markdown: kramdown
-# use Github Flavored Markdown
+# Use Github Flavored Markdown
 kramdown:
   input: GFM
 timezone: Europe/Moscow
