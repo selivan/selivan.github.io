@@ -5,7 +5,7 @@ categories: jekyll
 ---
 Task: install jekyll with github-pages extenshions on Ubuntu 14.04 Trusty.
 
-In trusty repositories maximum available ruby version is 1.9. Github Pages [started using jekyll 3.0](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0) in Febrary 2016 (see [dependencies and versions](https://pages.github.com/versions/)). It requires at least ruby 2.0.
+In trusty repositories maximum available ruby version is 1.9. Github Pages [started using jekyll 3.0](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0) at May 1 2016 (see current [dependencies and versions](https://pages.github.com/versions/)). It requires at least ruby 2.0.
 
 Add ppa with stable ruby versions built by [this guys](https://www.brightbox.com/docs/ruby/ubuntu/) and install it:
 
