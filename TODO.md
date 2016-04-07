@@ -1,7 +1,9 @@
 * [ ] Enlarge fonts
-* [ ] Add tags(categories)
+* [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
 * [ ] Add Linkedin profile link
-* [ ] Promote posts on reddit (may be add any autometion, like button "reddit it"?)
+* [ ] Promote posts on reddit (may be add any automation, like button "reddit it"?)
+* [ ] Re-work structure: separate about, blog, software(? stuff projects goodies ). Good example: http://www.terminally-incoherent.com/
+* [ ] ??? Use font-awesomwe icons instead of SVG. Example: http://www.terminally-incoherent.com/
 * [x] Add Disqus comments
 * [x] use SVG icon for RSS, like for github
 * [x] Move RSS link to footer
