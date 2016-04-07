@@ -12,8 +12,8 @@
 
   <!-- Try to always switch to HTTPS -->
   <script>
-  var host = "{{ site.github_username }}.github.io";
-  if ((host == window.location.host) && (window.location.protocol != "https:")) { window.location.protocol = "https:"} ;
+  var production_host = "{{ site.github_username }}.github.io";
+  if ((production_host == window.location.host) && (window.location.protocol != "https:")) { window.location.protocol = "https:"} ;
   </script>
 
 </head>
