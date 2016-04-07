@@ -12,7 +12,8 @@
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
           {% endif %}
             <li>
-            <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a>
+            <!-- <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a> -->
+            {% include icon-rss.html %}
             </li>
         </ul>
       </div>
