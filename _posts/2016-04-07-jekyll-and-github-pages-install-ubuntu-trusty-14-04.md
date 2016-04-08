@@ -26,5 +26,5 @@ Now you can run jekyll with github-pages support. It may be convenient to create
 
 ```bash
 export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-jekyll -w
+jekyll serve -w
 ```
