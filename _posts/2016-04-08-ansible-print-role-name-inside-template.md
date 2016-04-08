@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Ansible: print role name inside template"
-categories: ansible
+tags: ansible
 ---
 Ansible guys suppose to use `{% raw %}{{ ansible_managed }}{% endraw %}` inside templates to indicate where it came from. Unfortunately, this variable contains date and time, so it is changed on every playbook run. That breaks `--check` mode.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Install jekyll and github-pages on Ubuntu 14.04 Trusty"
-categories: jekyll
+tags: jekyll
 ---
 Task: install jekyll with github-pages extenshions on Ubuntu 14.04 Trusty.
 

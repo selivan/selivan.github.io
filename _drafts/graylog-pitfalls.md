@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Graylog pitfalls"
-categories: graylog
+tags: graylog
 ---
 * If extractor fails - message is not saved. For safety use regex check in every extractor. It may affect performance, but all your messages will be saved.
 * If you are extracting timestamp and it does not contain explicit timezone, it alwaus defaults to UTC. Even if you configured your timezone in graylog settings. So always denote correct timezone in timestamp extractor.
