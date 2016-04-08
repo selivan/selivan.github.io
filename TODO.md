@@ -2,7 +2,7 @@
 * [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
 * [ ] Add Linkedin profile link
 * [ ] Promote posts on reddit (may be add any automation, like button "reddit it"?)
-* [ ] Re-work structure: separate about, blog, software(? stuff projects goodies ). Good example: http://www.terminally-incoherent.com/
+* [ ] Re-work structure: separate about, blog, software(? stuff projects goodies ). Good example: http://www.terminally-incoherent.com/ Pther good one: http://www.cambus.net/
 * [ ] ??? Use font-awesomwe icons instead of SVG. Example: http://www.terminally-incoherent.com/ Counter-argument: http://www.sitepoint.com/icon-fonts-vs-svg-debate/
 * [x] Add Disqus comments
 * [x] use SVG icon for RSS, like for github
