@@ -6,6 +6,15 @@
   * Good example: http://www.terminally-incoherent.com/
   * http://www.cambus.net/
   * https://github.com/jekyll/jekyll/wiki/Sites
+  * Or take ready-ti-use theme:
+    * http://jekyllthemes.io
+    * https://github.com/jekyll/jekyll/wiki/themes
+    * https://github.com/jekyll/jekyll/wiki/sites
+    * http://jekyllthemes.org
+    * https://github.com/mmistakes/so-simple-theme
+    * http://jekyllthemes.org/themes/dbyll/
+* [ ] Add copyright(something of creative commons share alike).
+* [ ] Add about
 * [ ] ??? Use font-awesomwe icons instead of SVG. Example: http://www.terminally-incoherent.com/ Counter-argument: http://www.sitepoint.com/icon-fonts-vs-svg-debate/
 * [x] Add Disqus comments
 * [x] use SVG icon for RSS, like for github
