@@ -8,7 +8,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Just another IT blog.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://selivan.github.io" # the base hostname & protocol for your site
-#twitter_username: jekyllrb
+#twitter_username: i_got_no_twitter
 github_username:  selivan
 
 # Publish posts with a future date
@@ -35,3 +35,6 @@ gems:
   - jekyll-mentions
   # GitHub Sitemap https://help.github.com/articles/sitemaps-for-github-pages/
   - jekyll-sitemap
+  # Jekyll-seo-tag: add metadata tags for search engines and social networks to better index and display site's content
+  # https://github.com/jekyll/jekyll-seo-tag#usage
+  - jekyll-seo-tag
