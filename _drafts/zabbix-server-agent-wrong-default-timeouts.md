@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Zabbix: unawailable items and hosts caused by default wrong timeout settings."
+title:  "Zabbix: unawailable items and hosts caused by wrong default timeout settings."
 tags: zabbix
 ---
 
