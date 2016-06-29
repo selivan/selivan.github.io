@@ -6,6 +6,6 @@ tags: [jekyll, discus, github, blog]
   * jekyll template
   * robots.txt
   * sitemap.xml
-  * force https
+  * force https - no need, now github pages can do it natively
   * connect discus
   * choose license
