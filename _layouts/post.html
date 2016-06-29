@@ -25,8 +25,7 @@ layout: default
   */
 
   // Allow comments to be loaded on localhost
-  // production_host is set in head.html
-  if (production_host != window.location.host) { var disqus_developer = 1; }
+  if ("{{ site.github_username }}.github.io" != window.location.host) { var disqus_developer = 1; }
 
   var disqus_config = function () {
   // Replace PAGE_URL with your page's canonical URL variable
