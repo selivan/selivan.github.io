@@ -8,7 +8,7 @@ PXC 5.5 work does not work with IPv6 out-of-the-box: SST does not work and it ca
 
 To avoid error with parsing IPv6 addresses in config, use hostnames instead.
 
-To make SST work, use `sockopt` to force socat use IPv6. Warning: this will break SST for IPv4-only hosts.
+To make SST work, use [sockopt](https://www.percona.com/doc/percona-xtradb-cluster/5.5/manual/xtrabackup_sst.html#sockopt) to force `socat` use IPv6. Warning: this will break SST for IPv4-only hosts.
 
 Here is example config:
 
