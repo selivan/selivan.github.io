@@ -7,6 +7,7 @@
   * http://www.cambus.net/
   * https://github.com/jekyll/jekyll/wiki/Sites
   * Or take ready-to-use theme:
+    * http://toja.io/about/ https://mmistakes.github.io/minimal-mistakes/
     * http://jekyllthemes.io
     * https://github.com/jekyll/jekyll/wiki/themes
     * https://github.com/jekyll/jekyll/wiki/sites
