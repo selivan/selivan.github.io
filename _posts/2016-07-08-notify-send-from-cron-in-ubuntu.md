@@ -7,7 +7,7 @@ In ubuntu, you can use `notify-send` to show notificactions. But if try to show 
 
 `/usr/local/bin/gui-program-from-cron.sh`:
 
-```
+```bash
 #!/bin/sh
 [ "$#" -lt 1 ] && echo "Usage: $0 program options" && exit 1
 
@@ -19,7 +19,7 @@ env_reference_process=$( pgrep -u $user xfce4-session || pgrep -u $user ciannamo
 
 export DBUS_SESSION_BUS_ADDRESS=$(cat /proc/"$env_reference_process"/environ | grep -z DBUS | sed 's/DBUS_SESSION_BUS_ADDRESS=//')
 export DISPLAY=$(cat /proc/"$env_reference_process"/environ | grep -z DISPLAY | sed 's/DISPLAY=//')
-"$program" $@
+"$program" "$@"
 ```
 
 `crontab`:
