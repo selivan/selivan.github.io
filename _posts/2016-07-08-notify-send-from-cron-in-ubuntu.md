@@ -15,7 +15,7 @@ program="$1"
 shift
 
 user=$(whoami)
-env_reference_process=$( pgrep -u $user xfce4-session || pgrep -u $user ciannamon-session || pgrep -u $user gnome-session || pgrep -u $user gnome-shell || pgrep -u $user kdeinit )
+env_reference_process=$( pgrep -u "$user" xfce4-session || pgrep -u "$user" ciannamon-session || pgrep -u "$user" gnome-session || pgrep -u "$user" gnome-shell || pgrep -u "$user" kdeinit )
 
 export DBUS_SESSION_BUS_ADDRESS=$(cat /proc/"$env_reference_process"/environ | grep -z DBUS | sed 's/DBUS_SESSION_BUS_ADDRESS=//')
 export DISPLAY=$(cat /proc/"$env_reference_process"/environ | grep -z DISPLAY | sed 's/DISPLAY=//')
