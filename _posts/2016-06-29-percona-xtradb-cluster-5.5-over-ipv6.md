@@ -12,7 +12,7 @@ To make SST work, use [sockopt](https://www.percona.com/doc/percona-xtradb-clust
 
 Here is example config:
 
-```
+```ini
 [mysqld]
 wsrep_provider_options = "gmcast.listen_addr=tcp://[::]:4567; ist.recv_addr=HOST-IP6-NAME:4568"
 wsrep_sst_receive_address = HOST-IP6-NAME:4444
