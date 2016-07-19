@@ -14,7 +14,7 @@ So, if you want to aviod _rarely appearing mysterios problems_ with zabbix, you 
 
 For example, check `net.tcp.port[IP,port]` has no timeout parameter, and if IP is not answering, you have broken timeouting item. If IP was available when you applied template with new items, you won't notice anything wrong. To make tcp check with defined timeout, you can use this UserParameter for *nix hosts:
 
-```
+```config
 # tcp_connect_check[IP, port, timeout_seconds]
 # Security: UnsafeUserParameters=no disables sending some symbols to custom check, never change it
 UserParameter=tcp_connect_check[*], /bin/nc -z "$1" "$2" -w "$3"; echo $?

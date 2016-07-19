@@ -24,7 +24,7 @@ export DISPLAY=$(cat /proc/"$env_reference_process"/environ | grep -z ^DISPLAY= 
 
 `crontab`:
 
-```
+```config
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 */45 * * * * /usr/local/bin/gui-program-from-cron.sh notify-send --expire-time=30000 --icon=dialog-information "GET UP AND EXERCISE"
 ```

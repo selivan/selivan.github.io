@@ -11,6 +11,6 @@ First solution: you can enable monitoring of not supported items in Configuratio
 
 Here is second solution: write user parameter commands so, that if command result was non-zero, they report unusual value, switching trigger to 'ERROR':
 
-```
+```config
 UserParameter=php_fpm.active_processes, ( curl --max-time 2 --silent http://localhost/php_fpm_status || echo 'active processes: 9999' ) | grep '^active processes' | tr -s ' ' | cut -d' ' -f 3
 ```

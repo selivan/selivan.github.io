@@ -13,7 +13,7 @@ chown syslog /var/lib/syslog-ng
 
 Modify service config script `/etc/default/syslog-ng`:
 
-```
+```bash
 SYSLOGNG_OPTS="-u syslog -g syslog"
 
 if [ ! -e /var/run/syslog-ng.pid ]

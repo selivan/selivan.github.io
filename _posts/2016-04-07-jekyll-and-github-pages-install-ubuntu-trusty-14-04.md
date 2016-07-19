@@ -9,7 +9,7 @@ In trusty repositories maximum available ruby version is 1.9. Github Pages [star
 
 Add ppa with stable ruby versions built by [this guys](https://www.brightbox.com/docs/ruby/ubuntu/) and install it:
 
-```
+```bash
 sudo apt-add-repository ppa:brightbox/ruby-ng; sudo apt-get update
 sudo apt-get install ruby2.3 ruby2.3-dev ruby-switch
 ```
@@ -18,7 +18,7 @@ With `ruby-switch` you can have multiple ruby versions installed and select one 
 
 Now we have to install required gems. I don't want to create chaos of ruby gems installed from debian packages and manually, so I prefer to keep all required gems in home dir:
 
-```
+```bash
 gem install --user-install github-pages --no-rdoc --no-ri
 ```
 

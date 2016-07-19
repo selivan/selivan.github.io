@@ -15,7 +15,7 @@ And now, since you will never have second stand-alone master, you can use it wit
 
 `haproxy.cfg`:
 
-```
+```config
 defaults REDIS
     mode tcp
     timeout connect  4s
