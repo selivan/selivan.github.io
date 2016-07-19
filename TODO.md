@@ -1,4 +1,4 @@
-* [-] Enlarge fonts
+* [ ] ~~Enlarge fonts~~
 * [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
 * [ ] Add Linkedin profile link
 * [x] Promote posts on reddit (may be add any automation, like button "reddit it"?)
