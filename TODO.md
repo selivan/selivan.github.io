@@ -1,7 +1,7 @@
-* [ ] Enlarge fonts
+* [-] Enlarge fonts
 * [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
 * [ ] Add Linkedin profile link
-* [ ] Promote posts on reddit (may be add any automation, like button "reddit it"?)
+* [x] Promote posts on reddit (may be add any automation, like button "reddit it"?)
 * [ ] Re-work structure: separate about, blog, software(? stuff projects goodies ).
   * Good example: http://www.terminally-incoherent.com/
   * http://www.cambus.net/
@@ -17,7 +17,7 @@
     * https://github.com/mmistakes/so-simple-theme
     * http://jekyllthemes.org/themes/dbyll/
     * https://github.com/shashankmehta/greyshade
-* [ ] Add copyright(something of creative commons share alike).
+* [x] Add copyright(something of creative commons share alike).
 * [ ] Add about
 * [ ] ??? Use font-awesomwe icons instead of SVG. Example: http://www.terminally-incoherent.com/ Counter-argument: http://www.sitepoint.com/icon-fonts-vs-svg-debate/
 * [x] Add Disqus comments
