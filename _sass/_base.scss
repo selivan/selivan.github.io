@@ -129,6 +129,8 @@ blockquote {
  */
 pre,
 code {
+    /* All code displayed with word wrap */
+    white-space: pre-wrap;
     font-size: 15px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
