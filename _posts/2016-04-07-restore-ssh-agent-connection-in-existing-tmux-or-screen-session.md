@@ -9,7 +9,7 @@ When you use ssh agent, tmux or screen session gets it from environment variable
 
 ```bash
 if [ -n "$SSH_AUTH_SOCK" -a "$SSH_AUTH_SOCK" != "$HOME/.ssh/auth_sock" ]; then
-		ln -sf $SSH_AUTH_SOCK $HOME/.ssh/auth_sock
-		export SSH_AUTH_SOCK=$HOME/.ssh/auth_sock
+		ln -sf $SSH_AUTH_SOCK $HOME/.ssh/auth_sock \
+		&& export SSH_AUTH_SOCK=$HOME/.ssh/auth_sock
 fi
 ```
