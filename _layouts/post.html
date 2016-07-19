@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
@@ -12,9 +13,13 @@ layout: default
     {{ content }}
   </div>
 
-  <div class="post-content" itemprop="articleBody">
+  <div class="post-content">
   <hr \><br \>
-  This article is available under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike License <img alt="Creative Commons License" style="border-width:0" src="/cc-by-sa-88x31.png" /></a>.
+  License: <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Attribution-ShareAlike License" style="border-width:0" src="/images/cc-by-sa-88x31.png" />
+  </a> Share:
+  <a href="//www.reddit.com/submit?url={{ site.url }}{{ page.url | cgi_escape }}"><img alt="share on reddit" src="/images/social-icons/reddit.svg" height=48 width=32 /></a>
+  <a href="//www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | cgi_escape }}"><img alt="share on facebook" src="/images/social-icons/facebook.svg" height=48 width=32 /></a>
+  <a href="//twitter.com/share?url={{ site.url }}{{ page.url | cgi_escape }}"><img alt="share on twitter" src="/images/social-icons/twitter.svg" height=48 width=32 /></a>
   </div>
 
   <div class="post-content">
