@@ -1,6 +1,6 @@
 ---
 layout: default
 ---
-I have been collecting notes on my linux administration experience for a while. Now at last this blog is created. I am going to publish all notes I have collected and anything I will create further. 
+My name is Pavel Selivanov. I created this blog to write down notes on my Linux administration experience. Hope somebody will find this helpful.
 
-I am trying to store any stuff I created that may help anybody else in my [github repositories](https://github.com/selivan).
+Also, when I happen to create some probably useful stuff, I put it on my [github](https://github.com/selivan).
