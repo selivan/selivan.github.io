@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Make notify-send work from user cron file in ubuntu"
-tags: notify-send,ubuntu,desktop
+tags: [notify-send,ubuntu,desktop]
 ---
   In ubuntu, you can use `notify-send` to show notificactions. But if you try to show notification from crontab, it will fail: `notify-send` requires proper values in `$DBUS_SESSION_BUS_ADDRESS` and `$DISPLAY`. To override this disappointing limitation, you can grep this values from some known process of yours. Here is example that works for XFCE, Gnome, Unity, Cainnamon and KDE:
 
