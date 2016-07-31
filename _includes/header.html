@@ -15,7 +15,12 @@
 
       <div class="trigger">
         <a class="page-link" href="/about">About</a>
+        <a class="page-link" href="{{ "/feed.xml" | prepend: site.baseurl }}"> <span class="icon icon--github">
+        {% include icon-rss.svg %}
+    </span>RSS</a>
       </div>
+
+
 {% comment %}
       <div class="trigger">
         {% for my_page in site.pages %}
