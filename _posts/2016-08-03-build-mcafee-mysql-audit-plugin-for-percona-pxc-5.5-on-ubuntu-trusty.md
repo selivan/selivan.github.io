@@ -81,7 +81,7 @@ First script argument is mysqld executable and second is it's debugging symbols.
 
 Let's try to run plugin. Add this to [mysqld] section of `my.ini`:
 
-```bash
+```ini
 #
 # * Audit plugin
 #
