@@ -30,4 +30,8 @@ export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 jekyll serve -w
 ```
 
-To update your setup to latest github-pages version, you can just do `gem update github-pages --user-install --no-rdoc --no-ri`
+To update your setup to latest github-pages version, you can just do
+
+```bash
+gem update github-pages --user-install --no-rdoc --no-ri
+```
