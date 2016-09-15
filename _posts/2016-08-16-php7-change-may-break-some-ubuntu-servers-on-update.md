@@ -6,6 +6,7 @@ tags: [php,ubuntu]
 *This is translation of my original article in russian: [https://habrahabr.ru/post/310136](https://habrahabr.ru/post/310136)*
 
 http://php.net/manual/en/configuration.file.php#configuration.file.changelog:
+
 > 7.0.0 Hash marks (#) are no longer recognized as comments.
 
 Seems harmless. Administrators will see errors on test installation and fix old configs. But here comes one nasty trait of php-fpm: it refuses to start with incorrect `php-fpm.conf`, but it will start with incorrect `php.ini`, ignoring all settings there just rolling back to default values. Error is not written to php-fpm log. It can be spotted in console, but service start script hides that messages.
