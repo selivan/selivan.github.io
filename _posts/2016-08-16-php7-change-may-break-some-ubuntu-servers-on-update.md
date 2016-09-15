@@ -13,7 +13,7 @@ Seems harmless. Administrators will see errors on test installation and fix old 
 
 If `php.ini` was copied from 5th version, and more strict parser of 7th reads it with errors - php-fpm will silently work with default values. For example, if old file had `#` for comments and some of that comments has a brace `(` inside. Without brace it still allows such comments, despite what changelog says.
 
-Maximum size of uploaded file becomes `post_max_size=8m`. `expose_php` in on, so PHP version is sent out in `X-Powered-By` header. `disable_functions`, used to restrict potentially dangerous functions, becomes empty. `display_errors` is 1 and visitors will see full stacktrace on error pages. And a lot of other funny things.
+Maximum size of uploaded file becomes `post_max_size=8m`. `expose_php` in on, so PHP version is sent out in `X-Powered-By` header. `disable_functions`, used to restrict potentially dangerous functions, becomes empty. `display_errors` is 1 and visitors will see a full stacktrace on error pages. And a lot of other funny things.
 
 Ubuntu maintainers are trying to avoid this problem with a kludge:
 
