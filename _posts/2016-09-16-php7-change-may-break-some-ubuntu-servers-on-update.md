@@ -2,6 +2,7 @@
 layout: post
 title:  "Change in PHP 7 that may break some of Ubuntu servers on update"
 tags: [php,ubuntu]
+redirect_from: "/2016/08/16/php7-change-may-break-some-ubuntu-servers-on-update.html"
 ---
 *This is translation of my original article in russian: [https://habrahabr.ru/post/310136](https://habrahabr.ru/post/310136)*
 
