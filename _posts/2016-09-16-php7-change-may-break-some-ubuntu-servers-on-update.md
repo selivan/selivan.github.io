@@ -51,4 +51,4 @@ P.S.
 
   * [bug for ppa:ondrej/php](https://github.com/oerdnj/deb.sury.org/issues/456)
   * [bug for php7.0-fpm in ubuntu xenial](https://bugs.launchpad.net/ubuntu/+source/php7.0/+bug/1623540)
-  * [bug for php developers] https://bugs.php.net/bug.php?id=73099
+  * [bug for php developers](https://bugs.php.net/bug.php?id=73099)
