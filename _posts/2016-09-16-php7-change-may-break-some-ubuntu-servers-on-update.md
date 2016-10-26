@@ -2,6 +2,7 @@
 layout: post
 title:  "Change in PHP 7 that may break some of Ubuntu servers on update"
 tags: [php,ubuntu]
+redirect_from: "/2016/08/16/php7-change-may-break-some-ubuntu-servers-on-update.html"
 ---
 *This is translation of my original article in russian: [https://habrahabr.ru/post/310136](https://habrahabr.ru/post/310136)*
 
@@ -47,5 +48,7 @@ php7.0-fpm package from popular [ppa:ondrej/php](https://github.com/oerdnj/deb.s
 In total: if you are upgrading from PHP 5 tp PHP 7, make sure, that is does not ignore settings in `php.ini` and use default values.
 
 P.S.
-*  [bug for ppa:ondrej/php](https://github.com/oerdnj/deb.sury.org/issues/456)
-*  [bug for php7.0-fpm in ubuntu xenial](https://bugs.launchpad.net/ubuntu/+source/php7.0/+bug/1623540)
+
+  * [bug for ppa:ondrej/php](https://github.com/oerdnj/deb.sury.org/issues/456)
+  * [bug for php7.0-fpm in ubuntu xenial](https://bugs.launchpad.net/ubuntu/+source/php7.0/+bug/1623540)
+  * [bug for php developers](https://bugs.php.net/bug.php?id=73099)
