@@ -2,6 +2,7 @@
 layout: post
 title:  "Fix 502 error on php-fpm service reload"
 tags: php
+redirect_from: /2016/11/25/php-fpm-502-error-on-reload.html
 ---
 
 In default configuration php-fpm produces errors 502(bad gateway) on reloading. This is really annoying, if you need to do it often. For example, if you use tool like [deployer](https://deployer.org/) to deploy your application into new directory, switch symlink to it and reload php-fpm.
