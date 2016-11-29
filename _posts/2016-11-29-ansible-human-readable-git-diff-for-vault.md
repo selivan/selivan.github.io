@@ -9,6 +9,7 @@ Ansible vault can be used transparently with modules `include_vars` and `copy`. 
 To make git diffs human-readable, we can use [git attributes](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes) to specify properties for different pathnames in git repository.
 
 `.gitattributes`:
+
 ```git
 *.vault diff=ansible-vault merge=binary
 *.vault.yml diff=ansible-vault merge=binary
