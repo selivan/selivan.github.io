@@ -24,4 +24,4 @@ git config diff.ansible-vault.cachetextconv false
 
 This will also make `git blame` work fine for this files, but only if they always were encrypted during repository history.
 
-I found this idea here: https://github.com/building5/ansible-vault-tools. It also has scripts to make human-readable merge possible for vault encrypted files, but that requires little more complex setup.
+I found this idea here: [github.com/building5/ansible-vault-tools](https://github.com/building5/ansible-vault-tools). It also has scripts to make human-readable merge possible for vault encrypted files, but that requires little more complex setup.
