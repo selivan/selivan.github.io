@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ansible: human readable git diff for vault ecnrypted files"
+title:  "Ansible: human readable git diff for vault encrypted files"
 tags: ansible,git
 ---
 
