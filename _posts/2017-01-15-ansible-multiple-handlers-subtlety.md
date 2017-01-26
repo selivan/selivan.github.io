@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ansible multiple handlers subtelty"
+title:  "Ansible running multiple handlers subtelty"
 tags: ansible
 ---
 
