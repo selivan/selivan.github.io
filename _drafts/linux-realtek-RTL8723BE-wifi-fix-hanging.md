@@ -31,9 +31,9 @@ parm:           fwlps:Set to 1 to use FW control power save (default 1)
 ```
 
 Unload module and load it with changed options:
-```
-# rmmod rtl8723be
-# modprobe rtl8723be ips=0
+```bash
+rmmod rtl8723be
+modprobe rtl8723be ips=0
 ```
 
 To check current parameters for already loaded and running module: `systool -v -m rtl8723be`
@@ -41,7 +41,7 @@ To check current parameters for already loaded and running module: `systool -v -
 For me `ips=0 swlps=0 fwlps=0` fixes the problem. It may break power saving, but I don't care about it on desktop.
 
 Make kernel module parameters permanent:
-```
+```bash
 cat > /etc/modprobe.d/options-rtl8723be.conf <<EOF
 options rtl8723be ips=0 swlps=0 fwlps=0
 EOF
