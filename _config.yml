@@ -11,10 +11,13 @@ github_username:  selivan
 # Publish posts with a future date
 future: true
 
+
+# https://help.github.com/articles/page-build-failed-config-file-error/#fixing-highlighting-errors
+highlighter: rouge
 markdown: kramdown
 # Use Github Flavored Markdown
 kramdown:
-  input: GFM
+   input: GFM
 timezone: Europe/Moscow
 gems:
   # RSS feeds
