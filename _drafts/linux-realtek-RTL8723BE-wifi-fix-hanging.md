@@ -1,0 +1,50 @@
+---
+layout: post
+title:  "Fix network hanging for WiFi card Realtek RTL8723BE on Linux kernel 4.4"
+tags: [linux, wifi, rtl8723be]
+---
+
+On Linux kernel 4.4(used in Ubuntu Xenial) Realtek wireless card RTL8723BE has problems: after about a minute of work it hangs and start working only after reboot. This problem does not occur on later kernel versions. May be this problem also doesn't occur on all chipsets, but it affects me using Asus VivoMini UN65H motherboard. I'd like to continue using unchanged distributive kernel, so I have to fix this.
+
+Let's find out what driver is used by wifi card:
+
+```
+# ethtool -i wlan3 | grep driver
+driver: rtl8723be
+```
+
+Now we can see that it uses kernel module rtl8723be. Check out module parameters:
+
+```
+# modninfo rtl8723be
+filename:       /lib/modules/4.4.0-62-generic/kernel/drivers/net/wireless/realtek/rtlwifi/rtl8723be/rtl8723be.ko
+firmware:       rtlwifi/rtl8723befw.bin
+description:    Realtek 8723BE 802.11n PCI wireless
+...
+parm:           ips:Set to 0 to not use link power save (default 1)
+ (bool)
+parm:           swlps:Set to 1 to use SW control power save (default 0)
+ (bool)
+parm:           fwlps:Set to 1 to use FW control power save (default 1)
+ (bool)
+...
+```
+
+Unload module and load it with changed options:
+```
+# rmmod rtl8723be
+# modprobe rtl8723be ips=0
+```
+
+To check current parameters for already loaded and running module: `systool -v -m rtl8723be`
+
+For me `ips=0 swlps=0 fwlps=0` fixes the problem. It may break power saving, but I don't care about it on desktop.
+
+Make kernel module parameters permanent:
+```
+cat > /etc/modprobe.d/options-rtl8723be.conf <<EOF
+options rtl8723be ips=0 swlps=0 fwlps=0
+EOF
+```
+
+If module can be loaded on early boot stages, we also need to update initrams: `update-initramfs -u`. It will copy our `modprobe.d/*.conf` inside initial ramdisk, used on system boot.
