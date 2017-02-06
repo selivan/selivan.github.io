@@ -105,11 +105,11 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 
 [Подробнее про порядок обработки сообщений](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#quick-overview-of-message-flow-and-objects).
 
-### Примеры
+## Примеры конфигурации
 
 Записываем все сообщения категорий auth и authpriv в файл `/var/log/auth.log`, и продолжаем их обработку:
 
-```bash
+```
 # legacy
 auth,authpriv.*  /var/log/auth.log
 # новый формат
@@ -120,7 +120,7 @@ if ( $syslogfacility-text == "auth" or $syslogfacility-text == "authpriv" ) then
 
 Все сообщения с именем программы, начинающимся с "haproxy", записываем в файл `/var/log/haproxy.log`, не сбрасывая буфер на диск после каждого сообщения, и прекращаем дальнейшую обработку:
 
-```bash
+```
 # legacy
 :programname, startswith, "haproxy", -/var/log/haproxy.log
 & ~
@@ -136,6 +136,17 @@ if $programname startswith "haproxy" then -/var/log/haproxy.log
 
 Проверка конфига: `rsyslogd -N 1`. Больше примеров конфигурации: [раз](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [два](http://wiki.rsyslog.com/index.php/Configuration_Samples).
 
+## Клиент: пересылка логов с сохранением имени файла
+
+Сохранять имена файлов мы будем в поле TAG.
+
+#### Чтение лог-файлов, заданных через wildcard
+
+## Сервер
+
+## Надёжная доставка сообщений. Очереди
+
+## Отказоустойчивость
 
 ---
 
