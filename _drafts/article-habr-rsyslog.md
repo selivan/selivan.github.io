@@ -10,7 +10,7 @@
 
 Например, Elastic Filebeat до сих пор не умеет inotify.
 
-- Нетребователен к памяти
+- Нетребователен к памяти. Возможно использование на embedded системах
 - Позволяет фильтровать сообщение перед сохранением/пересылкой.
 
 Странная задача, но иногда требуется. Например, [PCI DSS](https://ru.wikipedia.org/wiki/PCI_DSS) в разделе 3.4 требует маскировать или шифровать номера карт, если они сохраняются на диск. Тонкость в том, что если кто-то ввёл номер карты в строку поиска или в форму обратной связи, то как только вы сохранили запрос в лог, вы нарушаете стандарт. Наблюдение: пользователи пытаются ввести номер карты в любое поле ввода на странице, и норовят сообщить его саппорту вместе с CVV и PIN.
@@ -19,7 +19,7 @@
 
 ## Формат сообщений и legacy
 
-TLDR: всё плохо.
+*TLDR*: всё плохо.
 
 syslog появился в 80-х, и быстро стал стандартом логирования для Unix-like систем и сетевого оборудования. Стандарта не было, все писали по принципу совместимости с существующим софтом. В 2001 IETF описал текущее положение вещей в RFC 3164(статус "informational"). Т. к. реализации очень отличаются, то в частности в этом документе сказано "содержание любого IP пакета отправленного на UDP порт 514 должно рассматриваться как сообщение syslog". Потом попробовали стандартизировать формат в RFC 3195, но документ получился неудачным, для него в данный момент нету ни одной живой реализации. В 2009 приняли RFC 5424, определяющий структурированные сообщения, но этим редко кто пользуется.
 
@@ -39,6 +39,8 @@ syslog появился в 80-х, и быстро стал стандартом 
     - экранирование. Либо читаем на стороне приёмника текст с `#012` или `\n`, либо раскодируем обратно на стороне приёмника, но тогда могут искажаться сообщения, содержащие такие сочетания символов.
     - использование octet-counted TCP Framing, как определено в RFC 5425 для TLS-enabled syslog. Нестандарт, только некоторые реализации.
 
+#### Альтернатива: RELP
+
 Если сообщения пересылаются между хостами, использующими rsyslog, можно вместо plain TCP sysog использовать [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. Был создан для rsyslog, сейчас поддерживается и некоторыми другими системами. В частности, его понимают Logstash и Graylog. Для транспорта использует TCP. Может опционально шифровать сообщения с помощью TLS. Надёжнее plain TCP, т. к. имеет подтверждение доставки сообщений. Решает проблему с multi-line сообщениями.
 
 ## Конфигурация rsyslog
@@ -52,7 +54,7 @@ auth,authpriv.*            /var/log/auth.log
 *.*       @192.168.1.1
 ```
 
-Т. к. возможности rsyslog гораздо больше, чем у его предшественника, формат конфигов был расширен директивами, начинающимися со знака `$`:
+Т. к. возможности rsyslog гораздо больше, чем у его предшественника, формат конфигов был расширен дополнительными директивами, начинающимися со знака `$`:
 
 ```
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
@@ -66,34 +68,74 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 - некоторые плагины(я пока с такими не сталкивался) могут не поддерживать новый RainerScript стиль настроек, им по-прежнему нужны старые директивы
 - настройка через старые директивы не всегда работает как ожидается для нового формата:
     - если модуль `omfile` вызывается с помощью старого формата: `auth,authpriv.*  /var/log/auth.log`, то владелец и разрешения получившегося файла регулируются старыми директивами `$FileOwner`, `$FileGroup`, `$FileCreateMode`. А вот если он вызывается с помощью `action(type="omfile" ...)`, то эти директивы игнорируются, и надо настраивать параметы action или задавать при загрузке модуля
-    - Директивы вида `$ActionQueueXXX` настраивают только очередь, которая будет использована в первом action после них, потом хзначения сбрасываются.
+    - Директивы вида `$ActionQueueXXX` настраивают только ту очередь, которая будет использована в первом action после них, потом значения сбрасываются.
 - точки с запятой где-то запрещены, а где-то наоборот обязательны(второе реже)
 
 Чтобы не спотыкаться об эти тонкости(да, в документации они описаны, но кто же её целиком читает?), стоит следовать простым правилам:
 - для маленьких простых конфигов использовать старый формат:  `:programname, startswith, "haproxy"  /var/log/haproxy.log`
-- для сложной обработки сообщений всегда использовать RainerScript, не трогая legacy директивы вида `$DoSomething`
+- для сложной обработки сообщений и для тонкой настройки Actions всегда использовать RainerScript, не трогая legacy директивы вида `$DoSomething`
 
-Подробнее об этом можно почитать в [документации](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#configuration-file).
+Подробнее про формат конфига [здесь](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#configuration-file).
 
 ## Обработка сообщений
 - все сообщения прилетают из какого-либо Input и попадают на обработку в привязанный к нему RuleSet. Если это явно не задано, то сообщения попадут в RuleSet по-умолчанию. Все директивы обработки сообщений, не вынесенные в отдельные RuleSet-блоки, относятся именно к нему. В частности, к нему относятся все директивы из традиционного формата конфигов: `local7.*  /var/log/myapp/my.log`
 - к Input привязан список парсеров для разбора сообщения. Если явно не задано, будет использоваться список парсеров для разбора традиционного формата syslog
-- RuleSet содержит список правил, правило состоит из фильтра и привязанных к нему Actions(может быть несколько)
+- Парсер выделяет из сообщения свойства. Самые используемые:
+    - `$msg` - сообщение
+    - `$rawmsg` - сообщение до обработки
+    - `$fromhost`, `$fromhost-ip` - DNS имя и IP адрес хоста-отправителя
+    - `$syslogfacility`, `$syslogfacility-text` - facility в числовой и текстовой форме
+    - `$syslogseverity`, `$syslogseverity-text` - то же для severity
+    - `$timereported` - время из сообщения
+    - `$syslogtag` - поле TAG
+    - `$programname` - поле TAG с отрезанным номером процесса: `named[12345]` -> `named`
+    - весь список можно посмотреть [тут](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
+- RuleSet содержит список правил, правило состоит из фильтра и привязанных к одного или нескольких Actions
 - Правила применяются последовательно к сообщению, попавшему в RuleSet, на первом сработавшем правиле сообщение не останавливается
 - Чтобы остановить обработку сообщения, можно использовать специальное discard action: `stop` или `~` в легаси-формате.
-- Как правило, Action использует модуль вывода("om...") или модуль изменения сообщения("mm...")
+- Внутри Action часто используются шаблоны. Шаблоны позволяют генерировать данные для передачи в Action из свойств сообщения, например, формат сообщения для передачи по сети или имя файла для записи. [Подробнее про шаблоны](http://www.rsyslog.com/doc/v8-stable/configuration/templates.html)
+- Как правило, Action использует модуль вывода("om...") или модуль изменения сообщения("mm..."). Вот некоторые из них:
+    - [omfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omfile.html) - вывод в файл
+    - [omfwd](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omfwd.html) - пересылка по сети, через udp или tcp
+    - [omrelp](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omrelp.html) - пересылка по сети по протоколу RELP
+    - [onmysql](http://www.rsyslog.com/doc/v8-stable/configuration/modules/ommysql.html), [ompgsql](http://www.rsyslog.com/doc/v8-stable/configuration/modules/ompgsql.html), [omoracle](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omoracle.html) - запись в базу
+    - [omelasticsearch](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omelasticsearch.html) - запись в ElasticSearch
+    - [omamqp1](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omamqp1.html) - пересылка по протоколу AMQP 1.0
+    - [весь список](http://www.rsyslog.com/doc/v8-stable/configuration/modules/idx_output.html) модулей вывода
+
+[Подробнее про порядок обработки сообщений](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#quick-overview-of-message-flow-and-objects).
 
 ### Примеры
 
-Записываем все сообщения категорий auth и authpriv в файл /var/log/auth.log:
-```
-# legacy формат
+Записываем все сообщения категорий auth и authpriv в файл `/var/log/auth.log`, и продолжаем их обработку:
+
+```bash
+# legacy
 auth,authpriv.*  /var/log/auth.log
 # новый формат
-if 
+if ( $syslogfacility-text == "auth" or $syslogfacility-text == "authpriv" ) then {
+    action(type="omfile" file="/var/log/auth.log")
+}
 ```
 
-[Подробнее](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#quick-overview-of-message-flow-and-objects).
+Все сообщения с именем программы, начинающимся с "haproxy", записываем в файл `/var/log/haproxy.log`, не сбрасывая буфер на диск после каждого сообщения, и прекращаем дальнейшую обработку:
+
+```bash
+# legacy
+:programname, startswith, "haproxy", -/var/log/haproxy.log
+& ~
+# новый формат
+if ( $programname startswith "haproxy" ) then {
+    action(type="omfile" file="/var/log/haproxy.log" flushOnTXEnd="off")
+    stop
+}
+# можно совмещать
+if $programname startswith "haproxy" then -/var/log/haproxy.log
+&~
+```
+
+Проверка конфига: `rsyslogd -N 1`. Больше примеров конфигурации: [раз](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [два](http://wiki.rsyslog.com/index.php/Configuration_Samples).
+
 
 ---
 
