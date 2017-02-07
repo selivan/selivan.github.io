@@ -4,7 +4,7 @@ title:  "Rsyslog configuration: forwarding log files, saving file names, handle 
 tags: [rsyslog, syslog]
 ---
 
-*This is translation of my original article in russian: https://habrahabr.ru/post/NNNNN*
+*This is translation of my original article in russian: https://habrahabr.ru/post/*
 
 ## Task
 
