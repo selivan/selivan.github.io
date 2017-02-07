@@ -254,5 +254,76 @@ input(type="imfile"
 
 ## Server
 
+On the server we have to accept forwarded logs and save them to file tree, according to sender host IP and recieve time: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. To set log file name from message content, we can use template. Variable `$.logpath` should be set inside RuleSet before using the template.
 
-На сервере надо принять переданные логи и разложить их по каталогам, в соответствии с IP передающего хоста и временем отправления: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. Для того, чтобы задать имя лог-файла в зависимости от содержания сообщения, мы также можем использовать шаблоны. Переменную `$.logpath` нужно будет задать внутри RuleSet перед использованием шаблона.
+```bash
+template(name="RemoteLogSavePath" type="list") {
+    constant(value="/srv/log/")
+    property(name="fromhost-ip")
+    constant(value="/")
+    property(name="timegenerated" dateFormat="year")
+    constant(value="-")
+    property(name="timegenerated" dateFormat="month")
+    constant(value="-")
+    property(name="timegenerated" dateFormat="day")
+    constant(value="/")
+    property(name="$.logpath" )
+}
+```
+
+Let's load all necessary modules and tuen off `$EscapeControlCharactersOnReceive`, otherwise we will have `\n` instead of new lines in recieved messages.
+
+```bash
+# Accept RELP messages from network
+module(load="imrelp")
+input(type="imrelp" port="20514" ruleset="RemoteLogProcess")
+
+# Default parameters for file output. Old-style global settings are not working with new-style actions
+module(load="builtin:omfile" FileOwner="syslog" FileGroup="adm" dirOwner="syslog"
+        dirGroup="adm" FileCreateMode="0640" DirCreateMode="0755")
+
+# Module to remove 1st space from message
+module(load="mmrm1stspace")
+
+# http://www.rsyslog.com/doc/v8-stable/configuration/input_directives/rsconf1_escapecontrolcharactersonreceive.html
+# Print recieved LF as-it-is, not like '\n'. For multi-line messages
+# Default: on
+$EscapeControlCharactersOnReceive off
+```
+
+Now let's create RuleSet tp parse incoming messages and saving them to apropriate files and folders. Services relying on syslog are expecting, that it will save message time and other syslog fields. So messages with standard facilities are saved in syslog format. For messages with local0-local7 facilities we will generate filename from `TAG`, and save pure message without other syslog fields. Problem with extra space in front of message is still present, because it emerges in message parsing phase. We will cut it out.
+
+To improve performance we will use asyncronous write: `asyncWriting="on"` and large buffer: `ioBufferSize=64k`. We won't flush the  buffer after aech recieved message: `flushOnTXEnd="off"`, but we will flush it once a second to have fresh logs on log server: `flushInterval="1"`.
+
+```
+ruleset(name="RemoteLogProcess") {
+    # For facilities local0-7 set log filename from $programname field: replace __ with /
+    # Message has arbitary format, syslog fields are not used
+    if ( $syslogfacility >= 16 ) then
+    {
+        # Remove 1st space from message. Syslog protocol legacy
+        action(type="mmrm1stspace")
+
+        set $.logpath = replace($programname, "__", "/");
+        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg"
+        flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+
+    # Logs with filename defined from facility
+    # Message has syslog format, syslog fields are used
+    } else {
+        if (($syslogfacility == 0)) then {
+    	    set $.logpath = "kern";
+        } else if (($syslogfacility == 4) or ($syslogfacility == 10)) then {
+            set $.logpath = "auth";
+        } else if (($syslogfacility == 9) or ($syslogfacility == 15)) then {
+            set $.logpath = "cron";
+        } else {
+            set $.logpath ="syslog";
+        }
+        # Built-in template RSYSLOG_FileFormat: High-precision timestamps and timezone information
+        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="RSYSLOG_FileFormat"
+        flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+    }
+} # ruleset
+```
+
