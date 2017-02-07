@@ -57,4 +57,26 @@ Transferred over network syslog message looks something like this:
 
 ### Alternative: RELP
 
-If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems.
+If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems. For instance, it's supported by Logstash and Graylog. Uses TCP for transport. Can optionally encrypt messages with TLS. It's more reliable than plain TCP syslog, because it does not loose messages when connection breaks. It solves problem with multi-line messages.
+
+## rsyslog configuration
+
+In contrast to the second popular syslog deamon, syslog-ng, rsyslog is compatible with configs of old syslogd:
+
+```bash
+auth,authpriv.*            /var/log/auth.log
+*.*;auth,authpriv.none     /var/log/syslog
+*.*       @syslog.example.net
+```
+
+Because rsyslog has a lot more features than it's predecessor, config format was extended with additional directives, starting from `$` sign:
+
+```
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+$WorkDirectory /var/spool/rsyslog
+$IncludeConfig /etc/rsyslog.d/*.conf
+``` 
+
+Starting with 6th version c-like RainerScript format was introduced. It allows to specify complex rules for message processing.
+
+
