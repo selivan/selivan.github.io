@@ -206,3 +206,53 @@ Last `stop` directive is required to stop processing this messages, otherwise th
 
 ### Reading log files set by wildcard
 
+*Interlude*
+
+Programmer: Hey, I can't find logs somevendor.log for begining of last month on log server, could you help me?  
+Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleand everything older than a week
+Programmer: @#$%^@!
+
+If application it creating many logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use `$.suffix` variable.
+
+```bash
+input(type="imfile"
+    File="/srv/myapp/logs/*.log"
+	Tag="myapp__"
+	Ruleset="myapp_logs"
+	addMetadata="on")
+
+ruleset(name="myapp_logs") {
+    # http://www.rsyslog.com/doc/v8-stable/rainerscript/functions.html
+	# re_extract(expr, re, match, submatch, no-found)
+	set $.suffix=re_extract($!metadata!filename, "(.*)/([^/]*)", 0, 2, "all.log");
+	call sendToLogserver
+}
+```
+
+Wildcards are supported only in imfile `inotify` mode(it's default).
+
+### Multi-line messages
+
+To work with files with multi-line messages imfile offers 3 options:
+- `readMode=1` - messages are divided by empty string
+- `readMode=2` - new messages start at rhe beginning of a line. If line starts from space or tabulation, it's part of message. Stack traces often look like this.
+- `startmsg.regex` - define new message by regexp(POSIX Extended)
+
+First two options have troubles working in `inotify` mode and third option can replace them with right regexp, so we will use it. Reading multi-line logs have a subtelty. New message mark is often placed on the first line of the message. So we can not be sure, that last message is complete, until new one starts. Because of this last message may be never tranferred. To avoid this, we set parameter `readTimeout`, and after that number of seconds last message is considered finished.
+
+```bash
+input(type="imfile"
+    File="/var/log/mysql/mysql-slow.log"
+    # http://blog.gerhards.net/2013/09/imfile-multi-line-messages.html
+    startmsg.regex="^# Time: [0-9]{6}"
+    readTimeout="2"
+    # no need to escape new line for RELP
+    escapeLF="off"
+    Tag=" mysql__slow.log"
+    Ruleset="sendToLogserver")
+```
+
+## Server
+
+
+На сервере надо принять переданные логи и разложить их по каталогам, в соответствии с IP передающего хоста и временем отправления: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. Для того, чтобы задать имя лог-файла в зависимости от содержания сообщения, мы также можем использовать шаблоны. Переменную `$.logpath` нужно будет задать внутри RuleSet перед использованием шаблона.
