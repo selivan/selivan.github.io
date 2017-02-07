@@ -107,4 +107,72 @@ Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/config
   * `$syslogtag` - `TAG` field
   * `$programname` - `TAG` field without process id: `named[12345]` -> `named`
   * whole list is [here](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
+* RuleSet contains list of rules, rule is filter and attached one or more Actions
+* Filters are logical expressions using message properties. More on filters [here](http://www.rsyslog.com/doc/v8-stable/configuration/filters.html)
+* Rules fro RuleSet are applied to message sequentially, it does not stop on first matched rule
+* To stop message processing inside RuleSet, special discard action can be used: `stop` or `~`  for legacy format
+* Inside Action templates are used often. Templates allow to generate data from message properties for using in Action. For example, message format for network forwarding or filename to write into. [More on templates](http://www.rsyslog.com/doc/v8-stable/configuration/templates.html).
+* Usually Action is using ouput module("om...") or message modification module("mm..."). Here are some of them:
+  - [omfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omfile.html) - file output
+  - [omfwd](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omfwd.html) - network forwarding over udp or tcp
+  - [omrelp](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omrelp.html) - network forwarding over RELP protocol
+  - [onmysql](http://www.rsyslog.com/doc/v8-stable/configuration/modules/ommysql.html), [ompgsql](http://www.rsyslog.com/doc/v8-stable/configuration/modules/ompgsql.html), [omoracle](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omoracle.html) - output to database
+  - [omelasticsearch](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omelasticsearch.html) - output into ElasticSearch
+  - [omamqp1](http://www.rsyslog.com/doc/v8-stable/configuration/modules/omamqp1.html) - forwarding over AMQP 1.0 protocol
+  - [whole list](http://www.rsyslog.com/doc/v8-stable/configuration/modules/idx_output.html) of output modules
+
+[More on message processing orger](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#quick-overview-of-message-flow-and-objects).
+
+## Configuration examples
+
+Write all messages of auth and authpriv facilities into file `/var/log/auth.log` and continue processing this messages:
+
+```bash
+# legacy
+auth,authpriv.*  /var/log/auth.log
+# modern
+if ( $syslogfacility-text == "auth" or $syslogfacility-text == "authpriv" ) then {
+    action(type="omfile" file="/var/log/auth.log")
+}
+```
+
+Write all messages with program name starting with "hapropxy" into file `/var/log/haproxy.log`, do not flush buffer after each message, and stop further processing:
+
+```
+# legacy (note the minus sign in front of filename - it disables buffer flush)
+:programname, startswith, "haproxy", -/var/log/haproxy.log
+& ~
+# modern
+if ( $programname startswith "haproxy" ) then {
+    action(type="omfile" file="/var/log/haproxy.log" flushOnTXEnd="off")
+    stop
+}
+# we can mix legacy and modern
+if $programname startswith "haproxy" then -/var/log/haproxy.log
+&~
+```
+
+Config check command: `rsyslogd -N 1`. More examples: [one](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [two](http://wiki.rsyslog.com/index.php/Configuration_Samples).
+
+## Client: forward logs with file names
+
+We will save file names into `TAG` field. We want to include directories into names, not to watch single-level file mess: `haproxy/error.log`. If log is not read from file, but comes from program though standard syslog mechanism, it can reject writing `/` symbols into `TAG`, because it's against the standard. So we will encode this symbols as double underlines, and will decode back on log server.
+
+Let's create template for transferring logs over network. We want to forward messages with tags logner than 32 symbols, because we have long meaningful log names. We want to forward pecise timestamp with timezone. Also, we will add local variable `$.suffix` to filename, I'll explain this later. Local variables in RainerScript have names starting from a dot. If variable is not defined, it will expand into empty string.
+
+```bash
+template (name="LongTagForwardFormat" type="string"
+string="<%PRI%>%TIMESTAMP:::date-rfc3339% %HOSTNAME% %syslogtag%%$.suffix%%msg:::sp-if-no-1st-sp%%msg%")
+```
+
+Now let's create RuleSet to use for network message forwarding. It can be assigned for Inputs that read files, or it can be called as a function. Yep, rsyslog allows to call one RuleSet from another. To use RELP we have to load it's module first.
+
+```bash
+# http://www.rsyslog.com/doc/relp.html
+module(load="omrelp")
+
+ruleset(name="sendToLogserver") {
+    action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat")
+}
+```
 
