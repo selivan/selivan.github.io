@@ -48,6 +48,13 @@ Transferred over network syslog message looks something like this:
 * `PRI` - priority. Calculated as `facility * 8 + severity`.
   * Facility has values from 0 to 23 for different system services: 0 - kernel, 2 - mail, 7 - news. Last 8 - from local0 to local7 - are used for services outside this pre-defined categories. [Complete list](https://en.wikipedia.org/wiki/Syslog#Facility).
   * Severity has values from 0(emergency, most important) to 7(debug, least important). [Complete list](https://en.wikipedia.org/wiki/Syslog#Severity_level).
-  * `TIMESTAMP` - time,  usually in format like `Feb  6 18:45:01`. According to RFC 3194, it also can have time format of ISO 8601: `2017-02-06T18:45:01.519832+03:00` with better precision and timezone.
-  * `HOST` - name of host, which generated the message
-  * 
+* `TIMESTAMP` - time,  usually in format like `Feb  6 18:45:01`. According to RFC 3194, it also can have time format of ISO 8601: `2017-02-06T18:45:01.519832+03:00` with better precision and timezone.
+* `HOST` - name of host, which generated the message
+* `TAG` - contains name of program that generated the message. Not more then 32 alphanumeric characters, though in fact many implementations allow more. Any non-alphanumeric symbol stops `TAG` and starts `MSG`, colon is used usually. Sometimes can have process id in square brackets. `[ ]` are not alphanumeric, so it should be part of a message. But usually implementations consider it part of `TAG` field, and consider `MSG` start after ": " symbols
+* `MSG` - message. Because of uncertainty about where `TAG` ends and it starts, often gets additional space symbol at the beginning. Can not contain new line symbols: by standard, they are frame delimeters, effectively starting new syslog message. Methods to actually transfer multi-line message:
+  * escaping. On recieving side we have message with `#012` instead of new lines
+  * using octed-based TCP Framing, described in RFC 5425 for TLS-enabled syslog. Non-standard, only few implementations can do it
+
+### Alternative: RELP
+
+If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems.
