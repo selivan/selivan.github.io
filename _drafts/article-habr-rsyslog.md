@@ -225,14 +225,14 @@ ruleset(name="myapp_logs") {
 
 ```bash
 input(type="imfile"
-	File="/var/log/mysql/mysql-slow.log"
+    File="/var/log/mysql/mysql-slow.log"
     # http://blog.gerhards.net/2013/09/imfile-multi-line-messages.html
-	startmsg.regex="^# Time: [0-9]{6}"
-	readTimeout="2"
+    startmsg.regex="^# Time: [0-9]{6}"
+    readTimeout="2"
     # no need to escape new line for RELP
     escapeLF="off"
-	Tag=" mysql__slow.log"
-	Ruleset="sendToLogserver")
+    Tag=" mysql__slow.log"
+    Ruleset="sendToLogserver")
 ```
 
 ## Сервер
@@ -241,16 +241,16 @@ input(type="imfile"
 
 ```bash
 template(name="RemoteLogSavePath" type="list") {
-	constant(value="/srv/log/")
-	property(name="fromhost-ip")
-	constant(value="/")
-	property(name="timegenerated" dateFormat="year")
-	constant(value="-")
-	property(name="timegenerated" dateFormat="month")
-	constant(value="-")
-	property(name="timegenerated" dateFormat="day")
-	constant(value="/")
-	property(name="$.logpath" )
+    constant(value="/srv/log/")
+    property(name="fromhost-ip")
+    constant(value="/")
+    property(name="timegenerated" dateFormat="year")
+    constant(value="-")
+    property(name="timegenerated" dateFormat="month")
+    constant(value="-")
+    property(name="timegenerated" dateFormat="day")
+    constant(value="/")
+    property(name="$.logpath" )
 }
 ```
 
@@ -279,31 +279,32 @@ $EscapeControlCharactersOnReceive off
 
 ```
 ruleset(name="RemoteLogProcess") {
-	# For facilities local0-7 set log filename from $programname field: replace __ with /
-	# Message has arbitary format, syslog fields are not used
-	if ( $syslogfacility >= 16 ) then
-	{
-		# Remove 1st space from message. Syslog protocol legacy
-		action(type="mmrm1stspace")
+    # For facilities local0-7 set log filename from $programname field: replace __ with /
+    # Message has arbitary format, syslog fields are not used
+    if ( $syslogfacility >= 16 ) then
+    {
+        # Remove 1st space from message. Syslog protocol legacy
+        action(type="mmrm1stspace")
 
-		set $.logpath = replace($programname, "__", "/");
-		action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+        set $.logpath = replace($programname, "__", "/");
+        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
 
-	# Logs with filename defined from facility
-	# Message has syslog format, syslog fields are used
-	} else {
-		if (($syslogfacility == 0)) then {
-			set $.logpath = "kern";
-		} else if (($syslogfacility == 4) or ($syslogfacility == 10)) then {
-			set $.logpath = "auth";
-		} else if (($syslogfacility == 9) or ($syslogfacility == 15)) then {
-			set $.logpath = "cron";
-		} else {
-			set $.logpath ="syslog";
-		}
-		# Built-in template RSYSLOG_FileFormat: High-precision timestamps and timezone information
-		action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="RSYSLOG_FileFormat" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
-	}
+    # Logs with filename defined from facility
+    # Message has syslog format, syslog fields are used
+    } else {
+        if (($syslogfacility == 0)) then {
+    	    set $.logpath = "kern";
+        } else if (($syslogfacility == 4) or ($syslogfacility == 10)) then {
+            set $.logpath = "auth";
+        } else if (($syslogfacility == 9) or ($syslogfacility == 15)) then {
+            set $.logpath = "cron";
+        } else {
+            set $.logpath ="syslog";
+        }
+        # Built-in template RSYSLOG_FileFormat: High-precision timestamps and timezone information
+        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="RSYSLOG_FileFormat"
+        flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+    }
 } # ruleset
 ```
 
@@ -319,16 +320,19 @@ RuleSet на клиенте с очередью будет выглядеть т
 
 ```bash
 ruleset(name="sendToLogserver") {
-	# Queue: http://www.rsyslog.com/doc/v8-stable/concepts/queues.html#disk-assisted-memory-queues
-	# Disk-Assisted Memory Queue: queue.type="LinkedList" + queue.filename
-	# queue.size - max elements in memory
-	# queue.highwatermark - when to start saving to disk
-	# queue.lowwatermark - when to stop saving to disk
-	# queue.saveonshutdown - save on disk between rsyslog shutdown
-	# action.resumeRetryCount - number of retries for action, -1 = eternal
-	# action.resumeInterval - interval to suspend action if destination can not be connected
-	# After each 10 retries, the interval is extended: (numRetries / 10 + 1) * Action.ResumeInterval
-	action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat" queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000" queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1" action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
+    # Queue: http://www.rsyslog.com/doc/v8-stable/concepts/queues.html#disk-assisted-memory-queues
+    # Disk-Assisted Memory Queue: queue.type="LinkedList" + queue.filename
+    # queue.size - max elements in memory
+    # queue.highwatermark - when to start saving to disk
+    # queue.lowwatermark - when to stop saving to disk
+    # queue.saveonshutdown - save on disk between rsyslog shutdown
+    # action.resumeRetryCount - number of retries for action, -1 = eternal
+    # action.resumeInterval - interval to suspend action if destination can not be connected
+    # After each 10 retries, the interval is extended: (numRetries / 10 + 1) * Action.ResumeInterval
+    action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat"
+    queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000"
+    queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1"
+    action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
 }
 ```
 
@@ -340,7 +344,7 @@ ruleset(name="sendToLogserver") {
 
 ```bash
 ruleset(name="sendToLogserver") {
-	action(type="omrelp" Target="syslog1.example.net" Port="20514" Template="LongTagForwardFormat")
+    action(type="omrelp" Target="syslog1.example.net" Port="20514" Template="LongTagForwardFormat")
     action(type="omrelp" Target="syslog2.example.net" Port="20514" Template="LongTagForwardFormat" action.execOnlyWhenPreviousIsSuspended="on" queue.dequeuebatchsize="1")
 }
 ```
