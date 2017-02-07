@@ -215,9 +215,9 @@ ruleset(name="myapp_logs") {
 Для работы с multi-line лог-файлами модуль imfile предлагает три варианта:
 - `readMode=1` - сообщения разделены пустой строкой
 - `readMode=2` - новые сообщения начинаются с начала строки, продолжение сообщения идёт с отступом. Часто так выглядят стектрейсы
-- `startmsg.regex` - определять начало нового сообщения по regexp(POSIX Extended).
+- `startmsg.regex` - определять начало нового сообщения по regexp(POSIX Extended)
 
-Первые два варианта имеют проблемы в режиме работы `inotify`, и при необходимости третий легко их заменяет с соответствующим regexp. Считывание multi-line логов имеет одну тонкость. Обычно признак нового сообщения находится в его начале, и пожтому мы не можем быть уверены, что программа закончила писать прошлое сообщение, пока не пришло следующее. Из-за этого последнее сообщение может никогда не передаваться. Чтобы так не получалось, мы задаём `readTimeout`, по истечении которого сообщение считается законченным и будет передано.
+Первые два варианта имеют проблемы в режиме работы `inotify`, и при необходимости третий легко их заменяет с соответствующим regexp. Считывание multi-line логов имеет одну тонкость. Обычно признак нового сообщения находится в его начале, и мы не можем быть уверены, что программа закончила писать прошлое сообщение, пока не началось следующее. Из-за этого последнее сообщение может никогда не передаваться. Чтобы так не получалось, мы задаём `readTimeout`, по истечении которого сообщение считается законченным и будет передано.
 
 ```
 input(type="imfile"
@@ -232,6 +232,63 @@ input(type="imfile"
 ```
 
 ## Сервер
+
+На сервере надо принять переданные логи и разложить их по папкам, в соответствии с IP передающего хоста и временем отправления: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. Для того, чтобы задать имя лог-файла в зависимости от содержания сообщения, мы также можем использовать шаблоны. Переменную `$.logpath` нужно будет задать внутри RuleSet.
+
+```
+template(name="RemoteLogSavePath" type="list") {
+	constant(value="/srv/log/")
+	property(name="fromhost-ip")
+	constant(value="/")
+	property(name="timegenerated" dateFormat="year")
+	constant(value="-")
+	property(name="timegenerated" dateFormat="month")
+	constant(value="-")
+	property(name="timegenerated" dateFormat="day")
+	constant(value="/")
+	property(name="$.logpath" )
+}
+
+# Accept RELP messages
+module(load="imrelp")
+input(type="imrelp" port="20514" ruleset="RemoteLogProcess")
+
+#
+module(load="mmrm1stspace")
+
+# http://www.rsyslog.com/doc/v8-stable/configuration/input_directives/rsconf1_escapecontrolcharactersonreceive.html
+# Print recieved LF as-it-is, not like #012#. For multi-line messages
+# Default: on
+$EscapeControlCharactersOnReceive off
+
+ruleset(name="RemoteLogProcess") {
+	# For facilities local0-7 set log filename from $programname field: replace __ with /
+	# Message has arbitary format, syslog fields are not used
+	if ( $syslogfacility >= 16 ) then
+	{
+		# Remove 1st space from message. Syslog protocol legacy
+		action(type="mmrm1stspace")
+
+		set $.logpath = replace($programname, "__", "/");
+		action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+
+	# Logs with filename defined from facility
+	# Message has syslog format, syslog fields are used
+	} else {
+		if (($syslogfacility == 0)) then {
+			set $.logpath = "kern";
+		} else if (($syslogfacility == 4) or ($syslogfacility == 10)) then {
+			set $.logpath = "auth";
+		} else if (($syslogfacility == 9) or ($syslogfacility == 15)) then {
+			set $.logpath = "cron";
+		} else {
+			set $.logpath ="syslog";
+		}
+		# Built-in template RSYSLOG_FileFormat: High-precision timestamps and timezone information
+		action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="RSYSLOG_FileFormat" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+	}
+} # ruleset
+```
 
 ## Надёжная доставка сообщений. Очереди
 
