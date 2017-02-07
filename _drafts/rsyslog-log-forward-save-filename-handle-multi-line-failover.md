@@ -176,3 +176,33 @@ ruleset(name="sendToLogserver") {
 }
 ```
 
+Now create Input reading log file, and assign it our RuleSet.
+
+```bash
+input(type="imfile"
+	File="/var/log/myapp/my.log"
+	Tag="myapp/my.log"
+	Ruleset="sendToLogserver")
+```
+
+Note, that for every read log file rsyslog creates state files inside it's work directory(set by `$WorkDirectory`). If rsyslog can not create files in it, it will forward whole log file again after restart.
+
+Now we have some application that uses system syslog with some tag on it's messages. We want to save this messages into local file and to forward over network:
+
+```
+# Template to output only message
+template(name="OnlyMsg" type="string" string="%msg:::drop-last-lf%\n")
+
+if( $syslogtag == 'nginx__access:')  then {
+    # write to file
+    action(type="omfile" file="/var/log/nginx/access" template="OnlyMsg")
+    # forward over network
+    call sendToLogserver
+    stop
+}
+```
+
+Last `stop` directive is required to stop processing this messages, otherwise they will get to common system syslog. Btw, if application can use socket for log messages than standard `/dev/log`(both nginx and haproxy can do this), then we can create separete Input for this socket with  [imuxsock](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imuxsock.html) module and assign it separate ruleset. So parsing whole log stream for some tags would not be required.
+
+### Reading log files set by wildcard
+
