@@ -322,9 +322,9 @@ ruleset(name="RemoteLogProcess") {
 
 ## Надёжная доставка сообщений. Очереди
 
-*img*: http://www.k-max.name/wp-content/uploads/2012/12/rsyslog-architecture.jpg
+img: http://www.k-max.name/wp-content/uploads/2012/12/rsyslog-architecture.jpg
 
-Изображение из блога [k-max.name](http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/).
+*Изображение из блога [k-max.name](http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/)*
 
 Для некоторых Actions выполнение тормозить или приостанавливаться, например пересылка логов по сети или запись в базу. Чтобы не терять сообщение и не мешать работать следующим Actions, можно использовать [очереди](http://www.rsyslog.com/doc/v8-stable/concepts/queues.html). Каждому Action всегда сопоставлена очередь сообщений, по умолчанию это Direct Queue нулевого размера. Ещё есть основная очередь для поступивших из всех Input сообщений, её тоже можно настраивать.
 
@@ -368,6 +368,6 @@ ruleset(name="sendToLogserver") {
 
 Эту возможность я пока не пробовал в продакшене.
 
-## Заключение
+## P.S.
 
 Описанная в статье конфигурация работает для rsyslog v8, на более ранних версиях не проверялась. Для Ubuntu есть официальный ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). Для CentOS/RHEL можно использовать [официальный репозиторий](http://www.rsyslog.com/rhelcentos-rpms/).
