@@ -345,7 +345,8 @@ ruleset(name="sendToLogserver") {
 ```bash
 ruleset(name="sendToLogserver") {
     action(type="omrelp" Target="syslog1.example.net" Port="20514" Template="LongTagForwardFormat")
-    action(type="omrelp" Target="syslog2.example.net" Port="20514" Template="LongTagForwardFormat" action.execOnlyWhenPreviousIsSuspended="on" queue.dequeuebatchsize="1")
+    action(type="omrelp" Target="syslog2.example.net" Port="20514" Template="LongTagForwardFormat"
+    action.execOnlyWhenPreviousIsSuspended="on" queue.dequeuebatchsize="1")
 }
 ```
 
