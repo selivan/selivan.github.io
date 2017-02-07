@@ -79,4 +79,32 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 
 Starting with 6th version c-like RainerScript format was introduced. It allows to specify complex rules for message processing.
 
+Because new config formats were created gradually and compatible with old format, then there is couple of flaws:
+* some plugins(but I haven't seen such ones) can lack new format support, and still require old configuration directives
+* configuring with old directives does not always work as expexted for new format:
+  * if module `omfile` is called with old format: `auth,authpriv.*  /var/log/auth.log`, then owner and group of created files are defined by old directives `$FileOwner`, `$FileGroup`, `$FileCreateMode`. And if it is called with `action(type="omfile" ...)`, then tihs directives are ignored and you should configure it in module loading statement or inside action itself.
+  * Directives like `$ActionQueueXXX` are configuring queue used by next Action, and after their values are reset.
+* semicolon is forbidden somewhere, and strictly required in other places(second happes less often).
+
+To avoid stumbling on this flaws, one should follow this simple rules:
+* for small and simple configs use old well-known format: `:programname, startswith, "haproxy"  /var/log/haproxy.log`
+* for complex message processing and for fine tuning of action parameters always use RainerScript, without legacy directives like `$DoSomething`.
+
+Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#configuration-file).
+
+## Message processing
+
+* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives ouside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional format:  
+`local7.*  /var/log/myapp/my.log`
+* Input has assigned list of message parsers. If not set explicitly, default set of parsers for traditional syslog format will be used
+* Parset extracts properties from message. Some of most used:
+  * `$msg` - message
+  * `$rawmsg` - whole message before parsing
+  * `$fromhost`, `$fromhost-ip` - DNS name and IP address of sender host
+  * `$syslogfacility`, `$syslogfacility-text` - facility in numeric and text forms
+  * `$syslogseverity`, `$syslogseverity-text` - same for severity
+  * `$timereported` - timespamp from message
+  * `$syslogtag` - `TAG` field
+  * `$programname` - `TAG` field without process id: `named[12345]` -> `named`
+  * whole list is [here](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
 
