@@ -327,3 +327,37 @@ ruleset(name="RemoteLogProcess") {
 } # ruleset
 ```
 
+## Reliable message delivery. Queues.
+
+![image](https://habrastorage.org/files/531/96b/eb1/53196beb160c48baa0e52ee3472439a5.jpg)
+
+*image from blog [k-max.name](http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/)*
+
+For some Actions execution can sometimes slow down or stop, for example forwarding over network or writing to database. To prevent message loss and to not affect other Actions, we can use [queues](http://www.rsyslog.com/doc/v8-stable/concepts/queues.html). Each Action always have assigned queue, by default it's zero size Direct Queue. Also we have common main queue for all messages from all Inputs, it's parameters also can be tuned.
+
+Queue types: disk, in-memory and most interesting option: Disk-Assisted Memory Queues. Latter ones use memory and start using disk, if memory have too much messages or to save unprocessed messages on service restart. Queue will start saving messages to disk when their number reaches `queue.highwatermark`, and on `queue.lowwatermark` it stops saving messages on disk. To save unprocessed messages on service restart, we should specify `queue.saveonshutdown="on"`.
+
+If network forwarding or writing to database was unsuccessful, Action is suspended. rsyslog will try to resume Action after some interval, this interval is increased with every failed attempt. To start sending logs after server became available: set `action.resumeRetryCount="-1"` (unlimited) and small suspend interval: `action.resumeInterval="10"`. More on [action parameters](http://www.rsyslog.com/doc/v8-stable/configuration/actions.html).
+
+RuleSet for client with queue looks like this:
+
+```bash
+ruleset(name="sendToLogserver") {
+    # Queue: http://www.rsyslog.com/doc/v8-stable/concepts/queues.html#disk-assisted-memory-queues
+    # Disk-Assisted Memory Queue: queue.type="LinkedList" + queue.filename
+    # queue.size - max elements in memory
+    # queue.highwatermark - when to start saving to disk
+    # queue.lowwatermark - when to stop saving to disk
+    # queue.saveonshutdown - save on disk between rsyslog shutdown
+    # action.resumeRetryCount - number of retries for action, -1 = eternal
+    # action.resumeInterval - interval to suspend action if destination can not be connected
+    # After each 10 retries, the interval is extended: (numRetries / 10 + 1) * Action.ResumeInterval
+    action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat"
+    queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000"
+    queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1"
+    action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
+}
+```
+
+Now we can easily reboot log server - messages on client will be saved in queue and forwarded later.
+
