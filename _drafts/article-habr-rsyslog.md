@@ -49,7 +49,7 @@ syslog появился в 80-х, и быстро стал стандартом 
 
 В отличии от второй распространённой альтернативы, syslog-ng, rsyslog совместим с конфигами исторического syslogd:
 
-```
+```bash
 auth,authpriv.*            /var/log/auth.log
 *.*;auth,authpriv.none     /var/log/syslog
 *.*       @syslog.example.net
@@ -57,7 +57,7 @@ auth,authpriv.*            /var/log/auth.log
 
 Т. к. возможности rsyslog гораздо больше, чем у его предшественника, формат конфигов был расширен дополнительными директивами, начинающимися со знака `$`:
 
-```
+```bash
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 $WorkDirectory /var/spool/rsyslog
 $IncludeConfig /etc/rsyslog.d/*.conf
@@ -79,7 +79,7 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 Подробнее про формат конфига [здесь](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#configuration-file).
 
 ## Обработка сообщений
-- все сообщения прилетают из какого-либо Input и попадают на обработку в привязанный к нему RuleSet. Если это явно не задано, то сообщения попадут в RuleSet по-умолчанию. Все директивы обработки сообщений, не вынесенные в отдельные RuleSet-блоки, относятся именно к нему. В частности, к нему относятся все директивы из традиционного формата конфигов:  
+- все сообщения прилетают из какого-либо Input и попадают на обработку в привязанный к нему RuleSet. Если это явно не задано, то сообщения попадут в RuleSet по-умолчанию. Все директивы обработки сообщений, не вынесенные в отдельные RuleSet-блоки, относятся именно к нему. В частности, к нему относятся все директивы из традиционного формата конфигов:
  `local7.*  /var/log/myapp/my.log`
 - к Input привязан список парсеров для разбора сообщения. Если явно не задано, будет использоваться список парсеров для разбора традиционного формата syslog
 - Парсер выделяет из сообщения свойства. Самые используемые:
@@ -90,7 +90,7 @@ $IncludeConfig /etc/rsyslog.d/*.conf
     - `$syslogseverity`, `$syslogseverity-text` - то же для severity
     - `$timereported` - время из сообщения
     - `$syslogtag` - поле TAG
-    - `$programname` - поле TAG с отрезанным номером процесса: `named[12345]` -> `named`
+    - `$programname` - поле TAG с отрезанным id процесса: `named[12345]` -> `named`
     - весь список можно посмотреть [тут](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
 - RuleSet содержит список правил, правило состоит из фильтра и привязанных к одного или нескольких Actions
 - Фильтры - логические выражения, с импользованием свойств сообщения. [Подробнее про фильтры](http://www.rsyslog.com/doc/v8-stable/configuration/filters.html)
@@ -145,14 +145,14 @@ if $programname startswith "haproxy" then -/var/log/haproxy.log
 
 Создадим шаблон для передачи логов по сети. Мы хотим передавать сообщения с тегами длиннее 32 символов(у нас длинные названия логов), и передавать более точную, чем стандартную, метку времени с указанием временной зоны. Кроме того, к названию лог-файла будет добавлена локальная переменная `$.suffix`, позже станет понятно, зачем. Локальные переменные в RainerScript начинаются с точки. Если переменная не определена, она раскроется в пустую строку.
 
-```
+```bash
 template (name="LongTagForwardFormat" type="string"
 string="<%PRI%>%TIMESTAMP:::date-rfc3339% %HOSTNAME% %syslogtag%%$.suffix%%msg:::sp-if-no-1st-sp%%msg%")
 ```
 
 Теперь создадим RuleSet, который будут использоваться для передачи логов по сети. Его можно будет присоединять к Input, читающим файлы, или вызывать как функцию. Да, rsyslog позволяет вызвать один RuleSet из другого. Для использования RELP надо сначала загрузить соответствующий модуль.
 
-```
+```bash
 # http://www.rsyslog.com/doc/relp.html
 module(load="omrelp")
 
@@ -163,7 +163,7 @@ ruleset(name="sendToLogserver") {
 
 Теперь создадим Input, читающий лог-файл, и присоединим к нему этот RuleSet.
 
-```
+```bash
 input(type="imfile"
 	File="/var/log/myapp/my.log"
 	Tag="myapp/my.log"
@@ -173,6 +173,7 @@ input(type="imfile"
 Стоит обратить внимание, что для каждого считываемого файла rsyslog создаёт state-файлы в своём рабочем каталоге(задаётся директивой `$WorkDirectory`). Если rsyslog не может создавать там файлы, то весь лог-файл будет заново передаваться после перезапуска rsyslog.
 
 В случае, если какое-то приложение пишет в общий syslog с определённым тегом, и мы хотим как сохранять это в файл, так и пересылать по сети:
+
 ```
 # Template to output only message
 template(name="OnlyMsg" type="string" string="%msg:::drop-last-lf%\n")
@@ -192,13 +193,13 @@ if( $syslogtag == 'nginx__access:')  then {
 
 *Интерлюдия*
 
-Программист: Не могу найти на лог-сервере логи somevendor.log за начало прошлого месяца, посмотри плиз  
-Девопс: Эээ... а мы разве пишем такие логи? Предупреждать же надо. Ну в любом случае всё старше недели логротейт потёр, если мы его не сохраняли - значит уже нету.  
+Программист: Не могу найти на лог-сервере логи somevendor.log за начало прошлого месяца, посмотри плиз
+Девопс: Эээ... а мы разве пишем такие логи? Предупреждать же надо. Ну в любом случае всё старше недели логротейт потёр, если мы его не сохраняли - значит уже нету.
 Программист: *бурно возмущается*
 
 Если приложение пишет много разных логов, и иногда появляются новые, то обновлять конфиги каждый раз неудобно. Хочется как-то автоматизировать. Модуль [imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) умеет считывать файлы, заданные вайлдкардом, и сохранять в мета-данных сообщения путь к файлу. Правда, путь сохраняется полный, а нам нужен только последний компонент, который оттуда придётся добыть. Кстати, тут нам и пригодится переменная `$.suffix`
 
-```
+```bash
 input(type="imfile"
     File="/srv/myapp/logs/*.log"
 	Tag="myapp__"
@@ -224,7 +225,7 @@ ruleset(name="myapp_logs") {
 
 Первые два варианта имеют проблемы в режиме работы `inotify`, и при необходимости третий легко их заменяет с соответствующим regexp. Считывание multi-line логов имеет одну тонкость. Обычно признак нового сообщения находится в его начале, и мы не можем быть уверены, что программа закончила писать прошлое сообщение, пока не началось следующее. Из-за этого последнее сообщение может никогда не передаваться. Чтобы так не получалось, мы задаём `readTimeout`, по истечении которого сообщение считается законченным и будет передано.
 
-```
+```bash
 input(type="imfile"
 	File="/var/log/mysql/mysql-slow.log"
     # http://blog.gerhards.net/2013/09/imfile-multi-line-messages.html
@@ -238,9 +239,9 @@ input(type="imfile"
 
 ## Сервер
 
-На сервере надо принять переданные логи и разложить их по папкам, в соответствии с IP передающего хоста и временем отправления: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. Для того, чтобы задать имя лог-файла в зависимости от содержания сообщения, мы также можем использовать шаблоны. Переменную `$.logpath` нужно будет задать внутри RuleSet.
+На сервере надо принять переданные логи и разложить их по папкам, в соответствии с IP передающего хоста и временем отправления: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. Для того, чтобы задать имя лог-файла в зависимости от содержания сообщения, мы также можем использовать шаблоны. Переменную `$.logpath` нужно будет задать внутри RuleSet перед использованием шаблона.
 
-```
+```bash
 template(name="RemoteLogSavePath" type="list") {
 	constant(value="/srv/log/")
 	property(name="fromhost-ip")
@@ -253,19 +254,32 @@ template(name="RemoteLogSavePath" type="list") {
 	constant(value="/")
 	property(name="$.logpath" )
 }
+```
 
-# Accept RELP messages
+Загрузим нужные модули и выключим `$EscapeControlCharactersOnReceive`, иначе в принятых логах все переводы строки заменятся на `\n`
+
+```bash
+# Accept RELP messages from network
 module(load="imrelp")
 input(type="imrelp" port="20514" ruleset="RemoteLogProcess")
 
-#
+# Default parameters for file output. Old-style global settings are not working with new-style actions
+module(load="builtin:omfile" FileOwner="syslog" FileGroup="adm" dirOwner="syslog" dirGroup="adm" FileCreateMode="0640" DirCreateMode="0755")
+
+# Module to remove 1st space from message
 module(load="mmrm1stspace")
 
 # http://www.rsyslog.com/doc/v8-stable/configuration/input_directives/rsconf1_escapecontrolcharactersonreceive.html
-# Print recieved LF as-it-is, not like #012#. For multi-line messages
+# Print recieved LF as-it-is, not like '\n'. For multi-line messages
 # Default: on
 $EscapeControlCharactersOnReceive off
+```
 
+Теперь создадим RuleSet, разбирающий прилетевшие логи и раскладывающий их по папкам. Службы, полагающиеся для логирования исключительно на syslog, ожидают, что он сохранит время сообщения. Поэтому логи, прилетевшие со стандартными facility, мы будем сохранять в формате syslog, а для прилетевших с facility local0-local7 будем вынимать имя лога из  поля `TAG`, и записывать только само сообщение без остальных полей syslog. Проблема с приклеенным к сообщению пробелом остаётся для RELP, потому что возникает ещё на этапе разбора сообщений, мы будем этот пробел отрезать.
+
+Для увеличения производительности будем писать асинхронно: `asyncWriting="on"` и с большим буфером `ioBufferSize=64k`. Не будем сбрасывать буфер после каждого полученного сообщения `flushOnTXEnd="off"`, но будем это делать каждую секунду, чтобы логи появлялись на лог-сервере достаточно оперативно: `flushInterval="1"`.
+
+```
 ruleset(name="RemoteLogProcess") {
 	# For facilities local0-7 set log filename from $programname field: replace __ with /
 	# Message has arbitary format, syslog fields are not used
@@ -297,7 +311,42 @@ ruleset(name="RemoteLogProcess") {
 
 ## Надёжная доставка сообщений. Очереди
 
+Для некоторых Actions выполнение тормозить или приостанавливаться, например пересылка логов по сети или запись в базу. Чтобы не терять сообщение и не мешать работать следующим Actions, можно использовать [очереди](http://www.rsyslog.com/doc/v8-stable/concepts/queues.html). Каждому Action всегда сопоставлена очередь сообщений, по умолчанию это Direct Queue нулевого размера. Ещё есть основная очередь для поступивших из всех Input сообщений, её тоже можно настраивать.
+
+Виды очередей: дисковые, in-memory, и самый интересный вариант- комбинированный: Disk-Assisted Memory Queues. Такие очереди используют память и начинают использовать диск, если очередь в памяти переполняется, или надо сохранить неотправленные сообщения на время перезагрузки сервиса. Сообщения начнут записываться на диск, когда количество сообщений в очереди достигнет `queue.highwatermark`, и пререстанут сохраняться на диск, когда их количество упадёт до `queue.lowwatermark`. Чтобы неотправленные сообщения сохранялись на диск во время презагрузки сервиса, надо указать `queue.saveonshutdown="on"`.
+
+Если персылка логов по сети или запись в базу была неуспешной, Action приостанавливается. rsyslog пытается возобновить работу Action через определённые, увеличивающиеся с каждой попыткой интервалы времени. Чтобы логи начали пересылаться вскоре после решения проблем, надо выставить  `action.resumeRetryCount="-1"` (неограниченный) и интервал для остановки очереди поменьше: `action.resumeInterval="10"`. Подробнее про [параметры Actions](http://www.rsyslog.com/doc/v8-stable/configuration/actions.html).
+
+RuleSet на клиенте с очередью будет выглядеть так:
+
+```bash
+ruleset(name="sendToLogserver") {
+	# Queue: http://www.rsyslog.com/doc/v8-stable/concepts/queues.html#disk-assisted-memory-queues
+	# Disk-Assisted Memory Queue: queue.type="LinkedList" + queue.filename
+	# queue.size - max elements in memory
+	# queue.highwatermark - when to start saving to disk
+	# queue.lowwatermark - when to stop saving to disk
+	# queue.saveonshutdown - save on disk between rsyslog shutdown
+	# action.resumeRetryCount - number of retries for action, -1 = eternal
+	# action.resumeInterval - interval to suspend action if destination can not be connected
+	# After each 10 retries, the interval is extended: (numRetries / 10 + 1) * Action.ResumeInterval
+	action(type="omrelp" Target="{{ logserver_ip }}" Port="{{ logserver_port }}" Template="LongTagForwardFormat" queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000" queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1" action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
+}
+```
+
+Теперь можно спокойно перезугружать лог-сервер - сообщения созраняться в очереди и будут переданы, когда он станет доступен.
+
 ## Отказоустойчивость
+
+
+
+```
+
+```
+
+## Заключение
+
+Описанная в статье конфигурация работает для rsyslog v8, на более ранних версиях не проверялась. Для Ubuntu есть официальный ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). Для CentOS/RHEL можно использовать [официальный репозиторий](http://www.rsyslog.com/rhelcentos-rpms/).
 
 ---
 
