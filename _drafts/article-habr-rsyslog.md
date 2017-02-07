@@ -262,7 +262,8 @@ module(load="imrelp")
 input(type="imrelp" port="20514" ruleset="RemoteLogProcess")
 
 # Default parameters for file output. Old-style global settings are not working with new-style actions
-module(load="builtin:omfile" FileOwner="syslog" FileGroup="adm" dirOwner="syslog" dirGroup="adm" FileCreateMode="0640" DirCreateMode="0755")
+module(load="builtin:omfile" FileOwner="syslog" FileGroup="adm" dirOwner="syslog"
+        dirGroup="adm" FileCreateMode="0640" DirCreateMode="0755")
 
 # Module to remove 1st space from message
 module(load="mmrm1stspace")
@@ -287,7 +288,8 @@ ruleset(name="RemoteLogProcess") {
         action(type="mmrm1stspace")
 
         set $.logpath = replace($programname, "__", "/");
-        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg" flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
+        action(type="omfile" dynaFileCacheSize="1024" dynaFile="RemoteLogSavePath" template="OnlyMsg"
+        flushOnTXEnd="off" asyncWriting="on" flushInterval="1" ioBufferSize="64k")
 
     # Logs with filename defined from facility
     # Message has syslog format, syslog fields are used
