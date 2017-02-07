@@ -157,7 +157,7 @@ string="<%PRI%>%TIMESTAMP:::date-rfc3339% %HOSTNAME% %syslogtag%%$.suffix%%msg::
 module(load="omrelp")
 
 ruleset(name="sendToLogserver") {
-    action(type="omrelp" Target="192.168.1.1" Port="20514" Template="LongTagForwardFormat")
+    action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat")
 }
 ```
 
@@ -330,7 +330,7 @@ ruleset(name="sendToLogserver") {
 	# action.resumeRetryCount - number of retries for action, -1 = eternal
 	# action.resumeInterval - interval to suspend action if destination can not be connected
 	# After each 10 retries, the interval is extended: (numRetries / 10 + 1) * Action.ResumeInterval
-	action(type="omrelp" Target="{{ logserver_ip }}" Port="{{ logserver_port }}" Template="LongTagForwardFormat" queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000" queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1" action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
+	action(type="omrelp" Target="syslog.example.net" Port="20514" Template="LongTagForwardFormat" queue.type="LinkedList" queue.size="10000" queue.filename="q_sendToLogserver" queue.highwatermark="9000" queue.lowwatermark="50" queue.maxdiskspace="500m" queue.saveonshutdown="on" action.resumeRetryCount="-1" action.reportSuspension="on" action.reportSuspensionContinuation="on" action.resumeInterval="10")
 }
 ```
 
@@ -338,48 +338,17 @@ ruleset(name="sendToLogserver") {
 
 ## Отказоустойчивость
 
+Можно настроить Action для выполнения только в случае, если предыдущее Action было приостановлено: [описание](http://www.rsyslog.com/action-execonlywhenpreviousissuspended-preciseness/). Это позволяет настраивать failover конфигурации. Некоторые Actions используют транзакции для увеличения производительности. В таком случае, успех или неудача будут известны только после завершения транзакции, когда сообщения уже обработаны. Это может приводить к потере части сообщений без вызова failover Action. Чтобы такого не происходило, надо ставить параметр `queue.dequeuebatchsize="1"`(по-умолчанию 16), что может снизить производительность.
 
-
+```bash
+ruleset(name="sendToLogserver") {
+	action(type="omrelp" Target="syslog1.example.net" Port="20514" Template="LongTagForwardFormat")
+    action(type="omrelp" Target="syslog2.example.net" Port="20514" Template="LongTagForwardFormat" action.execOnlyWhenPreviousIsSuspended="on" queue.dequeuebatchsize="1")
+}
 ```
 
-```
+Эту возможность я в продакшене пока не использовал.
 
 ## Заключение
 
 Описанная в статье конфигурация работает для rsyslog v8, на более ранних версиях не проверялась. Для Ubuntu есть официальный ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). Для CentOS/RHEL можно использовать [официальный репозиторий](http://www.rsyslog.com/rhelcentos-rpms/).
-
----
-
- - почему rsyslog
-     - используется некоторым софтом, то есть всё равно будет на сервере
-     - используется сетевыми железками
-     - гибче filebeat, умеет inotify
-     - фильтрация сообщений, например для PCI DSS(requirement 3.4): http://www.rsyslog.com/masking-data-in-logs-and-rsyslog/
- - формат syslog-сообщений: http://www.rsyslog.com/doc/syslog_parsing.html
-     - RFCs
-     - real life
-     - legacy: multi-line messages, пробел в начале сообщения
-     - как бороться, RELP
- - конфиги: старый и новый формат
-     - старый - совместим с историческим syslogd
-     - новый - с-подобный, гораздо более мощный
-     - из-за необходимости поддерживать статый и новый синтаксис, директивы нового и старого формата не всегда логично сочетаются:
-         - пример с omfile
-         - пример с конфигурацией queue для action
-     - лучше всюду, кроме небольших файлов для конкретного приложения, использовать новый
- - message flow: inputs, rulesets(default), filter+actions
- - клиент: посылаем файлы, сохраняя имя лог-файла в теге
-     - шаблоны
-     - multi-line файлы
-     - wildcards, с сохранением имени
- - сервер: получаем файлы, раскладываем по папками, берём имя файла из тега
-     - отрезаем пробел для чистых сообщений
-     - производительность: буффер, flush и прочее
- - надёжная доставка сообщений на недоступный сервер. очереди: in-memory, disk-assisted in-memory
- - отказоустойчивость: использовать второй сервер при недоступности первого: http://www.rsyslog.com/doc/v8-stable/tutorials/failover_syslog_server.html action.execOnlyWhenPreviousIsSuspended
-
-+ интеграция с systemd
-
-ссылки:
-  - rsyslog docs
-  - github репо с файлами, можно с ролью ansible
