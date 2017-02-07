@@ -361,3 +361,22 @@ ruleset(name="sendToLogserver") {
 
 Now we can easily reboot log server - messages on client will be saved in queue and forwarded later.
 
+## Failover
+
+Action can be configured to execute only if previous Action is suspended: [description](http://www.rsyslog.com/action-execonlywhenpreviousissuspended-preciseness/). This make faiover configurations possible. Some Actions use transaction to improve performance. If they do, success or failure will be known only after transaction is finished, when messages are already processed. So some messages can be lost without calling failover Action. To prevent this, we should set parameter `queue.dequeuebatchsize="1"`(default: 16). It can hit performance.
+
+```bash
+ruleset(name="sendToLogserver") {
+    action(type="omrelp" Target="syslog1.example.net" Port="20514" Template="LongTagForwardFormat")
+    action(type="omrelp" Target="syslog2.example.net" Port="20514" Template="LongTagForwardFormat"
+    action.execOnlyWhenPreviousIsSuspended="on" queue.dequeuebatchsize="1")
+}
+```
+
+I haven't use this failover config on production.
+
+## Summary
+
+IMHO I created rather flexible and convenient configuration. Logs are forwarded from both files and syslog. Multi-line messages are forwarded correctly. Log server restart does not cause looging messages. To add new log files, you should re-configure only client, server stays as it is.
+
+This works on rsyslog v8, I didn't check it on earlier version. For Ubuntu there is official ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). For CentOS/RHEL you can use [official repository](http://www.rsyslog.com/rhelcentos-rpms/).
