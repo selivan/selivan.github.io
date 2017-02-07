@@ -1,6 +1,6 @@
----
+﻿---
 layout: post
-title:  "Rsyslog configuration: forwarding log files, saving file names, handle multi-line messages and failover"
+title:  "Rsyslog configuration: forwarding log files with file names, handle multi-line messages, no messages lost on server downtime, failover server"
 tags: [rsyslog, syslog]
 ---
 
@@ -11,14 +11,14 @@ tags: [rsyslog, syslog]
 Forward logs to log server. If it's unavailable, do not loose messages, but preserve and and send later. Handle multi-line messages correctly.
 
 Additional goals:
-* server reconfiguration is not required for new log files, client reconfiguration is sufficiet
+* server reconfiguration is not required for new log files, client reconfiguration is sufficient
 * forwarding of all log files with name matching wildcard, saved separately on server with same names
 
 Only Linux servers are used.
 
 ## Choise of software
 
-Why use syslog in our days? We have elastic beats, logstash, systemd-journal-remote and a lto mode new shiny technologies?
+Why use syslog in our days? We have elastic beats, logstash, systemd-journal-remote and a lot more of new shiny technologies?
 
 * It is standard for logging in POSIX-like systems  
 Some software, like haproxy, uses only syslog. So you can not completely eliminate it
@@ -35,9 +35,9 @@ Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https:/
 
 *TLDR*: everything is broken
 
-Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware. There were no stanrard, everybody was writing code just to be compatible with existing software. In 2001 IETF described current situation in RFC 3164(status "informational"). Implementations vary a lot, so it states "The payload of any IP packet that has a UDP destination port of 514 MUST be treated as a syslog message". Later IETF tried to create standard format in RFC 3165, but this document was unconvenient, at this moment there is no any alive software implementation. In 2009 RFC 5424 was approved, defining structured messages, but it is rarely used.
+Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware. There were no standard, everybody was writing code just to be compatible with existing software. In 2001 IETF described current situation in RFC 3164(status "informational"). Implementations vary a lot, so it states "The payload of any IP packet that has a UDP destination port of 514 MUST be treated as a syslog message". Later IETF tried to create standard format in RFC 3165, but this document was inconvenient, at this moment there is no any alive software implementation. In 2009 RFC 5424 was approved, defining structured messages, but it is rarely used.
 
-[Here](http://www.rsyslog.com/doc/syslog_parsing.html) you can read what rsyslog author Rainer Gerhards does think about syslog standard situation. In fact, everybody is implementing syslog as he likes, and syslog server has the task to interpret anything it recieves. For example, rsyslog has [special module](http://www.rsyslog.com/doc/v8-stable/configuration/modules/pmciscoios.html) to parse format used by CISCO IOS. For the worst cases since rsyslog 5th version you can define custom parsers.
+[Here](http://www.rsyslog.com/doc/syslog_parsing.html) you can read what rsyslog author Rainer Gerhards does think about syslog standard situation. In fact, everybody is implementing syslog as he likes, and syslog server has the task to interpret anything it receives. For example, rsyslog has [special module](http://www.rsyslog.com/doc/v8-stable/configuration/modules/pmciscoios.html) to parse format used by CISCO IOS. For the worst cases since rsyslog 5th version you can define custom parsers.
 
 Transferred over network syslog message looks something like this:
 
@@ -46,14 +46,14 @@ Transferred over network syslog message looks something like this:
 ```
 
 * `PRI` - priority. Calculated as `facility * 8 + severity`.
-  * Facility has values from 0 to 23 for different system services: 0 - kernel, 2 - mail, 7 - news. Last 8 - from local0 to local7 - are used for services outside this pre-defined categories. [Complete list](https://en.wikipedia.org/wiki/Syslog#Facility).
+  * Facility has values from 0 to 23 for different system services: 0 - kernel, 2 - mail, 7 - news. Last 8 - from local0 to local7 - are used for services outside this predefined categories. [Complete list](https://en.wikipedia.org/wiki/Syslog#Facility).
   * Severity has values from 0(emergency, most important) to 7(debug, least important). [Complete list](https://en.wikipedia.org/wiki/Syslog#Severity_level).
 * `TIMESTAMP` - time,  usually in format like `Feb  6 18:45:01`. According to RFC 3194, it also can have time format of ISO 8601: `2017-02-06T18:45:01.519832+03:00` with better precision and timezone.
 * `HOST` - name of host, which generated the message
 * `TAG` - contains name of program that generated the message. Not more then 32 alphanumeric characters, though in fact many implementations allow more. Any non-alphanumeric symbol stops `TAG` and starts `MSG`, colon is used usually. Sometimes can have process id in square brackets. `[ ]` are not alphanumeric, so it should be part of a message. But usually implementations consider it part of `TAG` field, and consider `MSG` start after ": " symbols
 * `MSG` - message. Because of uncertainty about where `TAG` ends and it starts, often gets additional space symbol at the beginning. Can not contain new line symbols: by standard, they are frame delimeters, effectively starting new syslog message. Methods to actually transfer multi-line message:
-  * escaping. On recieving side we have message with `#012` instead of new lines
-  * using octed-based TCP Framing, described in RFC 5425 for TLS-enabled syslog. Non-standard, only few implementations can do it
+  * escaping. On receiving side we have message with `#012` instead of new lines
+  * using octet-based TCP Framing, described in RFC 5425 for TLS-enabled syslog. Non-standard, only few implementations can do it
 
 ### Alternative: RELP
 
@@ -81,8 +81,8 @@ Starting with 6th version c-like RainerScript format was introduced. It allows t
 
 Because new config formats were created gradually and compatible with old format, then there is couple of flaws:
 * some plugins(but I haven't seen such ones) can lack new format support, and still require old configuration directives
-* configuring with old directives does not always work as expexted for new format:
-  * if module `omfile` is called with old format: `auth,authpriv.*  /var/log/auth.log`, then owner and group of created files are defined by old directives `$FileOwner`, `$FileGroup`, `$FileCreateMode`. And if it is called with `action(type="omfile" ...)`, then tihs directives are ignored and you should configure it in module loading statement or inside action itself.
+* configuring with old directives does not always work as expected for new format:
+  * if module `omfile` is called with old format: `auth,authpriv.*  /var/log/auth.log`, then owner and group of created files are defined by old directives `$FileOwner`, `$FileGroup`, `$FileCreateMode`. And if it is called with `action(type="omfile" ...)`, then this directives are ignored and you should configure it in module loading statement or inside action itself.
   * Directives like `$ActionQueueXXX` are configuring queue used by next Action, and after their values are reset.
 * semicolon is forbidden somewhere, and strictly required in other places(second happes less often).
 
@@ -94,7 +94,7 @@ Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/config
 
 ## Message processing
 
-* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives ouside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional format:  
+* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives outside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional format:  
 `local7.*  /var/log/myapp/my.log`
 * Input has assigned list of message parsers. If not set explicitly, default set of parsers for traditional syslog format will be used
 * Parset extracts properties from message. Some of most used:
@@ -136,7 +136,7 @@ if ( $syslogfacility-text == "auth" or $syslogfacility-text == "authpriv" ) then
 }
 ```
 
-Write all messages with program name starting with "hapropxy" into file `/var/log/haproxy.log`, do not flush buffer after each message, and stop further processing:
+Write all messages with program name starting with "haproxy" into file `/var/log/haproxy.log`, do not flush buffer after each message, and stop further processing:
 
 ```
 # legacy (note the minus sign in front of filename - it disables buffer flush)
@@ -158,7 +158,7 @@ Config check command: `rsyslogd -N 1`. More examples: [one](http://www.rsyslog.c
 
 We will save file names into `TAG` field. We want to include directories into names, not to watch single-level file mess: `haproxy/error.log`. If log is not read from file, but comes from program though standard syslog mechanism, it can reject writing `/` symbols into `TAG`, because it's against the standard. So we will encode this symbols as double underlines, and will decode back on log server.
 
-Let's create template for transferring logs over network. We want to forward messages with tags logner than 32 symbols, because we have long meaningful log names. We want to forward pecise timestamp with timezone. Also, we will add local variable `$.suffix` to filename, I'll explain this later. Local variables in RainerScript have names starting from a dot. If variable is not defined, it will expand into empty string.
+Let's create template for transferring logs over network. We want to forward messages with tags longer than 32 symbols, because we have long meaningful log names. We want to forward precise timestamp with timezone. Also, we will add local variable `$.suffix` to filename, I'll explain this later. Local variables in RainerScript have names starting from a dot. If variable is not defined, it will expand into empty string.
 
 ```bash
 template (name="LongTagForwardFormat" type="string"
@@ -202,14 +202,14 @@ if( $syslogtag == 'nginx__access:')  then {
 }
 ```
 
-Last `stop` directive is required to stop processing this messages, otherwise they will get to common system syslog. Btw, if application can use socket for log messages than standard `/dev/log`(both nginx and haproxy can do this), then we can create separete Input for this socket with  [imuxsock](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imuxsock.html) module and assign it separate ruleset. So parsing whole log stream for some tags would not be required.
+Last `stop` directive is required to stop processing this messages, otherwise they will get to common system syslog. Btw, if application can use socket for log messages than standard `/dev/log`(both nginx and haproxy can do this), then we can create separate Input for this socket with  [imuxsock](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imuxsock.html) module and assign it separate ruleset. So parsing whole log stream for some tags would not be required.
 
 ### Reading log files set by wildcard
 
 *Interlude*
 
-Programmer: Hey, I can't find logs somevendor.log for begining of last month on log server, could you help me?  
-Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleand everything older than a week
+Programmer: Hey, I can't find logs somevendor.log for beginning of last month on log server, could you help me?  
+Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleaned everything older than a week
 Programmer: @#$%^@!
 
 If application it creating many logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use `$.suffix` variable.
@@ -238,7 +238,7 @@ To work with files with multi-line messages imfile offers 3 options:
 - `readMode=2` - new messages start at rhe beginning of a line. If line starts from space or tabulation, it's part of message. Stack traces often look like this.
 - `startmsg.regex` - define new message by regexp(POSIX Extended)
 
-First two options have troubles working in `inotify` mode and third option can replace them with right regexp, so we will use it. Reading multi-line logs have a subtelty. New message mark is often placed on the first line of the message. So we can not be sure, that last message is complete, until new one starts. Because of this last message may be never tranferred. To avoid this, we set parameter `readTimeout`, and after that number of seconds last message is considered finished.
+First two options have troubles working in `inotify` mode and third option can replace them with right regexp, so we will use it. Reading multi-line logs have a subtlety. New message mark is often placed on the first line of the message. So we can not be sure, that last message is complete, until new one starts. Because of this last message may be never transferred. To avoid this, we set parameter `readTimeout`, and after that number of seconds last message is considered finished.
 
 ```bash
 input(type="imfile"
@@ -254,7 +254,7 @@ input(type="imfile"
 
 ## Server
 
-On the server we have to accept forwarded logs and save them to file tree, according to sender host IP and recieve time: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. To set log file name from message content, we can use template. Variable `$.logpath` should be set inside RuleSet before using the template.
+On the server we have to accept forwarded logs and save them to file tree, according to sender host IP and receive time: `/srv/log/192.168.0.1/2017-02-06/myapp/my.log`. To set log file name from message content, we can use template. Variable `$.logpath` should be set inside RuleSet before using the template.
 
 ```bash
 template(name="RemoteLogSavePath" type="list") {
@@ -271,7 +271,7 @@ template(name="RemoteLogSavePath" type="list") {
 }
 ```
 
-Let's load all necessary modules and tuen off `$EscapeControlCharactersOnReceive`, otherwise we will have `\n` instead of new lines in recieved messages.
+Let's load all necessary modules and turn off `$EscapeControlCharactersOnReceive`, otherwise we will have `\n` instead of new lines in received messages.
 
 ```bash
 # Accept RELP messages from network
@@ -293,7 +293,7 @@ $EscapeControlCharactersOnReceive off
 
 Now let's create RuleSet tp parse incoming messages and saving them to apropriate files and folders. Services relying on syslog are expecting, that it will save message time and other syslog fields. So messages with standard facilities are saved in syslog format. For messages with local0-local7 facilities we will generate filename from `TAG`, and save pure message without other syslog fields. Problem with extra space in front of message is still present, because it emerges in message parsing phase. We will cut it out.
 
-To improve performance we will use asyncronous write: `asyncWriting="on"` and large buffer: `ioBufferSize=64k`. We won't flush the  buffer after aech recieved message: `flushOnTXEnd="off"`, but we will flush it once a second to have fresh logs on log server: `flushInterval="1"`.
+To improve performance we will use asynchronous write: `asyncWriting="on"` and large buffer: `ioBufferSize=64k`. We won't flush the  buffer after each received message: `flushOnTXEnd="off"`, but we will flush it once a second to have fresh logs on log server: `flushInterval="1"`.
 
 ```
 ruleset(name="RemoteLogProcess") {
@@ -363,7 +363,7 @@ Now we can easily reboot log server - messages on client will be saved in queue 
 
 ## Failover
 
-Action can be configured to execute only if previous Action is suspended: [description](http://www.rsyslog.com/action-execonlywhenpreviousissuspended-preciseness/). This make faiover configurations possible. Some Actions use transaction to improve performance. If they do, success or failure will be known only after transaction is finished, when messages are already processed. So some messages can be lost without calling failover Action. To prevent this, we should set parameter `queue.dequeuebatchsize="1"`(default: 16). It can hit performance.
+Action can be configured to execute only if previous Action is suspended: [description](http://www.rsyslog.com/action-execonlywhenpreviousissuspended-preciseness/). This make failover configurations possible. Some Actions use transaction to improve performance. If they do, success or failure will be known only after transaction is finished, when messages are already processed. So some messages can be lost without calling failover Action. To prevent this, we should set parameter `queue.dequeuebatchsize="1"`(default: 16). It can hit performance.
 
 ```bash
 ruleset(name="sendToLogserver") {
@@ -377,6 +377,6 @@ I haven't use this failover config on production.
 
 ## Summary
 
-IMHO I created rather flexible and convenient configuration. Logs are forwarded from both files and syslog. Multi-line messages are forwarded correctly. Log server restart does not cause looging messages. To add new log files, you should re-configure only client, server stays as it is.
+IMHO I created rather flexible and convenient configuration. Logs are forwarded from both files and syslog. Multi-line messages are forwarded correctly. Log server restart does not cause logging messages. To add new log files, you should re-configure only client, server stays as it is.
 
 This works on rsyslog v8, I didn't check it on earlier version. For Ubuntu there is official ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). For CentOS/RHEL you can use [official repository](http://www.rsyslog.com/rhelcentos-rpms/).
