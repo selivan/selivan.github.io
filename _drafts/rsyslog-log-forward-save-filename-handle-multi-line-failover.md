@@ -35,5 +35,19 @@ Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https:/
 
 *TLDR*: everything is broken
 
-Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware.
+Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware. There were no stanrard, everybody was writing code just to be compatible with existing software. In 2001 IETF described current situation in RFC 3164(status "informational"). Implementations vary a lot, so it states "The payload of any IP packet that has a UDP destination port of 514 MUST be treated as a syslog message". Later IETF tried to create standard format in RFC 3165, but this document was unconvenient, at this moment there is no any alive software implementation. In 2009 RFC 5424 was approved, defining structured messages, but it is rarely used.
 
+[Here](http://www.rsyslog.com/doc/syslog_parsing.html) you can read what rsyslog author Rainer Gerhards does think about syslog standard situation. In fact, everybody is implementing syslog as he likes, and syslog server has the task to interpret anything it recieves. For example, rsyslog has [special module](http://www.rsyslog.com/doc/v8-stable/configuration/modules/pmciscoios.html) to parse format used by CISCO IOS. For the worst cases since rsyslog 5th version you can define custom parsers.
+
+Transferred over network syslog message looks something like this:
+
+```
+<PRI> TIMESTAMP HOST TAG MSG
+```
+
+* `PRI` - priority. Calculated as `facility * 8 + severity`.
+  * Facility has values from 0 to 23 for different system services: 0 - kernel, 2 - mail, 7 - news. Last 8 - from local0 to local7 - are used for services outside this pre-defined categories. [Complete list](https://en.wikipedia.org/wiki/Syslog#Facility).
+  * Severity has values from 0(emergency, most important) to 7(debug, least important). [Complete list](https://en.wikipedia.org/wiki/Syslog#Severity_level).
+  * `TIMESTAMP` - time,  usually in format like `Feb  6 18:45:01`. According to RFC 3194, it also can have time format of ISO 8601: `2017-02-06T18:45:01.519832+03:00` with better precision and timezone.
+  * `HOST` - name of host, which generated the message
+  * 
