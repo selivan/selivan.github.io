@@ -71,7 +71,7 @@ auth,authpriv.*            /var/log/auth.log
 
 Because rsyslog has a lot more features than it's predecessor, config format was extended with additional directives, starting from `$` sign:
 
-```
+```bash
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 $WorkDirectory /var/spool/rsyslog
 $IncludeConfig /etc/rsyslog.d/*.conf
@@ -138,7 +138,7 @@ if ( $syslogfacility-text == "auth" or $syslogfacility-text == "authpriv" ) then
 
 Write all messages with program name starting with "haproxy" into file `/var/log/haproxy.log`, do not flush buffer after each message, and stop further processing:
 
-```
+```bash
 # legacy (note the minus sign in front of filename - it disables buffer flush)
 :programname, startswith, "haproxy", -/var/log/haproxy.log
 & ~
@@ -189,7 +189,7 @@ Note, that for every read log file rsyslog creates state files inside it's work 
 
 Now we have some application that uses system syslog with some tag on it's messages. We want to save this messages into local file and to forward over network:
 
-```
+```bash
 # Template to output only message
 template(name="OnlyMsg" type="string" string="%msg:::drop-last-lf%\n")
 
@@ -295,7 +295,7 @@ Now let's create RuleSet tp parse incoming messages and saving them to apropriat
 
 To improve performance we will use asynchronous write: `asyncWriting="on"` and large buffer: `ioBufferSize=64k`. We won't flush the  buffer after each received message: `flushOnTXEnd="off"`, but we will flush it once a second to have fresh logs on log server: `flushInterval="1"`.
 
-```
+```bash
 ruleset(name="RemoteLogProcess") {
     # For facilities local0-7 set log filename from $programname field: replace __ with /
     # Message has arbitary format, syslog fields are not used
