@@ -368,6 +368,8 @@ ruleset(name="sendToLogserver") {
 
 Эту возможность я пока не пробовал в продакшене.
 
-## P.S.
+## Итог
 
-Описанная в статье конфигурация работает для rsyslog v8, на более ранних версиях не проверялась. Для Ubuntu есть официальный ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). Для CentOS/RHEL можно использовать [официальный репозиторий](http://www.rsyslog.com/rhelcentos-rpms/).
+Получилась достаточно гибкая и удобная конфигурация. Логи передаются как из файлов, так и из syslog. Multi-line сообщения передаются корректно. Перезагрузка лог-сервера не вызывает потерю данных. Для добавления новых логов достаточно обновить конфигурацию клиента, сервер трогать не надо.
+
+Работает для rsyslog v8, на более ранних версиях не проверялась. Для Ubuntu есть официальный ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). Для CentOS/RHEL можно использовать [официальный репозиторий](http://www.rsyslog.com/rhelcentos-rpms/).
