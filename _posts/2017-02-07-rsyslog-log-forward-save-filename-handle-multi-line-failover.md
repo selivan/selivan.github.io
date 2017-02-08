@@ -8,7 +8,7 @@ tags: [rsyslog, syslog, linux]
 
 ## Task
 
-Forward logs to log server. If it's unavailable, do not loose messages, but preserve and and send later. Handle multi-line messages correctly.
+Forward logs to log server. If it's unavailable, do not lose messages, but preserve and and send later. Handle multi-line messages correctly.
 
 Additional goals:
 * server reconfiguration is not required for new log files, client reconfiguration is sufficient
@@ -57,7 +57,7 @@ Transferred over network syslog message looks something like this:
 
 ### Alternative: RELP
 
-If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems. For instance, it's supported by Logstash and Graylog. Uses TCP for transport. Can optionally encrypt messages with TLS. It's more reliable than plain TCP syslog, because it does not loose messages when connection breaks. It solves problem with multi-line messages.
+If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems. For instance, it's supported by Logstash and Graylog. Uses TCP for transport. Can optionally encrypt messages with TLS. It's more reliable than plain TCP syslog, because it does not lose messages when connection breaks. It solves problem with multi-line messages.
 
 ## rsyslog configuration
 
@@ -75,7 +75,7 @@ Because rsyslog has a lot more features than it's predecessor, config format was
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 $WorkDirectory /var/spool/rsyslog
 $IncludeConfig /etc/rsyslog.d/*.conf
-``` 
+```
 
 Starting with 6th version c-like RainerScript format was introduced. It allows to specify complex rules for message processing.
 
