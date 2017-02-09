@@ -213,7 +213,7 @@ Programmer: Hey, I can't find logfile somevendor.log for beginning of last month
 Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleaned everything older than a week  
 Programmer: @#$%^@!  
 
-If application it creating many logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use `$.suffix` variable.
+If application creates a lot of logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use the `$.suffix` variable.
 
 ```bash
 input(type="imfile"
