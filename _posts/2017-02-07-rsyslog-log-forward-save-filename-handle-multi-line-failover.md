@@ -209,9 +209,9 @@ Last `stop` directive is required to stop processing this messages, otherwise th
 
 *Interlude*
 
-Programmer: Hey, I can't find logs somevendor.log for beginning of last month on log server, could you help me?  
-Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleaned everything older than a week
-Programmer: @#$%^@!
+Programmer: Hey, I can't find logfile somevendor.log for beginning of last month on log server, could you help me?  
+Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleaned everything older than a week  
+Programmer: @#$%^@!  
 
 If application it creating many logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use `$.suffix` variable.
 
