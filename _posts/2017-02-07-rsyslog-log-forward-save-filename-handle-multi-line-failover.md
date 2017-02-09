@@ -11,12 +11,13 @@ tags: [rsyslog, syslog, linux]
 Forward logs to log server. If it's unavailable, do not lose messages, but preserve and and send later. Handle multi-line messages correctly.
 
 Additional goals:
+
 * server reconfiguration is not required for new log files, client reconfiguration is sufficient
 * forwarding of all log files with name matching wildcard, saved separately on server with same names
 
 Only Linux servers are used.
 
-## Choise of software
+## Choice of software
 
 Why use syslog in our days? We have elastic beats, logstash, systemd-journal-remote and a lot more of new shiny technologies?
 
