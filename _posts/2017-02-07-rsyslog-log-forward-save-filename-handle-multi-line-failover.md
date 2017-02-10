@@ -362,6 +362,8 @@ ruleset(name="sendToLogserver") {
 
 Now we can easily reboot log server - messages on client will be saved in queue and forwarded later.
 
+**WARNING:** Message relative order can be disrupted on message transfer from queue after resuming network connectivity(thanks [zystem](https://habrahabr.ru/users/zystem/) for comment). Rsyslog author [replied](https://github.com/rsyslog/rsyslog/issues/1400#issuecomment-278396567) that it is expected behaviour, details can be found here: http://www.gerhards.net/download/LinuxKongress2010rsyslog.pdf (section 7 "Concurrency-related Optimizations"). Briefly: attempt to preserve strict message order for multi-threaded processing leads to performance lost because of thread locks; notion of strict message order can have no sense for some of transport types, for multi-thread message generators and receivers.
+
 ## Failover
 
 Action can be configured to execute only if previous Action is suspended: [description](http://www.rsyslog.com/action-execonlywhenpreviousissuspended-preciseness/). This make failover configurations possible. Some Actions use transaction to improve performance. If they do, success or failure will be known only after transaction is finished, when messages are already processed. So some messages can be lost without calling failover Action. To prevent this, we should set parameter `queue.dequeuebatchsize="1"`(default: 16). It can hit performance.
