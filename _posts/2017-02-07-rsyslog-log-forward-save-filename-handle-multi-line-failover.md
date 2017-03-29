@@ -369,7 +369,7 @@ ruleset(name="sendToLogserver") {
 
 Now we can easily reboot log server - messages on client will be saved in queue and forwarded later.
 
-**WARNING:** Message relative order can be disrupted on message transfer from queue after resuming network connectivity(thanks [zystem](https://habrahabr.ru/users/zystem/) for comment). Rsyslog author [replied](https://github.com/rsyslog/rsyslog/issues/1400#issuecomment-278396567) that it is expected behaviour, details can be found here: http://www.gerhards.net/download/LinuxKongress2010rsyslog.pdf (section 7 "Concurrency-related Optimizations"). Briefly: attempt to preserve strict message order for multi-threaded processing leads to performance lost because of thread locks; notion of strict message order can have no sense for some of transport types, for multi-thread message generators and receivers.
+**WARNING:** Message relative order can be disrupted on message transfer from queue after resuming network connectivity(thanks [zystem](https://habrahabr.ru/users/zystem/) for the [comment](https://habrahabr.ru/post/321262/#comment_10058004)). Rsyslog author [replied](https://github.com/rsyslog/rsyslog/issues/1400#issuecomment-278396567) that it is expected behaviour, details can be found here: http://www.gerhards.net/download/LinuxKongress2010rsyslog.pdf (section 7 "Concurrency-related Optimizations"). Briefly: attempt to preserve strict message order for multi-threaded processing leads to performance lost because of thread locks; notion of strict message order can have no sense for some of transport types, for multi-thread message generators and receivers.
 
 ## Failover
 
