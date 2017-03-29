@@ -24,16 +24,16 @@ Only Linux servers are used.
 
 Why use syslog in our days? We have elastic beats, logstash, systemd-journal-remote and a lot more of new shiny technologies?
 
-* It is standard for logging in POSIX-like systems  
+* It is standard for logging in POSIX-like systems
 Some software, like haproxy, uses only syslog. So you can not completely eliminate it
 * It is used by network hardware
-* It has more complex setup, but a lot more features then competitor solutions  
+* It has more complex setup, but a lot more features then competitor solutions
 For example, Elastic Filebeat still can not use inofity.
 * Low memory usage. Can be used in embedded systems after [some tuning](http://wiki.rsyslog.com/index.php/Reducing_memory_usage).
-* Allows to change message before saving and forwarding.  
+* Allows to change message before saving and forwarding.
 Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https://en.wikipedia.org/wiki/PCI_DSS) in section 3.4 requires to mask or cypher card numbers, in case they are saved on disk. The nuance is: if somebody entered card number in search or contacts form, and you saved the query, you have broke the requirement.
 
-*Observation*: users are entering card number into every input field on a page, and sometimes try to tell it support together with CVV and PIN.
+*Observation*: users are entering card number into every input field on a page, and sometimes try to tell it together with CVV to support.
 
 ## Message format and legacy
 
@@ -62,7 +62,7 @@ Transferred over network syslog message looks something like this:
   * escaping. On receiving side we have message with `#012` instead of new lines
   * using octet-based TCP Framing, described in RFC 5425 for TLS-enabled syslog. Non-standard, only few implementations can do it
 
-### Alternative: RELP
+### Alternative to syslog protocol: RELP
 
 If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems. For instance, it's supported by Logstash and Graylog. Uses TCP for transport. Can optionally encrypt messages with TLS. It's more reliable than plain TCP syslog, because it does not lose messages when connection breaks. It solves problem with multi-line messages.
 
@@ -86,7 +86,7 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 
 Starting with 6th version c-like RainerScript format was introduced. It allows to specify complex rules for message processing.
 
-Because new config formats were created gradually and compatible with old format, then there is couple of flaws:
+Because new config formats were created gradually and compatible with old format, there is a couple of flaws:
 * some plugins(but I haven't seen such ones) can lack new format support, and still require old configuration directives
 * configuring with old directives does not always work as expected for new format:
   * if module `omfile` is called with old format: `auth,authpriv.*  /var/log/auth.log`, then owner and group of created files are defined by old directives `$FileOwner`, `$FileGroup`, `$FileCreateMode`. And if it is called with `action(type="omfile" ...)`, then this directives are ignored and you should configure it in module loading statement or inside action itself.
@@ -94,14 +94,15 @@ Because new config formats were created gradually and compatible with old format
 * semicolon is forbidden somewhere, and strictly required in other places(second happes less often).
 
 To avoid stumbling on this flaws, one should follow this simple rules:
-* for small and simple configs use old well-known format: `:programname, startswith, "haproxy"  /var/log/haproxy.log`
+* for small and simple configs use old well-known format:
+`:programname, startswith, "haproxy"  /var/log/haproxy.log`
 * for complex message processing and for fine tuning of action parameters always use RainerScript, without legacy directives like `$DoSomething`.
 
 Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/configuration/basic_structure.html#configuration-file).
 
 ## Message processing
 
-* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives outside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional format:  
+* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives outside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional format:
 `local7.*  /var/log/myapp/my.log`
 * Input has assigned list of message parsers. If not set explicitly, default set of parsers for traditional syslog format will be used
 * Parset extracts properties from message. Some of most used:
@@ -215,9 +216,9 @@ Last `stop` directive is required to stop processing this messages, otherwise th
 
 *Interlude*
 
-Programmer: Hey, I can't find logfile somevendor.log for beginning of last month on log server, could you help me?  
-Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already have cleaned everything older than a week  
-Programmer: @#$%^@!  
+Programmer: Hey, I can't find logfile somevendor.log for beginning of last month on log server, could you help me?
+Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already have cleaned everything older than a week
+Programmer: @#$%^@!
 
 If application creates a lot of logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use the `$.suffix` variable.
 
@@ -408,7 +409,7 @@ Can be rotated perfectly well with default scheme: `smth.log` is renamed to `smt
 
 For application than can re-open files on request(SIGHUP or something alike) no additional configuration is required: rsyslog will notice file inode change and re-open it.
 
-Problems appear with logrotate `copytruncae` option, that truncates `smth.log` to zero after  creating copy `smth.log.1`. rsyslog just stops reading lines from that file. Starting from version 8.16.0, imfile module has option `reopenOnTruncate` (default `"off"`, to enable switch to `"on"`), that tells rsyslog to reopen input file on truncate(inode unchanged but file size on disk is less than current offset in memory). It is marked as "experimental", but works fine for me in production. For versions older than 8.16.0, you can fix `copytruncate` rotatin by sending SIGHUP to rsyslogd process in post-rotate action. 
+Problems appear with logrotate `copytruncae` option, that truncates `smth.log` to zero after  creating copy `smth.log.1`. rsyslog just stops reading lines from that file. Starting from version 8.16.0, imfile module has option `reopenOnTruncate` (default `"off"`, to enable switch to `"on"`), that tells rsyslog to reopen input file on truncate(inode unchanged but file size on disk is less than current offset in memory). It is marked as "experimental", but works fine for me in production. For versions older than 8.16.0, you can fix `copytruncate` rotatin by sending SIGHUP to rsyslogd process in post-rotate action.
 
 *Note*: On Debian/Ubuntu systems by default logrotate output and result is not saved anywhere, so you won't notice if it's broken. I recommend to fix this in `/etc/cron.daily/logrotate`.
 
