@@ -6,6 +6,10 @@ tags: [rsyslog, syslog, linux]
 
 *This is translation of my original [article in russian](https://habrahabr.ru/post/321262/)*
 
+<!-- kramdown magick -->
+* 
+{:toc}
+
 ## Task
 
 Forward logs to log server. If it's unavailable, do not lose messages, but preserve and and send later. Handle multi-line messages correctly.
