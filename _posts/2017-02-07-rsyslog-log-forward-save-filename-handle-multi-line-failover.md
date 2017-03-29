@@ -12,12 +12,11 @@ tags: [rsyslog, syslog, linux]
 
 ## Task
 
-Forward logs to log server. If it's unavailable, do not lose messages, but preserve and and send later. Handle multi-line messages correctly.
-
-Additional goals:
-
-* server reconfiguration is not required for new log files, client reconfiguration is sufficient
-* forwarding of all log files with name matching wildcard, saved separately on server with same names
+Forward logs to log server:
+* If server is unavailable, do not lose messages, but preserve them and and send later.
+* Handle multi-line messages correctly.
+* For new log files client reconfiguration is sufficient, server reconfiguration is not required.
+* Forward all log files with name matching wildcard, save separately on server with the same names.
 
 Only Linux servers are used.
 
@@ -217,7 +216,7 @@ Last `stop` directive is required to stop processing this messages, otherwise th
 *Interlude*
 
 Programmer: Hey, I can't find logfile somevendor.log for beginning of last month on log server, could you help me?  
-Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already cleaned everything older than a week  
+Devops: Hmmm... Are we writing such logs? You should have told me. Anyway, logrotate already have cleaned everything older than a week  
 Programmer: @#$%^@!  
 
 If application creates a lot of logs, and new ones appear often, updating configuration every time is inconvenient. I'd like to have some automation. [Imfile](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html) module can read files specified by wildcards, and it saves filename in message metadata. But it saves full path, and we need only the last component, so we have to extract it. And here is the place to use the `$.suffix` variable.
@@ -237,7 +236,7 @@ ruleset(name="myapp_logs") {
 }
 ```
 
-Wildcards are supported only in imfile `inotify` mode(it's default).
+Wildcards are supported only in imfile `inotify` mode(it's default). Since version 8.25.0, wildcards are supported both in filename and path: `/var/log/*/*.log`.
 
 ### Multi-line messages
 
@@ -384,6 +383,34 @@ ruleset(name="sendToLogserver") {
 ```
 
 I haven't use this failover config on production.
+
+## Logrotate interaction
+
+### Logs written by rsyslog itself
+
+Can be rotated perfectly well with default scheme: `smth.log` is renamed to `smth.log.1` and new `smth.log` is created. In post-rotate action you should send SIGHUP to rsyslogd process. **Note**: rsyslog does not reload configuration on SIGHUP, it just re-opens all log files.
+
+```bash
+/var/log/someapp/*.log{
+    weekly
+    missingok
+    rotate 5
+    create 0644 syslog adm
+    sharedscripts
+    postrotate
+        # postrotate script should always return 0
+        test -s run/rsyslogd.pid && kill -HUP $(cat /run/rsyslogd.pid) || true
+    endscript
+}
+```
+
+### Logs written by application and read by syslog
+
+For application than can re-open files on request(SIGHUP or something alike) no additional configuration is required: rsyslog will notice file inode change and re-open it.
+
+Problems appear with logrotate `copytruncae` option, that truncates `smth.log` to zero after  creating copy `smth.log.1`. rsyslog just stops reading lines from that file. Starting from version 8.16.0, imfile module has option `reopenOnTruncate` (default `"off"`, to enable switch to `"on"`), that tells rsyslog to reopen input file on truncate(inode unchanged but file size on disk is less than current offset in memory). It is marked as "experimental", but works fine for me in production. For versions older than 8.16.0, you can fix `copytruncate` rotatin by sending SIGHUP to rsyslogd process in post-rotate action. 
+
+*Note*: On Debian/Ubuntu systems by default logrotate output and result is not saved anywhere, so you won't notice if it's broken. I recommend to fix this in `/etc/cron.daily/logrotate`.
 
 ## Summary
 
