@@ -6,7 +6,7 @@ tags: [rsyslog, syslog, linux]
 
 *This is translation of my original [article in russian](https://habrahabr.ru/post/321262/)*
 
-<!-- kramdown magick -->
+<!-- kramdown magick https://kramdown.gettalong.org/converter/html.html#toc -->
 * TOC
 {:toc}
 
