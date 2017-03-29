@@ -16,8 +16,7 @@ Modify service config script `/etc/default/syslog-ng`:
 ```bash
 SYSLOGNG_OPTS="-u syslog -g syslog"
 
-if [ ! -e /var/run/syslog-ng.pid ]
-then
+if [ ! -e /var/run/syslog-ng.pid ] then
 	touch /var/run/syslog-ng.pid
 fi
 chown syslog /var/run/syslog-ng.pid
