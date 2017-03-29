@@ -7,7 +7,7 @@ tags: [rsyslog, syslog, linux]
 *This is translation of my original [article in russian](https://habrahabr.ru/post/321262/)*
 
 <!-- kramdown magick -->
-* 
+* TOC
 {:toc}
 
 ## Task
