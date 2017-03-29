@@ -399,13 +399,14 @@ Can be rotated perfectly well with default scheme: `smth.log` is renamed to `smt
     create 0644 syslog adm
     sharedscripts
     postrotate
+        test -s run/rsyslogd.pid && kill -HUP $(cat /run/rsyslogd.pid)
         # postrotate script should always return 0
-        test -s run/rsyslogd.pid && kill -HUP $(cat /run/rsyslogd.pid) || true
+        true
     endscript
 }
 ```
 
-### Logs written by application and read by syslog
+### Logs written by application and read by rsyslog
 
 For application than can re-open files on request(SIGHUP or something alike) no additional configuration is required: rsyslog will notice file inode change and re-open it.
 
