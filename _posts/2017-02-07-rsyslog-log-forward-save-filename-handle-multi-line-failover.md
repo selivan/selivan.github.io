@@ -29,7 +29,7 @@ Why use syslog in our days? We have elastic beats, logstash, systemd-journal-rem
 Some software, like haproxy, uses only syslog. So you can not completely eliminate it
 * It is used by network hardware
 * It has more complex setup, but a lot more features then competitor solutions  
-For example, Elastic Filebeat still con not use inofity.
+For example, Elastic Filebeat still can not use inofity.
 * Low memory usage. Can be used in embedded systems after [some tuning](http://wiki.rsyslog.com/index.php/Reducing_memory_usage).
 * Allows to change message before saving and forwarding.  
 Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https://en.wikipedia.org/wiki/PCI_DSS) in section 3.4 requires to mask or cypher card numbers, in case they are saved on disk. The nuance is: if somebody entered card number in search or contacts form, and you saved the query, you have broke the requirement.
