@@ -245,7 +245,7 @@ To work with files with multi-line messages imfile offers 3 options:
 - `readMode=2` - new messages start at rhe beginning of a line. If line starts from space or tabulation, it's part of message. Stack traces often look like this.
 - `startmsg.regex` - define new message by regexp(POSIX Extended)
 
-First two options have troubles working in `inotify` mode and third option can replace them with right regexp, so we will use it. Reading multi-line logs have a subtlety. New message mark is often placed on the first line of the message. So we can not be sure, that last message is complete, until new one starts. Because of this last message may be never transferred. To avoid this, we set parameter `readTimeout`, and after that number of seconds last message is considered finished.
+First two options have troubles working in `inotify` mode and third option can replace them all with right regexp, so we will use it. Reading multi-line logs have a subtlety. New message mark is often placed on the first line of the message. So we can not be sure, that last message is complete, until new one starts. Because of this last message may be never transferred. To avoid this, we set parameter `readTimeout`, and after that number of seconds last message is considered finished.
 
 ```bash
 input(type="imfile"
