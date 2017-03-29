@@ -40,7 +40,10 @@ Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https:/
 
 *TLDR*: everything is broken
 
+<!-- <details>
+<summary> TLDR: everything is broken (click to view)</summary> -->
 Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware. There were no standard, everybody was writing code just to be compatible with existing software. In 2001 IETF described current situation in RFC 3164(status "informational"). Implementations vary a lot, so it states "The payload of any IP packet that has a UDP destination port of 514 MUST be treated as a syslog message". Later IETF tried to create standard format in RFC 3165, but this document was inconvenient, at this moment there is no any alive software implementation. In 2009 RFC 5424 was approved, defining structured messages, but it is rarely used.
+<!-- </details> -->
 
 [Here](http://www.rsyslog.com/doc/syslog_parsing.html) you can read what rsyslog author Rainer Gerhards does think about syslog standard situation. In fact, everybody is implementing syslog as he likes, and syslog server has the task to interpret anything it receives. For example, rsyslog has [special module](http://www.rsyslog.com/doc/v8-stable/configuration/modules/pmciscoios.html) to parse format used by CISCO IOS. For the worst cases since rsyslog 5th version you can define custom parsers.
 
