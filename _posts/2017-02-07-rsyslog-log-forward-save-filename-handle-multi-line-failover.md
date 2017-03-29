@@ -94,7 +94,7 @@ Because new config formats were created gradually and compatible with old format
 * semicolon is forbidden somewhere, and strictly required in other places(second happes less often).
 
 To avoid stumbling on this flaws, one should follow this simple rules:
-* for small and simple configs use old well-known format:
+* for small and simple configs use old well-known format:<br />
 `:programname, startswith, "haproxy"  /var/log/haproxy.log`
 * for complex message processing and for fine tuning of action parameters always use RainerScript, without legacy directives like `$DoSomething`.
 
