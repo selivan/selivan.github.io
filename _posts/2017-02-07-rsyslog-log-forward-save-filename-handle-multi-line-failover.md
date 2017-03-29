@@ -66,7 +66,7 @@ Transferred over network syslog message looks something like this:
 
 If messages are transferred between hosts using rsyslog, instead of plain TCP you can use [RELP](http://www.rsyslog.com/doc/relp.html) - Reliable Event Logging Protocol. It was created for rsyslog, now it's supported by some other systems. For instance, it's supported by Logstash and Graylog. Uses TCP for transport. Can optionally encrypt messages with TLS. It's more reliable than plain TCP syslog, because it does not lose messages when connection breaks. It solves problem with multi-line messages.
 
-## rsyslog configuration
+## Rsyslog configuration
 
 In contrast to the second popular syslog deamon, syslog-ng, rsyslog is compatible with configs of old syslogd:
 
