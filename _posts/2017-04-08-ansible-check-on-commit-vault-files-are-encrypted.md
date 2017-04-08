@@ -43,7 +43,7 @@ git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; 
                 exit 1
         }
 done
-# pipe creates separate subshell, we can not use it's variables
+# Pipe creates separate subshell, we can not use it's variables
 exit $?
 ```
 
