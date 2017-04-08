@@ -35,7 +35,6 @@ fi
 exec 1>&2
 
 # Check that all changed *.vault files are encrypted
-IFS=$'\n'
 git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
         [[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
         head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
