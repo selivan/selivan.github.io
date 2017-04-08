@@ -45,7 +45,7 @@ done
 exit $?
 ```
 
-By default git hooks are located in `.git/hooks` directory outside version control. Of course we want to store hooks in repository to share them between all users. Let's save them to `git_hooks` directory in the repository root. Starting from version 2.9, git has config parameter `core.hooksPath`, that allows to set relative path for hooks:
+By default git hooks are located in `.git/hooks` directory that is not under version control. Of course we want to store hooks in repository to share them between all users. Let's save them to `git_hooks` directory in the repository root. Starting from version 2.9, git has config parameter `core.hooksPath`, that allows to set relative path for hooks:
 
 ```bash
 git config core.hooksPath ./git_hooks
