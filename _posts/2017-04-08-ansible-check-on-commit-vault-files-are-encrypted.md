@@ -10,6 +10,8 @@ But this system has one drawback: it's easy to rename file to `*.vault` but forg
 
 Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`. It's non-zero exit status aborts the commit.
 
+Check if file is encrypted with ansible-vault is simple, such files have first line starting with `$ANSIBLE_VAULT;`.
+
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
 Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
