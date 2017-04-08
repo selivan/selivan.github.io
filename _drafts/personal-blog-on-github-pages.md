@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Personal blog on github pages: SEO friendly, comments, bells and whistles"
-tags: [jekyll, discus, github-pages, blog]
+tags: [jekyll,discus,github-pages,blog]
 ---
   * jekyll template
   * robots.txt
