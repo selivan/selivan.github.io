@@ -6,7 +6,7 @@ tags: [ansible,ansible-vault,git]
 
 In our project we have an agreement: all vault-encrypted files should have suffix `.vault`. It's convenient to be able to see that all secret information, like keys and passwords, is stored properly.
 
-But this system has one drawback: it's easy to rename file to `*.vault` but forget to actually encrypt it.
+But this system has one drawback: it's easy to rename a file to `*.vault` but forget to actually encrypt it.
 
 Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`. It's non-zero exit status aborts the commit.
 
