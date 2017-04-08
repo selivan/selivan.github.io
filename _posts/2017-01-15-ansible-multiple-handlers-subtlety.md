@@ -13,7 +13,7 @@ In ansible, to run multiple handlers for a task you can chain handlers by `notif
   notify: start apt mirroring step 2
 
 - name: start apt mirroring step 2
-  shell: sudo -u apt-mirror /usr/bin/apt-mirror >> /var/log/apt-mirror-cron.log
+  shell: sudo -u apt-mirror /usr/bin/apt-mirror >> /var/log/apt-mirror-cron.log 2>&1
   async: 6000
   poll: 0
 ```
