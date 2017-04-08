@@ -10,7 +10,7 @@ But this system has one drawback: it's easy to rename file to `*.vault` but forg
 
 Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`. It's non-zero exit status aborts the commit.
 
-Check if file is encrypted with ansible-vault is simple, first line of suck files starts with `$ANSIBLE_VAULT;`
+Check if file is encrypted with ansible-vault is simple, first line of such files starts with `$ANSIBLE_VAULT;`
 
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
