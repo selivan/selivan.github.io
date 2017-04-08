@@ -16,7 +16,7 @@ We want to check only changed files. `git diff` command with `--cached` option s
 
 Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
 
-If we redirect some command output to a loop(`while` or `for`), that loop will be running in separate subshell. Variables changed inside loop won't be visible to parent shell, and `exit` command will terminate just the subshell, not the main script. To communicate with loop subshell we can use it's exit code.
+If we use pipe to redirect some command output to `while` loop, it will be running in separate subshell. Variables changed inside loop won't be visible to parent shell, and `exit` command will terminate just the subshell, not the main script. To communicate with loop subshell we can use it's exit code.
 
 `./git/hooks/pre-commit`:
 
