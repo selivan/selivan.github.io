@@ -8,7 +8,7 @@ In our project we have an agreement: all vault-encrypted files should have suffi
 
 But this system has one drawback: it's easy to rename file to `*.vault` but forget to actually encrypt it.
 
-Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`, and it's non-zero exit status aborts the commit.
+Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`. It's non-zero exit status aborts the commit.
 
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
@@ -34,7 +34,7 @@ exec 1>&2
 
 # Check that all changed *.vault files are encrypted
 IFS=$'\n'
-git diff --cached --name-only -z "$against" | IFS= while read -r -d $'\0' file; do
+git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
         [[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
         head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
                 echo "ERROR: non-encrypted *.vault file: $file"
