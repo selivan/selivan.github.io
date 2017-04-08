@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ansible check before commit that all *.vault files are encrypted"
+title:  "Ansible: check before commit that all *.vault files are encrypted"
 tags: [ansible,ansible-vault,git]
 ---
 
