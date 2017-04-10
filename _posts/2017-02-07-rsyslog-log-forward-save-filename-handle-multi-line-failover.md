@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Rsyslog configuration: forwarding log files with file names, handle multi-line messages, no messages lost on server downtime, failover server"
-tags: [rsyslog, syslog, linux]
+tags: [rsyslog,syslog,"multiline logs",linux]
 ---
 
 *This is translation of my original [article in russian](https://habrahabr.ru/post/321262/)*
