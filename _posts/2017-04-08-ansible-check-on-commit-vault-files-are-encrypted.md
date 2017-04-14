@@ -38,8 +38,8 @@ exec 1>&2
 # Check that all changed *.vault files are encrypted
 git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
 	[[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
-	# sed gets symbols 1-2
-	file_status=$(git status --porcelain -- "$file" 2>&1 | sed 's/\(..\).*/\1/')
+	# cut gets symbols 1-2
+	file_status=$(git status --porcelain -- "$file" 2>&1 | cut -c 1-2)
 	file_status_index=${file_status:0:1}
 	file_status_worktree=${file_status:1:1}
 	[[ "$file_status_worktree" != ' ' ]] && {
