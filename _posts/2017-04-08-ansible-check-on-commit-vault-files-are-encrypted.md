@@ -16,35 +16,43 @@ Check if file is encrypted with ansible-vault is simple, first line of such file
 
 ```bash
 #!/usr/bin/env bash
+#
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
 
 # Unset variables produce errors
 set -u
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
-        against=HEAD
+	against=HEAD
 else
-        # Initial commit: diff against an empty tree object
-        against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+	# Initial commit: diff against an empty tree object
+	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
 fi
 
-# Redirect output to stderr
+# Redirect output to stderr.
 exec 1>&2
 
 # Check that all changed *.vault files are encrypted
 git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
-        [[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
-        # sed gets 2nd symbol
-        file_status_worktree=$(git status --porcelain -- "$file" 2>&1 | sed 's/.\(.\).*/\1/')
-        [[ "$file_status_worktree" = ' ' ]] || {
-            echo "ERROR: *.vault file modified in worktree but not added to index: $file"
-            echo "Can not check if it is properly encrypted. Use git add or git stash to fix this."
-            exit 1
-        }
-        head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
-                echo "ERROR: non-encrypted *.vault file: $file"
-                exit 1
-        }
+	[[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
+	# sed gets symbols 1-2
+	file_status=$(git status --porcelain -- "$file" 2>&1 | sed 's/\(..\).*/\1/')
+	file_status_index=${file_status:0:1}
+	file_status_worktree=${file_status:1:1}
+	[[ "$file_status_worktree" != ' ' ]] && {
+		echo "ERROR: *.vault file is modified in worktree but not added to the index: $file"
+		echo "Can not check if it is properly encrypted. Use git add or git stash to fix this."
+		exit 1
+	}
+	# check neither required nor possible for deleted files
+	[[ "$file_status_index" = 'D' ]] && continue
+	head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
+		echo "ERROR: non-encrypted *.vault file: $file"
+		exit 1
+	}
 done
 # Pipe creates separate subshell, we can not use it's variables
 exit $?
