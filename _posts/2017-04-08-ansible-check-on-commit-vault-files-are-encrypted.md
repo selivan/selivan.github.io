@@ -52,7 +52,7 @@ exit $?
 
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
-If file was modified on disk after `git add`, we can not check it's version that is going to be commited. So we ask user to fix the situation. We could use some automation here, like `git stash` before commit and `git stash pop` after, but I think leaving solution to user himself is better option. Thanks to [Ben Tennant](https://disqus.com/by/ben_tennant/) for pointing out this issue.
+If file was modified after `git add`, we can not check it's version that is going to be commited. So we ask user to fix the situation. We could use some automation here, like `git stash` before commit and `git stash pop` after, but I think leaving solution to user himself is better option. Thanks to [Ben Tennant](https://disqus.com/by/ben_tennant/) for pointing out this issue.
 
 Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
 
