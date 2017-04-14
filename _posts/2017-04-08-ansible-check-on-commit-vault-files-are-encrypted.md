@@ -47,7 +47,7 @@ git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; 
 		echo "Can not check if it is properly encrypted. Use git add or git stash to fix this."
 		exit 1
 	}
-	# check neither required nor possible for deleted files
+	# check is neither required nor possible for deleted files
 	[[ "$file_status_index" = 'D' ]] && continue
 	head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
 		echo "ERROR: non-encrypted *.vault file: $file"
