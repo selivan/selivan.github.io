@@ -10,18 +10,15 @@ But this system has one drawback: it's easy to rename a file to `*.vault` but fo
 
 Our ansible playbooks are stored in git repository, so we can use [git hooks](https://git-scm.com/docs/githooks) to force our rules. We will use `pre-commit` hook, that is executed by `git commit`. It's non-zero exit status aborts the commit.
 
-Check if file is encrypted with ansible-vault is simple, first line of such files starts with `$ANSIBLE_VAULT;`
-
-We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
-
-Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
-
-If we use pipe to redirect some command output to `while` loop, it will be running in separate subshell. Variables changed inside loop won't be visible to parent shell, and `exit` command will terminate just the subshell, not the main script. To communicate with loop subshell we can use it's exit code.
+Check if file is encrypted with ansible-vault is simple, first line of such file starts with `$ANSIBLE_VAULT;`
 
 `./git/hooks/pre-commit`:
 
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Unset variables produce errors
+set -u
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
@@ -31,12 +28,19 @@ else
         against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
 fi
 
-# Redirect output to stderr.
+# Redirect output to stderr
 exec 1>&2
 
 # Check that all changed *.vault files are encrypted
 git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
         [[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
+        # sed gets 2nd symbol
+        file_status_worktree=$(git status --porcelain -- "$file" 2>&1 | sed 's/.\(.\).*/\1/')
+        [[ "$file_status_worktree" = ' ' ]] || {
+            echo "ERROR: *.vault file modified in worktree but not added to index: $file"
+            echo "Can not check if it is properly encrypted. Use git add or git stash to fix this."
+            exit 1
+        }
         head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
                 echo "ERROR: non-encrypted *.vault file: $file"
                 exit 1
@@ -45,6 +49,14 @@ done
 # Pipe creates separate subshell, we can not use it's variables
 exit $?
 ```
+
+We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
+
+If file was modified on disk after `git add`, we can not check it's version that is going to be commited. So we ask user to fix the situation. We could use some automation here, like `git stash` before commit and `git stash pop` after, but I think leaving solution to user himself is better option. Thanks to [Ben Tennant](https://disqus.com/by/ben_tennant/) for pointing out this issue.
+
+Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
+
+If we use pipe to redirect some command output to `while` loop, it will be running in separate subshell. Variables changed inside loop won't be visible to parent shell, and `exit` command will terminate just the subshell, not the main script. To communicate with loop subshell we can use it's exit code.
 
 By default git hooks are located in `.git/hooks` directory that is not under version control. Of course we want to store hooks in repository to share them between all users. Let's save them to `git_hooks` directory in the repository root. Starting from version 2.9, git has config parameter `core.hooksPath`, that allows to set relative path for hooks:
 
