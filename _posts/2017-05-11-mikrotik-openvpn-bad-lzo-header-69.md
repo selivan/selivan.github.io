@@ -8,7 +8,7 @@ Mikrotik RoutesOS has limited [OpenVPN support](https://wiki.mikrotik.com/wiki/O
 
 I had to configure Linux OpenVPN(ver. 2.3) server and Mikrotik client. Seems easy. Connection was establishing normally, client got authentificated, and then error `Bad LZO decompression header byte: 69` arised. Packets were not transmitted over the connection and finally it was killed on `ping-restart` timeout.
 
-I tried not mentioning `comp-lzo` at all, setting it to `no`, to `auto` and pushing it to client: `push "comp-lzo no"`. But the error was still there.
+I tried not mentioning `comp-lzo` at all, setting it to `no`, to `auto` and pushing it to the client: `push "comp-lzo no"`. But the error was still there.
 
 Finally I figured out, that there is one more LZO-related option, `comp-noadapt`, and it does the trick. I got stable working connection.
 
