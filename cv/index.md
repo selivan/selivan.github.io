@@ -86,8 +86,8 @@ Skills that I used to practice some time ago.
   * Almost all job duties from "Radix-Tools", because it entirely became new "Ircos" department, staying in the same office.
   * Participated in development and support of distributed radio-monitoring system. Heterogeneous infrastructure: Linux, Windows, Mikrotik, HP. This system was working at [2013 Summer Universiade](https://en.wikipedia.org/wiki/2013_Summer_Universiade).
 * 2012 - 2013: additional job: Voronezh State University, teacher. Unofficial job, I was replacing official teacher.
-  * Course "Operating System GNU/Linux Introduction". Learning materials: https://github.com/selivan/gnu_linux_intro
-  * Course "Administration of information systems", actually  extension of previous course and networking basics. Learning materials:: https://github.com/selivan/gnu_linux_intro Video of lectures: http://www.youtube.com/playlist?list=PL8RrqJgewWmHQOk7EdKByYD3uUUDk6OUG
+  * Course "Operating System GNU/Linux Introduction". Learning materials: [github.com/selivan/gnu_linux_intro](https://github.com/selivan/gnu_linux_intro)
+  * Course "Administration of information systems", actually  extension of previous course and networking basics. Learning materials:: [github.com/selivan/gnu_linux_intro](https://github.com/selivan/gnu_linux_intro) Video of lectures: [youtube](http://www.youtube.com/playlist?list=PL8RrqJgewWmHQOk7EdKByYD3uUUDk6OUG)
 * 2009 - 2011: [Radix-Tools](http://www.radixtools.ru/), engineer-programmer
   * Administration of network and servers: Linux(Debian, Fedora), Windows 2003
   * Proxy, firewall, VPN
