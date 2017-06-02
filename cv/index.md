@@ -21,7 +21,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 
 ## Languages
 * Russian - native speaker.
-* English - upper intermediate. Can easily read and write technical documentation. Not so good at listening and speaking due to lack of practise.
+* English - upper intermediate. Can easily read and write technical documentation. Not so good at listening and speaking due to lack of practice.
 
 ## Skills
 
@@ -40,7 +40,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _Log analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana) |
 | _Logging and log shipping_ | rsyslog |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
-| _VPN_ | Openvpn |
+| _VPN_ | OpenVPN |
 | _Basic networking_ | static routing, VLANs, Firewalls |
 
 ### Optional skills. To use this I need to refresh my memory.
@@ -49,12 +49,12 @@ Skills that I used to practice some time ago.
 | _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), LXC, Docker |
 | _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), syslog(rsyslog), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
 | _VPN_ | PPTP, L2TP, ipsec |
-| _Operating Systems_ | Windows: Installation, configuration, maintainance of workstations(2000, XP, Windows 7) |
-| _Operating Systems_ | Windows: Installation, configuration, maintainance of  Windows Server(2003, 2008r2). Terminal services. |
+| _Operating Systems_ | Windows: Installation, configuration, maintenance of workstations(2000, XP, Windows 7) |
+| _Operating Systems_ | Windows: Installation, configuration, maintenance of  Windows Server(2003, 2008r2). Terminal services. |
 | _Operating Systems_ | Windows: Active Directory: Group Polices, CIFS, WSUS |
 | _Operating Systems_ | FreeBSD |
 | _Hardware_ | Linux Software RAID(mdadm), “fake” RAID(dmraid) |
-| _Network equimpent_ | CISCO, HP ProCurve, Mikrotik |
+| _Network equipment_ | CISCO, HP ProCurve, Mikrotik |
 | _SQL_ | PostgreSQL |
 | _Applications Server_ | Tomcat |
 | _NoSQL_ | MongoDB |
@@ -64,7 +64,7 @@ Skills that I used to practice some time ago.
 
 ## Communication skills
   * Team player
-  * Experience in working by Agile methology SCRUM
+  * Experience in working by Agile methodology SCRUM
 
 ## Expirience
 
@@ -83,8 +83,8 @@ Skills that I used to practice some time ago.
   * Administration of internal services(ticket system OTRS, wiki, jabber)
   * Assigning tasks to technical support engineers and monitoring their performance
 * 2011-2013 г.: [Ircos](http://ircos.ru/), engineer-programmer
-  * Все обязанности из ”Радикс-Тулс”, т. к. фирма практически полностью влилась в “ИРКОС” в виде нового отдела в том же здании.
-  * Participated in development and support of distributed radiomonitoring system. Heterogenous infrastructure: Linux, Windows, Mikrotik, HP. This system was working at [2013 Summer Universiade](https://en.wikipedia.org/wiki/2013_Summer_Universiade).
+  * Almost all job duties from "Radix-Tools", because it entirely became new "Ircos" department, staying in the same office.
+  * Participated in development and support of distributed radio-monitoring system. Heterogeneous infrastructure: Linux, Windows, Mikrotik, HP. This system was working at [2013 Summer Universiade](https://en.wikipedia.org/wiki/2013_Summer_Universiade).
 * 2012-2013 гг., additional job: Voronezh State University, teacher. Unofficial job, I was replacing official teacher.
   * Course "Operating System GNU/Linux Introduction". Learning materials: https://github.com/selivan/gnu_linux_intro
   * Course "Administration of information systems", actually  extension of previous course and networking basics. Learning materials:: https://github.com/selivan/gnu_linux_intro Video of lectures: http://www.youtube.com/playlist?list=PL8RrqJgewWmHQOk7EdKByYD3uUUDk6OUG
@@ -114,6 +114,6 @@ University: Voronezh State University\\
 Faculty: математический\\
 Department: Department of algebra and topological methods of analysis\\
 Qualification: specialist\\
-Specialty: mathematician\\
+Specialty: mathematician
 * Additional degree 2007-2009 гг.
-Qualification: Systems engineer(specialist on operations of hardware-software complexes of Computers and Networks).\\
+Qualification: Systems engineer(specialist on operations of hardware-software complexes of Computers and Networks).
