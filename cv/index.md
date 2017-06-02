@@ -72,29 +72,29 @@ Skills that I used to practice some time ago.
   * Development and support of AWS-based infrastructure that was certified for PCI DSS Compliance Level 1
   * Support of development and deploy cycle for rapidly developing web application
   * Securing web application that deals with sensitive financial information
-* 2014 - 2015гг.: [Yandex](https://yandex.ru), engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
+* 2014 - 2015: [Yandex](https://yandex.ru), engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
   * _Signed pretty strict NDA, sorry, no more details_ :(
-* 2013 - 2014гг.: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(the company was closed), leading specialist in department of banking telecommunication systems:
+* 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(the company was closed), leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
   * Deploy of central software configuration system Ansible (example: https://github.com/selivan/ansible_ipmi_lan_manage)
   * Development of Linux-based thin client build with extended functionality(open source part here: https://github.com/selivan/thinclient)
   * Upgrade of system for automatic installation and configuration of servers for new branch offices
   * Administration of internal services(ticket system OTRS, wiki, jabber)
   * Assigning tasks to technical support engineers and monitoring their performance
-* 2011-2013 г.: [Ircos](http://ircos.ru/), engineer-programmer
+* 2011 - 2013: [Ircos](http://ircos.ru/), engineer-programmer
   * Almost all job duties from "Radix-Tools", because it entirely became new "Ircos" department, staying in the same office.
   * Participated in development and support of distributed radio-monitoring system. Heterogeneous infrastructure: Linux, Windows, Mikrotik, HP. This system was working at [2013 Summer Universiade](https://en.wikipedia.org/wiki/2013_Summer_Universiade).
-* 2012-2013 гг., additional job: Voronezh State University, teacher. Unofficial job, I was replacing official teacher.
+* 2012 - 2013: additional job: Voronezh State University, teacher. Unofficial job, I was replacing official teacher.
   * Course "Operating System GNU/Linux Introduction". Learning materials: https://github.com/selivan/gnu_linux_intro
   * Course "Administration of information systems", actually  extension of previous course and networking basics. Learning materials:: https://github.com/selivan/gnu_linux_intro Video of lectures: http://www.youtube.com/playlist?list=PL8RrqJgewWmHQOk7EdKByYD3uUUDk6OUG
-* 2009 - 2011 гг. [Radix-Tools](http://www.radixtools.ru/), engineer-programmer
+* 2009 - 2011: [Radix-Tools](http://www.radixtools.ru/), engineer-programmer
   * Administration of network and servers: Linux(Debian, Fedora), Windows 2003
   * Proxy, firewall, VPN
   * Collaboration services: wiki, bug tracker, task tracker, VCS(svn, mercurial), jabber, mail
   * Configuration and support of monitoring system(Zabbix) and backup system(Bacula)
   * Purchase and repair of computers and office equipment
-* 2008-2009 [BITS](http://www.b-it-s.ru/), support engineer
+* 2008 - 2009: [BITS](http://www.b-it-s.ru/), support engineer
   * Administration of Linux servers(basically Suse), Windows 2003
   * Maintenance of Windows(2000, XP) workstations: network, office programs, bank clients, printers/scanners
   * Maintenance of the physical LAN structure
