@@ -96,7 +96,7 @@ Skills that I used to practice some time ago.
   * Purchase and repair of computers and office equipment
 * 2008-2009 [BITS](http://www.b-it-s.ru/), support engineer
   * Administration of Linux servers(basically Suse), Windows 2003
-  * Mainteinance of Windows(2000, XP) workstations: network, office programs, bank clients, printers/scanners
+  * Maintenance of Windows(2000, XP) workstations: network, office programs, bank clients, printers/scanners
   * Maintenance of the physical LAN structure
 
 ## Certifications
@@ -111,7 +111,7 @@ Check URL: [mcp.microsoft.com/authenticate/validatemcp.aspx](https://mcp.microso
 
 * University degree 2003-2009
 University: Voronezh State University\\
-Faculty: математический\\
+Faculty: Mathematical\\
 Department: Department of algebra and topological methods of analysis\\
 Qualification: specialist\\
 Specialty: mathematician
