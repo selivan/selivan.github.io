@@ -40,6 +40,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _Log analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana) |
 | _Logging and log shipping_ | rsyslog |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
+| _HIDS_ | OSSEC |
 | _VPN_ | OpenVPN |
 | _Basic networking_ | static routing, VLANs, Firewalls |
 
@@ -47,18 +48,22 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 Skills that I used to practice some time ago.
 
 | _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), LXC, Docker |
-| _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), syslog(rsyslog), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
-| _VPN_ | PPTP, L2TP, ipsec |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of workstations(2000, XP, Windows 7) |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of  Windows Server(2003, 2008r2). Terminal services. |
 | _Operating Systems_ | Windows: Active Directory: Group Polices, CIFS, WSUS |
 | _Operating Systems_ | FreeBSD |
 | _Hardware_ | Linux Software RAID(mdadm), “fake” RAID(dmraid) |
 | _Network equipment_ | CISCO, HP ProCurve, Mikrotik |
+| _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), syslog(rsyslog), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
+| _VCS_ | svn |
+| _VPN_ | PPTP, L2TP, ipsec |
+| _NIDS_ | Surixata |
 | _SQL_ | PostgreSQL |
 | _Applications Server_ | Tomcat |
 | _NoSQL_ | MongoDB |
+| _Message broker_ | RabbitMQ |
 | _Distributed coordination system_ | Apache Zookeeper |
+| _Log analysis_ | Graylog(Elasticsearch-based solution) |
 | _Programming_ | C, PHP |
 | _Backup_ | Bacula |
 
