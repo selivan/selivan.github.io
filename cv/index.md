@@ -1,7 +1,6 @@
 ---
 layout: default
 redirect_from:
-  - /cv/ru
   - /CV
 ---
 ![photo](/cv/my_profile_picture_small.jpg)
