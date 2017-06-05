@@ -77,8 +77,8 @@ Skills that I used to practice some time ago.
   * _Signed pretty strict NDA, sorry, no more details_ :(
 * 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(the company was closed), leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
-  * Deploy of central software configuration system Ansible (example: https://github.com/selivan/ansible_ipmi_lan_manage)
-  * Development of Linux-based thin client build with extended functionality(open source part here: https://github.com/selivan/thinclient)
+  * Deploy of central software configuration system Ansible (example: [github.com/selivan/ansible_ipmi_lan_manage](https://github.com/selivan/ansible_ipmi_lan_manage))
+  * Development of Linux-based thin client build with extended functionality(open source part here: [github.com/selivan/thinclient](https://github.com/selivan/thinclient))
   * Upgrade of system for automatic installation and configuration of servers for new branch offices
   * Administration of internal services(ticket system OTRS, wiki, jabber)
   * Assigning tasks to technical support engineers and monitoring their performance
