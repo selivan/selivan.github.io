@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
-My name is Pavel Selivanov. I created this blog to write down notes on my Linux administration experience. Hope somebody will find this helpful.
+![photo](/cv/my_profile_picture_small.jpg)
 
-Also, when I happen to create some probably useful stuff, I put it on my [github](https://github.com/selivan).
+Hello, stranger! My name is Pavel Selivanov. This is my blog where I write down notes on my Linux sysadmin/devops experience. Hope you will find this helpful.
+
+When I happen to create some probably useful stuff that is not under NDA, I put it on my [github](https://github.com/selivan).
