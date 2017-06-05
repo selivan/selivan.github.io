@@ -10,24 +10,24 @@ Pavel Selivanov.\\
 Blog: [selivan.github.io](https://selivan.github.io)\\
 Github: <a href="https://github.com/{{ include.username }}"><span class="icon icon--github">{% include icon-github.svg %}</span>selivan</a>
 
-## Summary
+# Summary
 
 I like to create reliable well-automated systems, that require minimal manual mainteinance. A good sysadmin is a lazy sysadmin :) I am passionate about Linux and Open Source software.
 
-## Contacts
+# Contacts
 <span class="icon">{% include point-on-map.svg %}</span>Voronezh, Russia. Relocation is possible.
 
 Mail: [selivan5@yandex.ru](selivan5@yandex.ru)\\
 Skype: [selivanovpavel](skype:selivanovpavel)\\
 Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba/)
 
-## Languages
+# Languages
 * English - upper intermediate. Can easily read and write technical documentation. Not so good at listening and speaking due to lack of practice.
 * Russian - native speaker.
 
-## Skills
+# Skills
 
-### Strong skills. I am good at this right now.
+## Strong skills. I am good at this right now.
 
 | _Operating Systems_ | Linux |
 | _Web Server/Balancer_ | nginx, haproxy |
@@ -46,7 +46,8 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _VPN_ | OpenVPN |
 | _Basic networking_ | static routing, VLANs, Firewalls |
 
-### Optional skills. To use this I need to refresh my memory.
+## Optional skills. To use this I need to refresh my memory.
+
 Things I used to work with some time ago.
 
 | _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), LXC, Docker |
@@ -69,11 +70,11 @@ Things I used to work with some time ago.
 | _Programming_ | C, PHP |
 | _Backup_ | Bacula |
 
-## Communication skills
+# Communication skills
   * Team player
   * Experience in working by Agile methodology SCRUM
 
-## Expirience
+# Expirience
 
 * 2015 - present time. [s.r.o. Unitpay](https://unitpay.ru)
   * Development and support of AWS-based infrastructure that was certified for PCI DSS Compliance Level 1
@@ -106,7 +107,7 @@ Things I used to work with some time ago.
   * Maintenance of Windows(2000, XP) workstations: network, office programs, bank clients, printers/scanners
   * Maintenance of the physical LAN structure
 
-## Certifications
+# Certifications
 
 * CISCO CCNA(passed the exam in June 2014, valid until July 2017). Verification Number: 418424169331DNCH. Check URL: [www.ciscocertificates.com/verify.cfm](https://www.ciscocertificates.com/verify.cfm)
 * Microsoft Certifications:
@@ -114,7 +115,7 @@ Things I used to work with some time ago.
   * 290  Managing and Maintaining a Microsoft Windows Server 2003 Environment
 Check URL: [mcp.microsoft.com/authenticate/validatemcp.aspx](https://mcp.microsoft.com/authenticate/validatemcp.aspx), Transcript ID 858475, Access Code selivan86
 
-## Education
+# Education
 
 * University degree 2003-2009
 University: Voronezh State University\\
