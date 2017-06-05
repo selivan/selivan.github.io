@@ -45,7 +45,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _Basic networking_ | static routing, VLANs, Firewalls |
 
 ### Optional skills. To use this I need to refresh my memory.
-Skills that I used to practice some time ago.
+Things I used to work with some time ago.
 
 | _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), LXC, Docker |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of workstations(2000, XP, Windows 7) |
