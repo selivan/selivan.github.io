@@ -2,6 +2,7 @@
 layout: default
 redirect_from:
   - /CV
+  - /CV/
 ---
 ![photo](/cv/my_profile_picture_small.jpg)
 
