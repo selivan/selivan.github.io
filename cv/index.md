@@ -1,5 +1,6 @@
 ---
 layout: default
+title:  "CV - Pavel Selivanov, sysadmin/devops"
 redirect_from:
   - /CV
   - /CV/
