@@ -13,7 +13,7 @@ To make this properly, you can use `rsync` command on target host with some hack
   when: ansible_check_mode
 
 - name: copy files within target host
-  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /etc/passwd /tmp
+  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /src/directory/ /dest/directory/
   # always run
   check_mode: no
   register: rsync_result
