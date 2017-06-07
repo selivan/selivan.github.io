@@ -7,13 +7,13 @@ Ansible dosn't have convenient way to copy files within target host. At least, I
 
 To make this properly, you can use `rsync` command on target host with some hacks:
 
-```yaml
+```c
 - set_fact:
     rsync_dry_run: "--dry-run"
   when: ansible_check_mode
 
 - name: copy files within target host
-  shell: rsync --itemize-changes --archive {{ rsync_dry_run | default('') }} /src/directory/ /dest/directory/
+  shell: rsync --itemize-changes --archive {% raw %}{{ rsync_dry_run | default('') }}{% endraw %} /src/directory/ /dest/directory/
   # always run
   check_mode: no
   register: rsync_result
