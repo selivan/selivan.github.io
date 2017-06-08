@@ -1,3 +1,8 @@
+---
+layout: post
+title:  "Logstash: parse mysql slow log with grok expression"
+tags: [logstash,grok,mysql]
+---
 ```
 (?m)^# Time: (?<datetime>%{NUMBER} %{TIME:time})
 # User@Host: %{USER:mysql_user}\[%{USER:mysql_current_user}\] @ (?<mysql_client_host>%{HOST}|%{IP}) \[%{IP:mysql_client_ip}\]
