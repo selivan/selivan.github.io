@@ -5,7 +5,7 @@ tags: ansible
 ---
 **UPD**: I created a feature request, asking for ansible guys to make special variable `ansible_role`: [#25447](https://github.com/ansible/ansible/issues/25447).
 
-**UPD 2**: @sivel noticed much easier way to do it: {% raw %}`{{ role_path | basename }}`{% endraw %}. Seems that whatever you are trying to do, already there is a jinja filter to do it. {% raw %}`template: dest=/etc/mysql/my.cnf content="{{ 'mysql' | make_config_fast_reliable_and_secure }}"`{% endraw %} :)
+**UPD 2**: @sivel noticed much easier way to do it: {% raw %}`{{ role_path | basename }}`{% endraw %}. Seems that whatever you are trying to do, already there is a jinja filter to do it. {% raw %}`template: dest=/etc/mysql/my.cnf content="{{ 'mysql' | make_config_fast_reliable_and_secure }}"`{% endraw %} :))
 
 Ansible guys suppose to use `{% raw %}{{ ansible_managed }}{% endraw %}` inside templates to indicate where it came from. Unfortunately, this variable contains date and time, so it is changed on every playbook run. That breaks `--check` mode.
 
