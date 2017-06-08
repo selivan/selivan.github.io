@@ -1,0 +1,9 @@
+```
+(?m)^# Time: (?<datetime>%{NUMBER} %{TIME:time})
+# User@Host: %{USER:mysql_user}\[%{USER:mysql_current_user}\] @ (?<mysql_client_host>%{HOST}|%{IP}) \[%{IP:mysql_client_ip}\]
+# Thread_id: %{INT:thread_id} %{SPACE}Schema:%{SPACE}%{WORD:schema}%{SPACE}Last_errno: %{INT:last_errno}%{SPACE}Killed:%{SPACE}%{INT:killed}
+# Query_time:%{SPACE}%{NUMBER:query_time}%{SPACE}Lock_time:%{SPACE}%{NUMBER:lock_time}%{SPACE}Rows_sent:%{SPACE}%{INT:rows_sent}%{SPACE}Rows_examined:%{SPACE}%{INT:rows_examined}%{SPACE}Rows_affected:%{SPACE}%{INT:rows_affected}%{SPACE}Rows_read:%{SPACE}%{INT:rows_read}
+# Bytes_sent:%{SPACE}%{INT:bytes_sent}
+SET timestamp=%{INT:mysql_timestamp};
+%{GREEDYDATA:query}
+```
