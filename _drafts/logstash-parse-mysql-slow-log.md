@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Logstash: parse mysql slow log"
-tags: [logstash,mysql]
+tags: [logstash,grok,mysql]
 ---
 We send mysql slow log to logstash with rsyslog, as a whole multi-line message. So it should be parsed as single message, logstash [multiline plugin](https://www.elastic.co/guide/en/logstash/current/plugins-codecs-multiline.html) is useless in this case.
 
@@ -28,3 +28,4 @@ date {
 ```
 
 Unfortunately, logstash config syntax, besides just being ugly(why not use yaml or other well-known format for structured data?) does not allow to write long strings in convenient multi-line form, like `'''..'''` in python(see this [unanswered question](https://discuss.elastic.co/t/syntax-for-readable-long-lines-in-logstash-config/88754) on discuss.elastic.co). So don't forget to remove new lines I added for readability.
+``
