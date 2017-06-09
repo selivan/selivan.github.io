@@ -28,4 +28,3 @@ date {
 ```
 
 Unfortunately, logstash config syntax, besides just being ugly(why not use yaml or other well-known format for structured data?) does not allow to write long strings in convenient multi-line form, like `'''..'''` in python(see this [unanswered question](https://discuss.elastic.co/t/syntax-for-readable-long-lines-in-logstash-config/88754) on discuss.elastic.co). So don't forget to remove new lines I added for readability.
-``
