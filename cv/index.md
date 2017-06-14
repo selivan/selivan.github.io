@@ -7,7 +7,7 @@ redirect_from:
 ---
 ![photo](/cv/my_profile_picture_small.jpg)
 
-Pavel Selivanov, sysadmin/DevOps.\\
+Pavel Selivanov, sysadmin/devops.\\
 Blog: [selivan.github.io](https://selivan.github.io)\\
 Github: <a href="https://github.com/{{ include.username }}"><span class="icon icon--github">{% include icon-github.svg %}</span>selivan</a>
 
