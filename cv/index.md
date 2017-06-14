@@ -13,7 +13,7 @@ Github: <a href="https://github.com/{{ include.username }}"><span class="icon ic
 
 # Summary
 
-I like to create reliable well-automated systems, that require minimal manual mainteinance. A good sysadmin is a lazy sysadmin :) I am passionate about Linux and Open Source software.
+I like to create reliable well-automated systems, that require minimal manual maintenance. A good sysadmin is a lazy sysadmin :) I am passionate about Linux and Open Source software.
 
 # Contacts
 <span class="icon">{% include point-on-map.svg %}</span>Voronezh, Russia. Relocation is possible.
