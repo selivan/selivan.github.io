@@ -61,7 +61,7 @@ Things I used to work with some time ago.
 | _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), syslog(rsyslog), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
 | _VCS_ | svn |
 | _VPN_ | PPTP, L2TP, ipsec |
-| _NIDS_ | Surixata |
+| _NIDS_ | Suricata |
 | _SQL_ | PostgreSQL |
 | _Applications Server_ | Tomcat |
 | _NoSQL_ | MongoDB |
