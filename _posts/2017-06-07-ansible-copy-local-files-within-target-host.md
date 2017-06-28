@@ -26,8 +26,8 @@ Check mode will show, whether the task is to change files, and files won't be co
 
 Other options thay you may want to use with `rsync` in this task:
   * `--update` skip files that are never in destination
-  * `--checksum` do not skip files based on mod-time and size, use checksum
   * `--ignore-existing` do not update files that exist in destination
+  * `--checksum` do not skip files based on mod-time and size, use checksum
 
 Yep, ansible will brag about using [synchronize module](http://docs.ansible.com/synchronize_module.html) instead of rsync, but it can not work within destination host.
 
