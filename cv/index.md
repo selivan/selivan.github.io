@@ -118,11 +118,12 @@ Check URL: [mcp.microsoft.com/authenticate/validatemcp.aspx](https://mcp.microso
 
 # Education
 
-* University degree 2003-2009
+* University degree 2003-2009\\
 University: Voronezh State University\\
 Faculty: Mathematical\\
 Department: Department of algebra and topological methods of analysis\\
-Qualification: Specialist\\
+Qualification: Specialist(intermediate degree between bachelor and master)\\
 Specialty: Mathematician
-* Additional degree 2007-2009 гг.
+* Additional degree 2007-2009 гг.\\
+University: Voronezh State University\\
 Qualification: Systems engineer(specialist on operations of hardware-software complexes of Computers and Networks).
