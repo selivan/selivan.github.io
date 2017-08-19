@@ -35,7 +35,11 @@ You can not just unset `TMOUT` variable, because it is read-only. But happily, y
 alias fuckoff='exec sh -c "unset TMOUT; exec bash"'
 ```
 
-Or even insert this in `.bashrc_local`, included from `.bashrc` and removed before audit.
+Or even insert this in `.bashrc_local`(included from `.bashrc` and removed before audit):
+
+```bash
+test -n "$TMOUT" && exec sh -c "unset TMOUT; exec bash"
+```
 
 Voila! You have usable working environment again.
 
