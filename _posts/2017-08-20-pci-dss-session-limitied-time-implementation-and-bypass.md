@@ -25,6 +25,8 @@ ClientAliveCountMax 3
 
 Your auditor will be quite happy with this.
 
+---
+
 Problem is, if you like to open a lot of sessions in tmux/screen - with aproprite directory and commands history for particular task - this thing fucks up all your well-suited workflow.
 
 You can not just unset `TMOUT` variable, because it is read-only. But happily, you can replace shell with another program by `exec` command. Pure `sh` respects the `TMOUT` setting, but it's simple and doesn't know a thing about read-only variables. So here is what you do:
