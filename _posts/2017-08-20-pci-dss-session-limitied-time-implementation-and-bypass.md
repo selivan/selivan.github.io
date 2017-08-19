@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "PCI DSS requirement for session idle timeout: realisation and bypass"
+title:  "PCI DSS requirement for session idle timeout: implementation and bypass"
 tags: [ansible,acl]
 ---
 PCI DSS 3.2 requirement 8.1.8 states "If a session has been idle for more than 15 minutes, require the user to re-authenticate to re-activate the terminal or session".
