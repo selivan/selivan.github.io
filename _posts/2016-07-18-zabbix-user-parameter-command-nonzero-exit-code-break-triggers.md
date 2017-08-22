@@ -14,3 +14,5 @@ Here is second solution: write user parameter commands so, that if command resul
 ```config
 UserParameter=php_fpm.active_processes, ( curl --max-time 2 --silent http://localhost/php_fpm_status || echo 'active processes: 9999' ) | grep '^active processes' | tr -s ' ' | cut -d' ' -f 3
 ```
+
+**UPDATE**: Since 3.4 Zabbix checks user parameters exit code and shows stdout and stderr in frontend: [documentation](https://www.zabbix.com/documentation/3.4/manual/appendix/command_execution#exit_code_checking). But relevant trigger becomes silently broken anyway.
