@@ -18,7 +18,7 @@ I like to create reliable well-automated systems, that require minimal manual ma
 # Contacts
 <span class="icon">{% include point-on-map.svg %}</span>Voronezh, Russia. Relocation is possible.
 
-Mail: [selivan5@yandex.ru](selivan5@yandex.ru)\\
+Mail: [selivan5@yandex.ru](mailto:selivan5@yandex.ru)\\
 Skype: [selivanovpavel](skype:selivanovpavel)\\
 Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba/)
 
