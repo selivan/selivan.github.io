@@ -77,7 +77,7 @@ Things I used to work with some time ago.
 
 # Expirience
 
-* 2015 - present time: [s.r.o. Unitpay](https://unitpay.ru)
+* 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)
   * Development and support of AWS-based infrastructure that was certified for PCI DSS Compliance Level 1
   * Support of development and deploy cycle for rapidly developing web application
   * Securing web application that deals with sensitive financial information
