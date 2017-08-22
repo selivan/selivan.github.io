@@ -18,7 +18,7 @@
     * http://jekyllthemes.org/themes/dbyll/
     * https://github.com/shashankmehta/greyshade
 * [x] Add copyright(something of creative commons share alike).
-* [ ] Add about
+* [x] Add about
 * [ ] ??? Use font-awesomwe icons instead of SVG. Example: http://www.terminally-incoherent.com/ Counter-argument: http://www.sitepoint.com/icon-fonts-vs-svg-debate/
 * [x] Add Disqus comments
 * [x] use SVG icon for RSS, like for github
