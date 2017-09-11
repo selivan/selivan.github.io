@@ -23,8 +23,8 @@ Skype: [selivanovpavel](skype:selivanovpavel)\\
 Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba/)
 
 # Languages
-* English - upper intermediate. Can easily read and write technical documentation. Not so good at listening and speaking due to lack of practice.
 * Russian - native speaker.
+* English.
 
 # Skills
 
