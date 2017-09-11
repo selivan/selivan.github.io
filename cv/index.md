@@ -13,7 +13,7 @@ Github: <a href="https://github.com/{{ include.username }}"><span class="icon ic
 
 # Summary
 
-I like to create reliable well-automated systems, that require minimal manual maintenance. A good sysadmin is a lazy sysadmin :) I am passionate about Linux and Open Source software.
+I like to create reliable well-automated systems, that require minimal manual maintenance. I prefer Linux technology stack, but know Windows as well. I am passionate about Open Source.
 
 # Contacts
 <span class="icon">{% include point-on-map.svg %}</span>Voronezh, Russia. Relocation is possible.
@@ -40,8 +40,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _In-memory storage_ | Redis |
 | _Monitoring_ | Zabbix |
 | _Cloud services_ | AWS |
-| _Log analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana) |
-| _Logging and log shipping_ | rsyslog |
+| _Log shipping and analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana) |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
 | _HIDS_ | OSSEC |
 | _VPN_ | OpenVPN |
@@ -67,7 +66,7 @@ Things I used to work with some time ago.
 | _NoSQL_ | MongoDB |
 | _Message broker_ | RabbitMQ |
 | _Distributed coordination system_ | Apache Zookeeper |
-| _Log analysis_ | Graylog(Elasticsearch-based solution) |
+| _Log shipping and analysis_ | Graylog(Elasticsearch-based solution) |
 | _Programming_ | C, PHP |
 | _Backup_ | Bacula |
 
