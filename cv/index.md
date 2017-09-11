@@ -23,8 +23,8 @@ Skype: [selivanovpavel](skype:selivanovpavel)\\
 Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba/)
 
 # Languages
-* Russian - native speaker.
 * English.
+* Russian - native speaker.
 
 # Skills
 
