@@ -32,7 +32,7 @@ password_pbkdf2 grub grub.pbkdf2.sha512.10000.3D3AF9CADA7E87C4CC938C3127426AD71F
 EOF
 ```
 
-Cleartext passwords are not a very good idea, but you anyway have full-disk encryption, don't you? Btw, grub allows to have other users than superuser, that have access to only some of menu entries.
+Btw, grub allows to have other users than superuser, that have access to only some of menu entries.
 
 Now, you have to define default menu entries as `--unresticted`, allowing to use them without password. Linux menu entries are defined in file `/etc/grub.d/10_linux`. Simpliest way to change all entries is to modify `CLASS` variable in the beginning of the file:
 
