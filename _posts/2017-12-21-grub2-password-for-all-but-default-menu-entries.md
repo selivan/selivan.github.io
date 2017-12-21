@@ -40,7 +40,7 @@ Now, you have to define default menu entries as `--unresticted`, allowing to use
 CLASS="--class gnu-linux --class gnu --class os --unrestricted"
 ```
 
-Now run `update-grub` to update actual `/boot/grub/grub/cfg`.
+Now run `update-grub` to update actual `/boot/grub/grub.cfg`.
 
 Links:
 
