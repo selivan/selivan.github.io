@@ -38,7 +38,7 @@ chmod a+x /etc/grub.d/01_password
 
 Btw, grub allows to have other users than superuser, that have access to only some of menu entries.
 
-Now, you have to define default menu entries as `--unresticted`, allowing to use them without password. Linux menu entries are defined in file `/etc/grub.d/10_linux`. Simpliest way to change all entries is to modify `CLASS` variable in the beginning of the file:
+Now, you have to define default menu entries as `--unrestricted`, allowing to use them without password. Linux menu entries are defined in file `/etc/grub.d/10_linux`. Simpliest way to change all entries is to modify `CLASS` variable in the beginning of the file:
 
 ```bash
 CLASS="--class gnu-linux --class gnu --class os --unrestricted"
