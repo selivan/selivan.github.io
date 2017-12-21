@@ -4,7 +4,7 @@ title:  "GRUB 2: password protection for all but default menu entries"
 tags: [grub,linux]
 ---
 
-WARNING. Playing with grub can make your system unbootable. Be careful.
+WARNING: Playing with grub can make your system unbootable. Be careful.
 
 Let's say you don't want to allow anybody to boot from other media on your device. Protecting a BIOS/EFI with password is easy. But also you have a GRUB bootloader, which can boot from arbitrary media, has command line and is basically a small OS.
 
