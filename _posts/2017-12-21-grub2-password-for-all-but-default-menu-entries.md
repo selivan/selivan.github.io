@@ -10,7 +10,7 @@ Let's say you don't want to allow anybody to boot from other media on your devic
 
 On the other hand, you don't want to enter additional password every time you turn on your device. You can protect with password any actions in grub, except booting existing menu entries without changind them.
 
-First, define users and passwords. Grub 1 allowed only plaintext passwords in configs, which is not a good idea. Grub 2 allows to use hashed passwords with salt(PBKDF2 is used, which is not Cthulhu worshipers chant, but [Password-Based Key Derivation Function](https://en.wikipedia.org/wiki/PBKDF2)).
+First, define users and passwords. Grub 1 allowed only plaintext passwords in configs, which is not a good idea. Grub 2 allows to use hashed passwords with salt (PBKDF2 is used, which is not Cthulhu worshipers chant, but [Password-Based Key Derivation Function](https://en.wikipedia.org/wiki/PBKDF2)).
 
 ```bash
 grub-mkpasswd-pbkdf2
