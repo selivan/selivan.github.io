@@ -44,7 +44,7 @@ Now, you have to define default menu entries as `--unrestricted`, allowing to us
 CLASS="--class gnu-linux --class gnu --class os --unrestricted"
 ```
 
-Now run `update-grub` to update actual `/boot/grub/grub.cfg`.
+Now to update actual `/boot/grub/grub.cfg` you should run `update-grub`(for Debian-based OS, like Ubuntu) or `grub-mkconfig -o <path to grub.cfg>` for others (thanks [the_gnarts](https://www.reddit.com/user/the_gnarts) who pointed out this difference).
 
 Links:
 
