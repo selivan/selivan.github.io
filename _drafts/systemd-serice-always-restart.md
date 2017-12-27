@@ -14,3 +14,4 @@ RestartSec=2
 StartLimitInterval=0
 ```
 
+In recent systemd versions `StartLimitInterval` was renamed to `StartLimitIntervalSec`.
