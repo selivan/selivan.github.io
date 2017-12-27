@@ -1,16 +1,27 @@
 # Site settings
 title: selivan.github.io
 #email: selivan.at.github@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
+# > this means to ignore newlines until "baseurl:"
+description: >
   Just another IT blog.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://selivan.github.io" # the base hostname & protocol for your site
+# the subpath of your site, e.g. /blog
+baseurl: ""
+# the base hostname & protocol for your site
+url: "https://selivan.github.io"
 #twitter_username: i_got_no_twitter
-github_username:  selivan
+github_username: selivan
+
+# Specify social profiles in site metadata
+# https://jekyll.github.io/jekyll-seo-tag/usage/
+# https://developers.google.com/search/docs/data-types/social-profile
+social:
+  name: Pavel Selivanov
+  links:
+    - https://github.com/selivan/
+    - https://www.linkedin.com/in/pavel-selivanov-9b8398ba/
 
 # Publish posts with a future date
 future: true
-
 
 # https://help.github.com/articles/page-build-failed-config-file-error/#fixing-highlighting-errors
 highlighter: rouge
