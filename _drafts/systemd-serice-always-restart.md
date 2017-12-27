@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Systemd service that is always restarted on failuere"
+title:  "Systemd service that is always restarted on failure"
 tags: [autologin,console,getty,ubuntu,systemd]
 ---
 Use `systemctl edit foobar.service` or manually edit `/etc/systemd/system/foobar.service.d/override.conf` and run `systemctl deamon-reload`.
