@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Add custom display resolution in LightDM"
-tags: [lightdm,xrandr,desktop,ubuntu,lenovo-yoga]
+tags: [lightdm,xrandr,desktop,ubuntu]
 ---
 
 Sometimes Xorg doesn't detect all possible valid resolutions for a display.
