@@ -1,5 +1,5 @@
-* [ ] ~~Enlarge fonts~~
-* [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
+* [x] ~~Enlarge fonts~~
+* [x] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
   * http://pavdmyt.com/how-to-implement-tags-at-jekyll-website/
   * https://blog.lanyonm.org/articles/2013/11/21/alphabetize-jekyll-page-tags-pure-liquid.html
   * git branch: tags

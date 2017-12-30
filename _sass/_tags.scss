@@ -20,6 +20,11 @@
      color: #999;
  }
 
+// looks better
+ .tags a:hover {
+     color: #000;
+ }
+
  .tag {
    background: #eee;
    border-radius: 3px 0 0 3px;
@@ -58,10 +63,10 @@
  }
 
  .tag:hover {
-   background-color: crimson;
+   background-color: cadetblue;
    color: white;
  }
 
  .tag:hover::after {
-    border-left-color: crimson;
+    border-left-color: cadetblue;
  }
