@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Systemd service that is always restarted"
-tags: [autologin,console,getty,ubuntu,systemd]
+tags: [systemd]
 ---
 Just using `Restart` and `RestartSec` is not enough: systemd services have start rate limiting enabled by default. If service is started more than `StartLimitBurst` times in `StartLimitIntervalSec` seconds is it not permitted to start any more. This parameters are inherited from `DefaultStartLimitIntervalSec`(default 10s) and `DefaultStartLimitBurst`(default 5) in `systemd-system.conf`.
 
