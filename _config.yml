@@ -11,7 +11,7 @@ url: "https://selivan.github.io"
 #twitter_username: i_got_no_twitter
 github_username: selivan
 
-# Specify social profiles in site metadata
+# Specify social profiles in site metadata with jekyll-seo-tag plugin
 # https://jekyll.github.io/jekyll-seo-tag/usage/
 # https://developers.google.com/search/docs/data-types/social-profile
 social:
