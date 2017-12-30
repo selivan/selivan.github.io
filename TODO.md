@@ -1,6 +1,9 @@
 * [ ] ~~Enlarge fonts~~
 * [ ] Add categories. Or tags. What is the difference? https://jekyllrb.com/docs/frontmatter/
-* [ ] Add Linkedin profile link
+  * http://pavdmyt.com/how-to-implement-tags-at-jekyll-website/
+  * https://blog.lanyonm.org/articles/2013/11/21/alphabetize-jekyll-page-tags-pure-liquid.html
+  * git branch: tags
+* [ ] Add Linkedin profile link - already in CV, is it needed anywhere else?
 * [x] Promote posts on reddit (may be add any automation, like button "reddit it"?)
 * [ ] Re-work structure: separate about, blog, software(? stuff projects goodies ).
   * Good example: http://www.terminally-incoherent.com/
