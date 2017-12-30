@@ -20,6 +20,8 @@ StartLimitInterval=0
 
 In recent systemd versions `StartLimitInterval` was renamed to `StartLimitIntervalSec`.
 
+You can tune `Restart` parameter to restart service only on failure, only on uncught signal, etc. Check the manpage.
+
 Links:
 
 * [systemd.service(5)](https://www.freedesktop.org/software/systemd/man/systemd.service.html)
