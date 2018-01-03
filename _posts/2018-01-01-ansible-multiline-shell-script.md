@@ -20,3 +20,13 @@ Sometimes ansible is not enough, and you want to unleash the raw shell power. Bu
 
 Links:
 * [stackoverflow.com - In YAML, how do I break a string over multiple lines?](https://stackoverflow.com/a/21699210/890863)
+
+**UPD** [https://www.reddit.com/user/androidul](https://www.reddit.com/user/androidul) on reddit suggested to use [file or template lookups](http://docs.ansible.com/ansible/latest/playbooks_lookups.html#more-lookups) for embedding long scripts. IMHO that's a good idea for really large scripts, but for 5-7 lines YAML multiline is more readable.
+
+```yaml
+- name: large shell script
+  shell: shell: "{{ lookup('template', 'large_script.j2') }}"
+  args:
+    executable: /bin/bash
+  register: large_script_result
+```
