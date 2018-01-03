@@ -25,7 +25,7 @@ Links:
 
 ```yaml
 - name: large shell script
-  shell: shell: "{{ lookup('template', 'large_script.j2') }}"
+  shell: shell: {% raw %}"{{ lookup('template', 'large_script.j2') }}"{% endraw %}
   args:
     executable: /bin/bash
   register: large_script_result
