@@ -114,7 +114,7 @@ Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/config
   * `$timereported` - timespamp from message
   * `$syslogtag` - `TAG` field
   * `$programname` - `TAG` field without process id: `named[12345]` -> `named`
-  * whole list is [here](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
+  * complete list is [here](http://www.rsyslog.com/doc/v8-stable/configuration/properties.html)
 * RuleSet contains list of rules, rule is filter and attached one or more Actions
 * Filters are logical expressions using message properties. More on filters [here](http://www.rsyslog.com/doc/v8-stable/configuration/filters.html)
 * Rules fro RuleSet are applied to message sequentially, it does not stop on first matched rule
