@@ -102,7 +102,7 @@ Read more about config format [here](http://www.rsyslog.com/doc/v8-stable/config
 
 ## Message processing
 
-* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives outside separate RuleSet blocks are part of default RuleSet. For instance, all directives from traditional config format:
+* All messages comes from one of Inputs and fall into assigned RuleSet. If it is not set explicitly, default RuleSet will be used. All message processing directives outside separate RuleSet blocks are part of default RuleSet. For instance, all directives in traditional config format:
 `local7.*  /var/log/myapp/my.log`
 * Input has assigned list of message parsers. If not set explicitly, default set of parsers for traditional syslog format will be used
 * Parser extracts properties from message. Some of most used:
