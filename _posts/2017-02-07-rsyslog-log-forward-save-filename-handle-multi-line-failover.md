@@ -337,7 +337,7 @@ ruleset(name="RemoteLogProcess") {
 
 ## Reliable message delivery. Queues.
 
-![image](https://habrastorage.org/files/531/96b/eb1/53196beb160c48baa0e52ee3472439a5.jpg)
+![rsyslog message flow schema](https://habrastorage.org/files/531/96b/eb1/53196beb160c48baa0e52ee3472439a5.jpg)
 
 *image from blog [k-max.name](http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/)*
 
