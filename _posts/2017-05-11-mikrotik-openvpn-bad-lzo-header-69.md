@@ -12,6 +12,6 @@ I tried not mentioning `comp-lzo` at all, setting it to `no`, to `auto` and push
 
 Finally I figured out, that there is one more LZO-related option, `comp-noadapt`, and it does the trick. I got stable working connection.
 
-This option is supposed to make compression adaptive, allowing not to compress already compressed data, like transfer of large compressed file. I suppose, this adaptive algorithm somehow brokes `comp-lzo no` option, at least for several first packets.
+This option is supposed to make compression adaptive, allowing not to compress already compressed data, like transfer of large compressed file. I suppose, this adaptive algorithm somehow breaks `comp-lzo no` option, at least for several first packets.
 
 Hope this article will save you some time, that I had to lose on debugging this annoying error.
