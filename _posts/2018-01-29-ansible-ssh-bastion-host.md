@@ -54,7 +54,7 @@ P.S. Starting from Ansible 2, you can also use `ProxyCommand` in `ansible_ssh_co
 
 **UPD**: [stemid85](https://www.reddit.com/user/stemid85) on Reddit [pointed out](https://www.reddit.com/r/linuxadmin/comments/7tp0q1/using_ansible_with_bastion_host/dtfp057/) the way to use a chain of bation hosts:
 
-```ini
+```
 Host bastion1                                                                                                                   HostName 192.168.1.1
 
 Host bastion2
