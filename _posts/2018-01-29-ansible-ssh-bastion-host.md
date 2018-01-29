@@ -4,9 +4,9 @@ title:  "Using Ansible with bastion host"
 tags: [ansible,ssh,bastion]
 ---
 
-Sometimes due to network configuration or security reasons you can't access a host directly, but should use intermediate host. It is called bastion host.
+Sometimes due to network configuration or security reasons you can't access a host directly, but should use intermediate host, so-called bastion host.
 
-This setup is taken from [this article by Scott Lowe](https://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/), but ssh.cfg is adjusted so that mentioning exact network mask is not necessary.
+I got this setup from [this article by Scott Lowe](https://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/), but `ssh.cfg` is adjusted so that mentioning exact network mask is not necessary.
 
 `ansible.cfg`:
 
