@@ -51,3 +51,16 @@ bastion2 ansible_ssh_host=bastion2
 ```
 
 P.S. Starting from Ansible 2, you can also use `ProxyCommand` in `ansible_ssh_common_args` inventory variable: [Ansible FAQ](https://docs.ansible.com/ansible/latest/faq.html#how-do-i-configure-a-jump-host-to-access-servers-that-i-have-no-direct-access-to).
+
+**UPD**: [stemid85](https://www.reddit.com/user/stemid85) on Reddit [pointed out](https://www.reddit.com/r/linuxadmin/comments/7tp0q1/using_ansible_with_bastion_host/dtfp057/) the way to use a chain of bation hosts:
+
+```ini
+Host bastion1                                                                                                                   HostName 192.168.1.1
+
+Host bastion2
+  HostName 192.168.2.2
+  ProxyCommand ssh bastion1 -W %h:%p                                                                                         
+
+Host target
+  ProxyCommand ssh bastion2 -W %h:%p                                                                                         
+```
