@@ -6,14 +6,15 @@ tags: ansible
 
 In ansible, to run multiple handlers for a task you can chain handlers by `notify` dependencies, like in [this stackoverflow answer](http://stackoverflow.com/a/31618968/890863). There is a small subtelty here. Notify action is triggered only if task was changed. Some tasks do not change at all(like `debug: msg=...`), some tasks do not always change. To run all required handlers surely you should set `changed_when: True` for all of them except the last one:
 
-```c
-- name: start apt mirroring
-  debug: msg="check logs in /var/log/apt-mirror-cron.log"
-  changed_when: True
-  notify: start apt mirroring step 2
+```yaml
+handlers:
+  - name: start apt mirroring
+    debug: msg="check logs in /var/log/apt-mirror-cron.log"
+    changed_when: True
+    notify: start apt mirroring step 2
 
-- name: start apt mirroring step 2
-  shell: sudo -u apt-mirror /usr/bin/apt-mirror >> /var/log/apt-mirror-cron.log 2>&1
-  async: 6000
-  poll: 0
+  - name: start apt mirroring step 2
+    shell: sudo -u apt-mirror /usr/bin/apt-mirror >> /var/log/apt-mirror-cron.log 2>&1
+    async: 6000
+    poll: 0
 ```
