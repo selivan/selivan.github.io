@@ -53,4 +53,4 @@ Don't forget `chmod a+x inventory/ec2.sh`, or Ansible will try to read it as sta
 This executable uses ansible to read AWS credentials from vault encrypted file and passes them to EC2 external inventory script with environment variables. Inventory is explcitly set to localhost only to prevent recursion on trying to read inventory.
 
 Links:
-* [Ansible docs - Dynamic Inventory](http://docs.ansible.com/ansible/latest/intro_dynamic_inventory.html)
+* [Ansible documentation - Dynamic Inventory](http://docs.ansible.com/ansible/latest/intro_dynamic_inventory.html)
