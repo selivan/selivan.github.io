@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Using Ansible with dynamic AWS EC2 inventory with encrypted credentials in vault"
+title:  "Using Ansible dynamic AWS EC2 inventory with encrypted credentials in vault"
 tags: [ansible,aws,ec2,ansible-vault]
 ---
 
