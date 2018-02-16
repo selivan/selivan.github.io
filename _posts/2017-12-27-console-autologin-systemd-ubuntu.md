@@ -16,3 +16,5 @@ ExecStart=-/sbin/mingetty --autologin ubuntu --noclear %I
 ```
 
 First `ExecStart` empty assignment is required, if you want to re-define value in global unit file `/lib/systemd/system/*.service`.
+
+`-` prefix makes systemd ignore non-zero exit code and consider it success.
