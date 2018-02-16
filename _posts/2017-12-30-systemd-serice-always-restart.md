@@ -20,7 +20,7 @@ StartLimitInterval=0
 
 In recent systemd versions `StartLimitInterval` was renamed to `StartLimitIntervalSec`.
 
-You can tune `Restart` parameter to restart service only on failure, only on uncught signal, etc. Check the manpage.
+You can tune `Restart` parameter to restart service only on failure, only on uncaught signal, etc. Check the manpage.
 
 Links:
 
