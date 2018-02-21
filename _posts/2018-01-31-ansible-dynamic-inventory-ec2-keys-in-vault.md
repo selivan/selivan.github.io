@@ -39,7 +39,7 @@ Now let's create executable to use `ec2.py.orig` with credentials from ansible v
 #!/bin/bash
 cd "$(dirname $0)/.."
 
-# Specify only localhost to avoid recursion on onventory lookup
+# Set inventory to localhost only to avoid recursion on inventory lookup
 credentials=$(ansible localhost --inventory='localhost,' --connection=local --extra-vars=@aws-credentials.vault.yml -m debug -a 'msg="{% raw %}{{ aws_access_key }}:{{ aws_secret_key }}{% endraw %}"' | tr -d ' ' | grep '"msg":' | cut -d'"' -f4)
 
 export AWS_ACCESS_KEY_ID=$(echo $credentials | cut -d: -f1)
