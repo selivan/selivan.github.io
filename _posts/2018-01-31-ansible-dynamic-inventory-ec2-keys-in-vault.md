@@ -5,6 +5,8 @@ tags: [ansible,aws,ec2,ansible-vault]
 ---
 **UPD**: The most secure way is to create instance with IAM role and run ansible on it. But sometimes it is not convenient.
 
+---
+
 Ansible dynamic inventory script for AWS EC2 requires either to store credentials in plain text in `~/.aws/credentials`, or to manually export them in shell variables.
 
 I prefer to store all security sensitive data in vault encrypted files, including AWS credentials. Here is how you can do it.
