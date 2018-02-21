@@ -8,13 +8,14 @@ In ansible, to run multiple handlers for a task you can chain handlers by `notif
 
 ```yaml
 handlers:
-  - name: start apt mirroring
-    debug: msg="check logs in /var/log/apt-mirror-cron.log"
+  # At first check if nginx config is correct
+  - name: restart nginx
+    shell: nginx -t
     changed_when: True
-    notify: start apt mirroring step 2
+    notify: restart nginx step 2
 
-  - name: start apt mirroring step 2
-    shell: sudo -u apt-mirror /usr/bin/apt-mirror >> /var/log/apt-mirror-cron.log 2>&1
-    async: 6000
-    poll: 0
+  - name: restart nginx step 2
+    service: name=nginx state=restarted
 ```
+
+**UPD**: Since Ansible 2.3, [named block](http://docs.ansible.com/ansible/latest/playbooks_blocks.html) could be more elegant solution. Unfortunately, blocks do not work in handlers: [ansible #36480](https://github.com/ansible/ansible/issues/36480).
