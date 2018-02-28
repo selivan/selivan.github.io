@@ -53,5 +53,5 @@ How it works:
 * script should always return success, even if it failed to add new mode - otherwise lightdm will go to infinite restart cycle
 
 Links:
- * https://askubuntu.com/a/377944/25924
- * https://wiki.ubuntu.com/LightDM
+ * [askubuntu.com/a/377944/25924](https://askubuntu.com/a/377944/25924)
+ * [wiki.ubuntu.com/LightDM](https://wiki.ubuntu.com/LightDM)
