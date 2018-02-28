@@ -50,6 +50,7 @@ How it works:
  * Lightdm hook `display-setup-script` is run as root after X starts before user session/greeter.
 * `cvt` calculates VESA Coordinated Video Timing modes and returns correct X modelines.
 * `xrandr` adds modeline to server, then adds that mode to list of valid modes for the output, and swithes to it.
+* script should always return success, even if it failed to add new mode - otherwise lightdm will go to infinite restart cycle
 
 Links:
  * https://askubuntu.com/a/377944/25924
