@@ -12,7 +12,7 @@ Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://
 
 Then I worked with that project. It had a lot of custom features, specific for our use case. Then the bank was closed(it's license was revoked),  source codes for the client were moved to my github: [thunclient](https://github.com/selivan/thinclient). A couple of times I modified it for a bit of money.
 
-Recently I got time to make this pile if ugly unreliable scripts into pretty convenient and easy-to-use solution:
+Recently I got time to make this pile of ugly unreliable scripts into pretty convenient and easy-to-use solution:
 
 * Vagrant brings up virtual machine, that can be configured as ordinary workstation
 * Single script builds files for network boot, all unnecessary parts are cut out
@@ -34,7 +34,7 @@ In the bank we used VNC to connect to user's thin client(it was `x11vnc` to conn
 
 Why not just use [Thinstation](http://www.thinstation.org/)?
 
-Well, if Thinstation completely satisfies your requirements - you would better use it, it's more old and mature project. Plus it is about one and a half times smaller in size, because it is specially created for minimal size, not just slightly modified standard Ubuntu.
+Well, if Thinstation completely satisfies your requirements - you would better use it, it's older and more mature project. Plus it is about one and a half times smaller in size, because it is specially crafted for minimal size, not just slightly modified standard Ubuntu.
 
 But it has ancient versions of software, and not a lot of it. If you need something special, not just client for RDP/Citrix/..., you would have to build it yourself, and do so for each update.
 
@@ -62,7 +62,7 @@ A lot of things should be cut of the resulting image:  `/tmp`, `/run`, `/proc`, 
 
 Utility `mksquashfs` supports as many as 3 types of lists to exclude files: by full path, by masks and by regular expressions. It would seem that everything is fine. But last two options do not support paths starting with `/`. I could not exclude files inside some directory without excluding the directory itself.
 
-I got tired of fighting with it, so I just use `find` to fild all files and directories to exclude, and put it all into a single huge file with full paths. Ugly_crutch.jpg. But it works. The only artifact for this approach is the lonely directory `/proc/NNN`, corresponding to mksquashfs process id, which did not exist when the exclude list was created. procfs is anyway mounted on top of it.
+I got tired of fighting with it, so I just use `find` to find files and directories to exclude, and put it all into a single huge file with full paths. Ugly_crutch.jpg. But it works. The only artifact for this approach is the lonely directory `/proc/NNN`, corresponding to mksquashfs process id, which did not exist when the exclude list was created. procfs is anyway mounted on top of it.
 
 ## Initrd magic
 
@@ -86,7 +86,7 @@ If root FS is assembled from several overlays, mounted inside initrams, after ru
 
 I had to disable AppArmor: it's profiles re designed to work with root FS directly mounted from a single device. When OverlayFS is used, AppArmor recognizes that `/sbin/dhclient` is really `/AURS/root/sbin/dhclient`, and he profile is broken. The only way to use it is to rewrite profiles for all application, and update each time thay change.
 
-## Where the write support is requierd
+## Where the write support is required
 
 Generally, Linux can work fine when all FS are mounted read-only. But many programs rely on ability to write something on disk, so you have to mount tmpfs to this paths:
 
