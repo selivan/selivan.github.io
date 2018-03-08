@@ -8,7 +8,7 @@ tags: [ubuntu,pxe,thinclient]
 
 ## History
 
-Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember right mounting root file system over network did not work very well in large offices with weak network. My good friend [@deadroot](https://habrahabr.ru/users/deadroot/) created first version of thin client, that could boot completely into RAM, without requiring something to be mounted over network.
+Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember it right mounting root file system over network did not work very well in large offices with weak network. My good friend [@deadroot](https://habrahabr.ru/users/deadroot/) created first version of thin client, that could boot completely into RAM, without requiring something to be mounted over network.
 
 Then I worked with that project. It had a lot of custom features, specific for our use case. Then the bank was closed(it's licence was revoked),  source codes for the client were moved to my github: [thunclient](https://github.com/selivan/thinclient). A couple of times I modified it for a bit of money.
 
@@ -78,27 +78,29 @@ So, to mount the root FS in some tricky way, you have to create your own boot sc
 
 ## Overlays
 
-Для создния единой корневой файловой системы из нескольких используется [OverlayFS](https://www.kernel.org/doc/Documentation/filesystems/overlayfs.txt). В первых версиях использовалась AUFS(она используется большинством линусковых LiveCD). Но её не приняли в ядро, и сейчас всем рекомендуют переходить на OverlayFS.
+To crete a single root filesystem from multiple [OverlayFS](https://www.kernel.org/doc/Documentation/filesystems/overlayfs.txt) is used. First versions used AUFS(it is used by the most of Linux LiveCD). But it was not accepted into the mainline kernel, and now everybody is advised to switch to OverlayFS.
 
-После монтирования настоящей корневой ФС в каталог внутри initramfs, будет запущена программа `run_init` из состава `klibc-utils`. Она проверит, что кореневая ФС смонтирована внутри initramfs, отчистит initramfs(зачем зря терять память?) и переместит точку монтирования корневой ФС в `/`. [Подробности](https://askubuntu.com/a/910374/25924). Эта программа собрана в виде отдельного исполняемого файла, потому что скрипт, использующий любые внешние утилиты, сломается после отчистки initramfs.
+After mounting the real root FS into directory inside initramfs, the program `run_init` from `klibc-utils` will be launched. It will check that root FS is mounted inside initramfs, clear the initramfs(why should we waste memory for it?), move mount point of root FS into `/` and launch the system init. [Some details](https://askubuntu.com/a/910374/25924). This program is build as a separate executable file, because a script using external tools will break after cleaning the initramfs.
 
-Если корневая ФС собирается из нескольких оверлеев, смонтированных внутри initramfs, при работе `run_init` эти точки монтрования пропадают, и она ломается. Эту проблему можно решить, переместив точки монтирования оверлеев **внутрь** корневой ФС, где они уже не пропадут. Рекурсия :) Делается так: `mount --move olddir newdir`.
+If root FS is assembled from several overlays, mounted inside initrams, after running `run_init` this mount points will disappear and it will be broken. To avoid this, we can move overlay mount points **inside** the root FS, where they will be safe. Recursion :) This is how we do it: `mount --move olddir newdir`.
 
-Apparmor пришлось отключить: её профили рассчитаны на прямое монтирование корневой ФС с одного устройства. При использовании OverlayFS она видит, что `/sbin/dhclient` это на самом деле `/AURS/root/sbin/dhclient`, и профиль ломается. Единственный вариант её использовать - переписать все профили для всех приложений, и обновлять при необходимости.
+I had to disable Apparmor: it's profiles re designed to work with root FS directly mounted from a single device. When OverlayFS is used, Apparmor recognizes that `/sbin/dhclient` is really `/AURS/root/sbin/dhclient`, and he profile is broken. The only way to use it is to rewrite profiles for all application, and update each time thay change.
 
 ## Where the write support is requierd
 
-Под идее, Linux может спокойно работать, когда все ФС примонтированы read-only. Но многие программы рассчитывают на возможность записи на диск, приходится монтировать туда tmpfs:
+Generally, Linux can work fine when all FS are mounted read-only. But many programs rely on ability to write something on disk, so you have to mount tmpfs to this paths:
 
-* `/tmp`, `/var/tmp` - понятно, нужны очень многим
-* `/var/log` - пишем логи
-* `/run` - без него не запустятся почти все сервисы
-* `/media` - монтированиие подключенных носителей
-* `/var/lib/system` - используется многими программами из systemd, в частности `systemd-timesyncd`
-* `/var/lib/dhclient` - сюда dhclient записывает информацию о leases
-* `/etc/apparmor.d/cache` - если вы всё-таки поборете AppArmor, то ему надо будет писать файлы в `/etc`. ИМХО отвратительно, для таких вещей есть `/var`.
+* `/tmp`, `/var/tmp` - that's obvious
+* `/var/log` - write some logs
+* `/run` - almost all services won't run without it
+* `/media` - mount connected media
+* `/var/lib/system` - it is used by a lot of programs from `systemd`, for example `systemd-timesyncd`
+* `/var/lib/dhclient` - this is where dhclient writes leases information
+* `/etc/apparmor.d/cache` - if you manage to use AppArmor, it will need to write files inside `/etc`. IMHO this is disgusting, thay should use `/var` for that.
 
 ## Summary
+
+
 
 Если вы хотите собрать загружаемую по сети и работающую только из памяти сборку Ubuntu - вот тут есть готовый удобный конструктор: [thinclient](https://github.com/selivan/thinclient). Если потребутеся помощь - пишите в ЛС, подскажу.
 
