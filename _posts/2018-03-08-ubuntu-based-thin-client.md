@@ -84,7 +84,7 @@ After mounting the real root FS into directory inside initramfs, the program `ru
 
 If root FS is assembled from several overlays, mounted inside initrams, after running `run_init` this mount points will disappear and it will be broken. To avoid this, we can move overlay mount points **inside** the root FS, where they will be safe. Recursion :) This is how we do it: `mount --move olddir newdir`.
 
-I had to disable AppArmor: it's profiles re designed to work with root FS directly mounted from a single device. When OverlayFS is used, AppArmor recognizes that `/sbin/dhclient` is really `/AURS/root/sbin/dhclient`, and he profile is broken. The only way to use it is to rewrite profiles for all application, and update each time thay change.
+I had to disable AppArmor: it's profiles re designed to work with root FS directly mounted from a single device. When OverlayFS is used, AppArmor recognizes that `/sbin/dhclient` is really `/AUFS/root/sbin/dhclient`, and he profile is broken. The only way to use it is to rewrite profiles for all application, and update each time thay change.
 
 ## Where the write support is required
 
