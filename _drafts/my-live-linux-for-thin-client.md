@@ -46,7 +46,7 @@ Of course, using Vagrant brings some difficulties.
 
 The `virtualbox-guest-utils` service should be running on the virtual machine, for shared folders to work. In addition, you need a boot manager(`grub`), mandatory for a machine with disk and useless for network boot client. I solved this problems by excluding this packages files from build, so they do not affect the size of resulting image.
 
-Besides, Vagrant requires working ssh, that allows login for a user with Vagrant generated key. I exclude the vagrant user's home folder with that key. You can put ssh key for ubuntu user - that one is used for work - into it's home folder.
+Besides, Vagrant requires working ssh, that allows login for a user with Vagrant generated key. I exclude the vagrant user's home folder with that key. You can put ssh key for ubuntu user - that one is used for work - into it's home directory.
 
 And Vagrant generates network interfaces configuration, that won't work on real machine. So I have to swap `interfaces` file during the build, and I created a script, that on real machine generates `interfaces` config with all available interfaces configured with DHCP.
 
@@ -66,15 +66,15 @@ I got tired of fighting with it, so I just use `find` to fild all files and dire
 
 ## Initrd magick
 
-Чтобы не тянуть в составе ядра все необходимые драйвера и логику монтирования корневой ФС, Linux использует initial ramdisk. Раньше использовался формат initrd, в котором этот диск представлял собой настоящий образ файловой системы. В ядре 2.6 появился новый формат - initramfs, представляющий собой извлекаемый в tmpfs cpio-архив. Как initrd, так и initramfs могут быть сжаты для экономии времени загрузки. Многие названия утилит и имена файлов по-прежнему упоминают initrd, хотя он уже не используется.
+In order not to drag inside kernel all required drivers and an logic for mounting the root FS, Linux uses initial ramdisk. Previously, the initrd format was used, in which the disk was an actual filesystem image. A new format appeared in 2.6 kernel - initrams, which is cpio archive extracted to tmpfs. Both initrd and initrams can be compressed to save the loading time. A lot of tools and filenames still mention initrd, though it is not used anymore.
 
-В Debian/Ubuntu для создания initramfs используется пакет initramfs-tools. Он даёт следующие возможности для кастомизации:
+Debian/Ubuntu uses package initramfs-tools to create initramfs. It provides the following customization options:
 
-* хуки - скрипты специального формата, которые позволяют добавлять в образ исполняемые файлы со всеми требуемыми им библиотеками и модули ядра
-* скрипты в каталогах `init-bottom`, `init-premount`, `init-top`, `local-block`, `local-bottom`, `local-premount`, `local-top`, выполняемые в соответствующий момент загрузки. См. [man initramfs-tools(8)](http://manpages.ubuntu.com/manpages/xenial/en/man8/initramfs-tools.8.html)
-* самое интересное - добавлять собственные скрипты загрузки, отвечающие за монтирование корневой ФС. Они должны определять shell функцию `mountroot()`, которая будет использована главным скриптом `/init`. В составе уже есть `local` для монтирования корня на локальном диске и `nfs` для монтирования корня по сети. Используемый скрипт выбирается парамертом загрузки `boot`.
+* hooks - special format scripts, that allow you to add kernel modules and executable files with all required libraries.
+* scripts inside directories `init-bottom`, `init-premount`, `init-top`, `local-block`, `local-bottom`, `local-premount`, `local-top`, executed in apropriate time on boot. See [man initramfs-tools(8)](http://manpages.ubuntu.com/manpages/xenial/en/man8/initramfs-tools.8.html).
+* the most interesting option - you can add your own boot scripts, that mount the root FS. This scripts should define shell function `mountroot()`, which will be used by the main script `/init`. initramfs-tools already includes script `local` to mount root FS on local drive and `nfs` to mount root FS over network. Use script is selected by the boot parameter `boot`.
 
-Итого, чтобы примонтировать корневую ФС каким-то сильно хитрым образом, надо создать свой скрипт загрузки, определить в нём функцию `mountroot()`, передать имя этого скрипта в параметре загрузки `boot` и не забыть написать хуки, подтягивающие в initramfs все нужные скрипту программы и модули ядра.
+So, to mount the root FS in some tricky way, you have to create your own boot script, define function `mountroot()` in it, pass this script name in boot parameter `boot`. And don't forget to write hooks that will include into initramfs all required kernel modules and executables.
 
 ## Борьба за оверлеи
 
