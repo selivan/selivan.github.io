@@ -6,6 +6,10 @@ tags: [ubuntu,pxe,thinclient]
 
 <!-- *This article in russian: [https://habrahabr.ru/](habrahabr.ru/)* -->
 
+![logo ubuntu plus windows](/images/2018-03-08-ubuntu-based-thin-client/ubuntu-and-windows-250x250.jpg)
+
+*Image from [getwallpapers.com](http://getwallpapers.com/collection/kali-linux-desktop-wallpaper)*
+
 ## History
 
 Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember it right mounting root file system over network did not work very well in large offices with weak network. My good friend [@efim-a-efim](https://github.com/efim-a-efim) created first version of thin client, that could boot completely into RAM, without requiring something to be mounted over network.
