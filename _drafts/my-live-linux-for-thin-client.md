@@ -28,33 +28,33 @@ Recently I got time to make this pile if ugly unreliable scripts into pretty con
 * You can change single parameter in config and the minimal console system will be built. It's a good basis for your own custom build.
 * If boot failed because of server or network problem, it will briefly display an error message and start over. It's convenient that when problems are fixed, workstations will start themselves without manual interaction.
 
-В банке для удалённого подключения к тонкому клиенту пользователя использовался VNC(`x11vnc` для подключения к уже запущенной сессии Xorg). Это далеко не всем требуется(обычно хватает возможности подключения к сеансу RDP на сервере терминалов), и тут всё очень индивидуально в плане требований удобства/безопасности. Поэтому эту часть я выкладывать не стал.
+In the bank we used VNC to connect to user's thin client(it was `x11vnc` to connect to running Xorg session). This is not reuired for anyone(usually it is enough to connect to user's RDP session on a ternimal server), and conveniency/security requirements differ a lot for different environments. Therefore, I did not include that part.
 
-## Аналоги
+## Alternatives
 
-Почему бы просто не пользоваться [Thinstation](http://www.thinstation.org/)?
+Why not just use [Thinstation](http://www.thinstation.org/)?
 
-Если Thinstation полностью устраивает - то лучше пользоваться им, это более старый и зрелый проект. Плюс он раза в полтора меньше по размеру, всё-таки это специально заточенная под минимальный объём сборка, а не слегка допиленная обычная Ubuntu.
+Well, if Thinstation completely statisfies your requirements - you better use it, it's more old and mature project. Plus it is about one and a half times smaller in size, because it is specially created for minimal size, not just slightly modified standard Ubuntu.
 
-Но версии софта в нём достаточно древние и его там мало. Если нужно что-то дополнительное, помимо клиентов RDP/Citrix/... - потребуется собирать это руками, и так при каждом обновлении.
+But it has ancient versions of software, and not a lot of it. If you need something special, not just client for RDP/Citrix/..., you would have to build it yourself, and do so for each update.
 
 ## Vagrant vs chroot
 
-Прошлые версии использовали chroot, как собственно и большинство похожих проектов, тот же Thinstation к примеру. Это несложно, но всё-таки запущеннная в chroot отдельная программа не соответствует происходящему на реальной машине: нету взаимодействия с системным init, с другими программами и службами. Плюс Vagrant позволил сделать процесс создения клиента максимально простым: виртуалка настраивается как обычная машина.
+Previous versions used chroot, like most of similar projects do, Thinstation for example. It is easy, but program running in chroot is not exacltly the same as program running on real or virtual machine: there is no interction with system init, with other programs and services. And Vagrant made the build process as simple as possible: you just configure a virtual machine like you do for real one, and that's it.
 
-Конечно, использование Vagrant приносит и некоторые сложности.
+Of course, using Vagrant brings some difficulties.
 
-На машине должна работать служба `virtualbox-guest-utils`, для работы общих папок. Кроме того, нужен менеджер загрузки(`grub`), обязательный для машины с диском и бесполезный для загружаемого по сети клиента. Эти проблемы я решил, исключая из сборки все файлы этих пакетов. Поэтому на размер получившегося образа они не влияют.
+The `virtualbox-guest-utils` service should be running on the virtual machine, for shared folders to work. In addition, you need a boot manager(`grub`), mandatory for a machine with disk and useless for network boot client. I solved this problems by excluding this packages files from build, so they do not affect the size of resulting image.
 
-Кроме того, для Vagrant обязателен работающий на машине ssh, пускающий пользователя со сгенерированным ключом. Самый неприятный момент. Ключ из собранного образа я для безопасности исключаю. Если кто-то захочет заходить на тонкие клиенты по ssh, надо слегка поменять скрипт сборки, чтобы при сборке архива с домашним каталогом(собирается отдельно, потому что меняется чаще всего - не хочется каждый раз перегенерить весь образ ради пары строчек в каком-нибудь конфиге) туда включался нужный ключ.
+Besides, Vagrant requires working ssh, that allows login for a user with Vagrant generated key. I exclude the vagrant user's home folder with that key. You can put ssh key for ubuntu user - that one is used for work - into it's home folder.
 
-Ну и для работы Vagrant генерирует настройки сетевых интерфейсов, которые будут ошибочными для реальной машины. Пришлось на время сборки подменять файл `interfaces`, и написать скрипт, который на реальной машине генерирует конфиг для настройки всех доступных интерйефсов по DHCP.
+And Vagrant generates network interfaces configuration, that won't work on real machine. So I have to swap `interfaces` file during the build, and I created a script, that on real machine generates `interfaces` config with all available interfaces configured with DHCP.
 
-Provisioning делается с помощью Ansible. Это очень удобный инструмент для конфигурации всяческого софта и железа. Но включать в итоговый образ Ansible и требующийся ему второй python с нужными билиотеками не хотелось бы: бесплезный балласт. Ставить Ansible на машину, где запукается виртуальное окружение, тоже не хочется: это усложнит работу.
+Provisioning is done with Ansible. It is very convenient tool to configure all kinds of software and hardware. But I didn't want to include Ansible and python2 that is requires into the resulting image: useless waste of space. Installing Ansible on the real machine, that runs Vagrant and VirtualBox, is also a bad option: this will complicate the build process.
 
-Vagrant позволяет сделать хитрость: поставить Ansible на одну машину(тестовый PXE сервер), и с неё делать разворачивание других машин, в рамках той же playbook. Для этого машины должны иметь статический IP, чтобы прописать его в ansible inventory. Ну а проблему с конфигурацией интерфейсов мы решили в прошлом пункте.
+Vagrant allows you to make a trick: install Ansible on one virtual(test PXE server), and provision other virtuals from it. To do so, the virtuals should have static IP addresses. Well, we already solved the interfaces confiuration problem.
 
-## Непослушный кабачок
+## The naughty squash
 
 [Squashfs](https://en.wikipedia.org/wiki/SquashFS) - сжимающия read-only файловая система. Лежит в основе большинства существующих Linux LiveCD. Именно она позволяет создать достаточно компактный образ системы, помещающийся в оперативную память тонкого клиента.
 
