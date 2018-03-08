@@ -100,7 +100,4 @@ Generally, Linux can work fine when all FS are mounted read-only. But many progr
 
 ## Summary
 
-
-
-Если вы хотите собрать загружаемую по сети и работающую только из памяти сборку Ubuntu - вот тут есть готовый удобный конструктор: [thinclient](https://github.com/selivan/thinclient). Если потребутеся помощь - пишите в ЛС, подскажу.
-
+If you would like to build and Ubuntu image that boots over network and works entirely from RAM - here you can get a convenient ready-to-use construction kit: [thinclient](https://github.com/selivan/thinclient). I would be happy too see any feedback here in comments or on github.
