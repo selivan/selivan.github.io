@@ -8,25 +8,25 @@ tags: [ubuntu,pxe,thinclient]
 
 ## History
 
-В далёком 2013 году в одном банке использовались кастомные тонкие клиенты на основе [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). С ними были некоторые проблемы, по-моему монтирование корневой ФС по сети в больших филиалах с слабой сетью работало не очень. Тогда мой хороший друг [@deadroot](https://habrahabr.ru/users/deadroot/) сделал первую версию тонкого клиента, который грузился целиком в память, не требуя что-то монтировать по сети для  работы.
+Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember right mounting root file system over network did not work very well in large offices with weak network. My good friend [@deadroot](https://habrahabr.ru/users/deadroot/) created first version of thin client, that could boot completely into RAM, without requiring something to be mounted over network.
 
-Потом этот клиент активно допиливал я, там было много полезных кастомных штук, специфичных именно для нашего сценария использования. Потом банк закрылся(отозвали лицензию), остатки исходников клиента переехали на мой гитхаб: [thunclient](https://github.com/selivan/thinclient). Пару раз я его слегка допиливал на заказ.
+Then I worked with that project. It had a lot of custom features, specific for our use case. Then the bank was closed(it's licence was revoked),  source codes for the client were moved to my github: [thunclient](https://github.com/selivan/thinclient). A couple of times I modified it for a bit of money.
 
-Недавно у меня дошли руки сделать из этой кучи страшных легко ломающихся скриптов достаточно удобное для использования решение:
+Recently I got time to make this pile if ugly unreliable scripts into pretty convenient and easy-to-use solution:
 
-* Vagrant поднимает виртуалку, которую можно настраивать как обычную рабочую станцию.
-* Одним скриптом из неё собирается готовые для загрузки по сети файлы, лишнее вырезается.
-* Vagrant поднимает виртуальный PXE сервер и сетевой клиент для проверки получившейся сборки.
+* Vagrant brings up virtual machine, that can be configured as ordinary workstation
+* Single script builds files for network boot, all unnecessary parts are cut out
+* Vagrant brings up virtual PXE server and network boot client to test the resulting build
 
-## Что умеет
+## What it can do
 
-* Целиком грузится в память, не требует для работы монтировать корневую ФС по сети.
-* Постороена на базе Ubuntu, практически любой софт можно ставить из её богатых репозиториев, и подключать сторонние если чего-то не хватило. Особенно приятно, что обновления безопасности прилетают в Ubuntu достаточно быстро.
-* Умеет монтировать поверх корневой ФС дополнительные оверлеи. Можно добавить какой-то софт только для некоторых рабочих станций, не собирая новый образ
-* Умеет [zram](https://www.kernel.org/doc/Documentation/blockdev/zram.txt) - сжатие памяти, актуально для старых клиентов с небольшим количеством оперативки. Хотя и для новых как правило не помешает.
-* Из коробки собирается лёгкий десктоп(LXDE) с RDP-клиентом, адреса и параметры RDP серверов просто передаются с PXE-сервера через параметры при загрузке.
-* Можно поменять один параметр в конфиге и будет собираться минимальная консольная система без лишнего софта - основа для какой-нибудь вашей нестандартной сборки.
-* Если загрузка не прошла из-за проблем с сервером или сетью, будет недолго показывать сообщение об ошибке и пытаться загрузится снова. Удобно, что когда проблемы исправлены, рабочие станции поднимутся сами без лишних телодвижений.
+* Boots entirely into RAM, does not require to mount root FS over network
+* Ubuntu-based, you can find almost any software in it's reach repositories, or connect external of you miss something. Particularly good part is that security updates arrive in Ubuntu repos fast enough.
+* It can mount additional overlays on top of root FS.  You can add some custom software only for some workstations without building a new image
+* It uses [zram](https://www.kernel.org/doc/Documentation/blockdev/zram.txt) - memory compression, it's good for old clients with a small amount of RAM. Although it is not bad for modern clients as well.
+* Out of the box light desktop (LXDE) with an RDP client is build. RDP servers addresses and options are simply passed from PXE server in boot parameters.
+* You can change single parameter in config and the minimal console system will be built. It's a good basis for your own custom build.
+* If boot failed because of server or network problem, it will briefly display an error message and start over. It's convenient that when problems are fixed, workstations will start themselves without manual interaction.
 
 В банке для удалённого подключения к тонкому клиенту пользователя использовался VNC(`x11vnc` для подключения к уже запущенной сессии Xorg). Это далеко не всем требуется(обычно хватает возможности подключения к сеансу RDP на сервере терминалов), и тут всё очень индивидуально в плане требований удобства/безопасности. Поэтому эту часть я выкладывать не стал.
 
