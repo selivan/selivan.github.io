@@ -4,7 +4,7 @@ title:  "Ubuntu based thin client made with your own hands"
 tags: [ubuntu,pxe,thinclient]
 ---
 
-*This article in russian: [https://habrahabr.ru/](habrahabr.ru/)*
+<!-- *This article in russian: [https://habrahabr.ru/](habrahabr.ru/)* -->
 
 ## History
 
@@ -76,7 +76,7 @@ Debian/Ubuntu uses package initramfs-tools to create initramfs. It provides the 
 
 So, to mount the root FS in some tricky way, you have to create your own boot script, define function `mountroot()` in it, pass this script name in boot parameter `boot`. And don't forget to write hooks that will include into initramfs all required kernel modules and executables.
 
-## Борьба за оверлеи
+## Overlays
 
 Для создния единой корневой файловой системы из нескольких используется [OverlayFS](https://www.kernel.org/doc/Documentation/filesystems/overlayfs.txt). В первых версиях использовалась AUFS(она используется большинством линусковых LiveCD). Но её не приняли в ядро, и сейчас всем рекомендуют переходить на OverlayFS.
 
@@ -86,17 +86,19 @@ So, to mount the root FS in some tricky way, you have to create your own boot sc
 
 Apparmor пришлось отключить: её профили рассчитаны на прямое монтирование корневой ФС с одного устройства. При использовании OverlayFS она видит, что `/sbin/dhclient` это на самом деле `/AURS/root/sbin/dhclient`, и профиль ломается. Единственный вариант её использовать - переписать все профили для всех приложений, и обновлять при необходимости.
 
-## Где нужна возможность записи
+## Where the write support is requierd
 
 Под идее, Linux может спокойно работать, когда все ФС примонтированы read-only. Но многие программы рассчитывают на возможность записи на диск, приходится монтировать туда tmpfs:
 
 * `/tmp`, `/var/tmp` - понятно, нужны очень многим
+* `/var/log` - пишем логи
 * `/run` - без него не запустятся почти все сервисы
+* `/media` - монтированиие подключенных носителей
 * `/var/lib/system` - используется многими программами из systemd, в частности `systemd-timesyncd`
 * `/var/lib/dhclient` - сюда dhclient записывает информацию о leases
 * `/etc/apparmor.d/cache` - если вы всё-таки поборете AppArmor, то ему надо будет писать файлы в `/etc`. ИМХО отвратительно, для таких вещей есть `/var`.
 
-## Итого
+## Summary
 
 Если вы хотите собрать загружаемую по сети и работающую только из памяти сборку Ubuntu - вот тут есть готовый удобный конструктор: [thinclient](https://github.com/selivan/thinclient). Если потребутеся помощь - пишите в ЛС, подскажу.
 
