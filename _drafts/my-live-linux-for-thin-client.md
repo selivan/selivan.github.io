@@ -56,15 +56,15 @@ Vagrant allows you to make a trick: install Ansible on one virtual(test PXE serv
 
 ## The naughty squash
 
-[Squashfs](https://en.wikipedia.org/wiki/SquashFS) - сжимающия read-only файловая система. Лежит в основе большинства существующих Linux LiveCD. Именно она позволяет создать достаточно компактный образ системы, помещающийся в оперативную память тонкого клиента.
+[Squashfs](https://en.wikipedia.org/wiki/SquashFS) is compressing red-only filesystem. It is used in most of existing Linux LiveCD. It allows you to create a fairly compact system image, located inside the RAM.
 
-Из итогового образа надо много чего вырезать: `/tmp`, `/run`, `/proc`, `/sys`, `/usr/share/doc` и так далее.
+A lot of things should be cut of the resulting image:  `/tmp`, `/run`, `/proc`, `/sys`, `/usr/share/doc` and so on.
 
-Утилита `mksquashfs` поддерживает аж 3 типа списков для исключения файлов: по полному пути, по маскам и по регулярным выражениям. Казалось бы, всё прекрасно. Но последние два варианта не поддерживают пути, начинающиеся с `/`. У меня не получилось исключить все файлы внутри некотороый структуры папок, не исключая последнюю папку.
+Utility `mksquashfs` supports as many as 3 types of lists to exclude files: by full path, by masks and by regular expresions. It would seem that everything is fine. But last two options do not support paths starting with `/`. I could not exclude files inside some directory without excluding the directory itself.
 
-Мне быстро надоело с ней бороться, я просто нашёл `find`-ом все файлы и папки, которые надо исплючить, и запихнул в один большой файл с исключениями по полному пути. Костыли.jpg. Но работает. Единственным артефактом этого подхода в итоговом образе остаётся одинокая папка `/proc/NNN`, соответствующая номеру процесса mksquashfs, которого при создании списка исключений ещё не было. Сверху всё равно монтируется procfs.
+I got tired of fighting with it, so I just use `find` to fild all files and directories to exclude, and put it all into a single huge file with full paths. Ugly_crutch.jpg. But it works. The only artifact for this approach is the lonely directory `/proc/NNN`, corresponding to mksquashfs process idm which did not exist when the exclude list was created. procsfs is anyway mounted on top of it.
 
-## Магия initrd
+## Initrd magick
 
 Чтобы не тянуть в составе ядра все необходимые драйвера и логику монтирования корневой ФС, Linux использует initial ramdisk. Раньше использовался формат initrd, в котором этот диск представлял собой настоящий образ файловой системы. В ядре 2.6 появился новый формат - initramfs, представляющий собой извлекаемый в tmpfs cpio-архив. Как initrd, так и initramfs могут быть сжаты для экономии времени загрузки. Многие названия утилит и имена файлов по-прежнему упоминают initrd, хотя он уже не используется.
 
