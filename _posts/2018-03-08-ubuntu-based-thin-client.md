@@ -4,7 +4,7 @@ title:  "Ubuntu based thin client made with your own hands"
 tags: [ubuntu,pxe,thinclient]
 ---
 
-*This article in russian: [habrahabr.ru/post/350722](https://habrahabr.ru/post/350722/)*
+*This article in russian: [habrahabr.ru/post/350780](https://habrahabr.ru/post/350780/)*
 
 ![logo ubuntu plus windows](/images/2018-03-08-ubuntu-based-thin-client/ubuntu-and-windows-250x250.jpg)
 
