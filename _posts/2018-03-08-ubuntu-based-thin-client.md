@@ -60,7 +60,7 @@ Vagrant allows you to make a trick: install Ansible on one virtual(test PXE serv
 
 ## The naughty squash
 
-[Squashfs](https://en.wikipedia.org/wiki/SquashFS) is compressing red-only filesystem. It is used in most of existing Linux LiveCD. It allows you to create a fairly compact system image, located inside the RAM.
+[Squashfs](https://en.wikipedia.org/wiki/SquashFS) is compressing read-only filesystem. It is used in most of existing Linux LiveCD. It allows you to create a fairly compact system image, located inside the RAM.
 
 A lot of things should be cut of the resulting image:  `/tmp`, `/run`, `/proc`, `/sys`, `/usr/share/doc` and so on.
 
