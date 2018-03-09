@@ -61,7 +61,7 @@ done < <(git diff --cached --name-only -z "$against")
 exit $EXIT_STATUS
 ```
 
-Thanks to [Ben Tennant](https://disqus.com/by/ben_tennant/) and [Flexic](https://disqus.com/by/flexic/) for helping to fix and improve this script.
+Thank you [Ben Tennant](https://disqus.com/by/ben_tennant/) and [Flexic](https://disqus.com/by/flexic/) for helping to fix and improve this script.
 
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
