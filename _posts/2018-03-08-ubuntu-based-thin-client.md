@@ -36,11 +36,15 @@ In the bank we used VNC to connect to user's thin client(it was `x11vnc` to conn
 
 ## Alternatives
 
-Why not just use [Thinstation](http://www.thinstation.org/)?
+* [Thinstation](http://www.thinstation.org/)
 
 Well, if Thinstation completely satisfies your requirements - you would better use it, it's older and more mature project. Plus it is about one and a half times smaller in size, because it is specially crafted for minimal size, not just slightly modified standard Ubuntu.
 
 But it has ancient versions of software, and not a lot of it. If you need something special, not just client for RDP/Citrix/..., you would have to build it yourself, and do so for each update.
+
+* [LTSP](http://ltsp.org/)
+
+As [kvaps](https://habrahabr.ru/users/kvaps/) pointed out in [comment](https://habrahabr.ru/post/350780/#comment_10702986) to russian article, LTSP can copy squashfs image into RAM and work without mounting FS over network: variable [LTSP_NBD_TO_RAM](https://github.com/kvaps/ltsp/blob/master/client/Debian/share/initramfs-tools/scripts/init-bottom/ltsp#L31) controls it. It uses chroot for configuration, which may be less convenient, especially for configuring GUI enviromment and applications. It is also a good mature project, you may consider it as an alternative.
 
 ## Vagrant vs chroot
 
