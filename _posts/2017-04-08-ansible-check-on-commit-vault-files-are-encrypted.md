@@ -35,8 +35,11 @@ fi
 # Redirect output to stderr.
 exec 1>&2
 
+EXIT_STATUS=0
+
 # Check that all changed *.vault files are encrypted
-git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; do
+# read: -r do not allow backslashes to escape characters; -d delimiter
+while IFS= read -r -d $'\0' file; do
 	[[ "$file" != *.vault && "$file" != *.vault.yml ]] && continue
 	# cut gets symbols 1-2
 	file_status=$(git status --porcelain -- "$file" 2>&1 | cut -c1-2)
@@ -45,22 +48,24 @@ git diff --cached --name-only -z "$against" | while IFS= read -r -d $'\0' file; 
 	[[ "$file_status_worktree" != ' ' ]] && {
 		echo "ERROR: *.vault file is modified in worktree but not added to the index: $file"
 		echo "Can not check if it is properly encrypted. Use git add or git stash to fix this."
-		exit 1
+		EXIT_STATUS=1
 	}
 	# check is neither required nor possible for deleted files
 	[[ "$file_status_index" = 'D' ]] && continue
 	head -1 "$file" | grep --quiet '^\$ANSIBLE_VAULT;' || {
 		echo "ERROR: non-encrypted *.vault file: $file"
-		exit 1
+		EXIT_STATUS=1
 	}
-done
-# Pipe creates separate subshell, we can not use it's variables
-exit $?
+done < <(git diff --cached --name-only -z "$against")
+
+exit $EXIT_STATUS
 ```
+
+Thank you [Ben Tennant](https://disqus.com/by/ben_tennant/) and [Flexic](https://disqus.com/by/flexic/) for helping to fix and improve this script.
 
 We want to check only changed files. `git diff` command with `--cached` option shows only changes added to git index for commit.
 
-If file was modified after `git add`, we can not check it's version that is going to be commited. So we ask user to fix the situation. We could use some automation here, like `git stash` before commit and `git stash pop` after, but I think leaving solution to user himself is better option. Thanks to [Ben Tennant](https://disqus.com/by/ben_tennant/) for pointing out this issue.
+If file was modified after `git add`, we can not check it's version that is going to be commited. So we ask user to fix the situation. We could use some automation here, like `git stash` before commit and `git stash pop` after, but I think leaving solution to user himself is better option.
 
 Handling pathnames with spaces and/or special characters is tricky in shell. `git diff` has `-z` option to use NULL characters as pathname terminators. Built-in bash command `read` has `-d` option to specify the last line character and `-r` to disable interpretation of backslash escaped characters(like `'\t'`). It uses characters from `$IFS` variable(default `$' \t\n'`) as word delimiters. If we set `$IFS` empty, whole line before NULL will be saved to a variable.
 
