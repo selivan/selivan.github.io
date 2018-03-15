@@ -34,10 +34,10 @@ timezone: Europe/Moscow
 plugins:
   # RSS feeds
   - jekyll-feed
-  # https://help.github.com/articles/redirects-on-github-pages/ Example:
-  #---
-  #redirect_from: "/foo"
-  #---
+  # https://help.github.com/articles/redirects-on-github-pages/ 
+  # Google Bot treats <link rel=canonical href=...> as 301 redirect: https://stackoverflow.com/a/19717455/890863
+  # Example:
+  # redirect_from: "/foo"
   - jekyll-redirect-from
   # GitHub Emoji https://help.github.com/articles/emoji-on-github-pages/
   # Example: :+1:
