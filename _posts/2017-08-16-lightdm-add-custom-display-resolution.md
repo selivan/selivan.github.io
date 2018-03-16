@@ -22,16 +22,17 @@ freq="$4"
 if [ $# -ne 4 ]; then
 echo "Usage: $0 output x y freq"
 echo "To find output name: xrandr -q"
-exit 1
+exit 0
 fi
 
 mode=$( cvt "$x" "$y" "$freq" | grep -v '^#' | cut -d' ' -f3- )
 modename="${x}x${y}"
 
-xrandr --newmode $modename $mode
-xrandr --addmode "$output" "$modename"
+xrandr --newmode $modename $mode &&\
+xrandr --addmode "$output" "$modename" &&\
 xrandr --output "$output" --mode "$modename"
 
+# Always return success or lightdm goes into infinite loop
 exit 0
 ```
 
@@ -50,7 +51,7 @@ How it works:
  * Lightdm hook `display-setup-script` is run as root after X starts before user session/greeter.
 * `cvt` calculates VESA Coordinated Video Timing modes and returns correct X modelines.
 * `xrandr` adds modeline to server, then adds that mode to list of valid modes for the output, and swithes to it.
-* script should always return success, even if it failed to add new mode - otherwise lightdm will go to infinite restart cycle
+* script should always return success, even if it failed to add new mode - otherwise lightdm will go into infinite restart cycle
 
 Links:
  * [askubuntu.com/a/377944/25924](https://askubuntu.com/a/377944/25924)
