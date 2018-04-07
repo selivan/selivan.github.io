@@ -19,3 +19,29 @@ handlers:
 ```
 
 **UPD**: Since Ansible 2.3, [named block](http://docs.ansible.com/ansible/latest/playbooks_blocks.html) could be more elegant solution. Unfortunately, blocks do not work in handlers: [ansible #36480](https://github.com/ansible/ansible/issues/36480).
+
+**UPD2**: Task may have multiple handlers like this:
+
+```yaml
+- template: src=foo.j2 dest=/etc/foo
+  notify:
+    - restart foo
+    - restart bar
+```
+
+But **be careful**: handlers will always run in order they are defined, not in order they are listed in `notify:`
+
+**UPD3**: Since Ansible 2.2, handlers can "llisten" to some topic:
+
+```yaml
+handlers:
+    - name: restart memcached
+      service: name=memcached state=restarted
+      listen: "restart web services"
+    - name: restart apache
+      service: name=apache state=restarted
+      listen: "restart web services"
+tasks:
+    - command: echo "this task will restart the web services"
+      notify: "restart web services"
+```
