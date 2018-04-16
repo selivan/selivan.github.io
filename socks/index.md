@@ -4,6 +4,10 @@ title:  "Self-hosted socks5 server in one command"
 ---
 `curl {{ site.url }}/socks.txt | sudo bash`
 
+If you would like to manually set port and/or password:
+
+`export PORT=8080; export PASSWORD=mypass; curl {{ site.url }}/socks.txt | sudo bash`
+
 This creates self-hosted socks5 server powered by [Dante](http://www.inet.no/dante/). Supported Linux distributions:
 * Ubuntu 16.04 Xenial
 
