@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Self-hosted socks5 server in one command"
+title:  "Self-hosted socks5 server in single command"
 ---
 `curl {{ site.url }}/socks.txt | sudo bash`
 
