@@ -52,6 +52,7 @@ pass {
         log: error
 }
 EOF
+
 # Open port in firewall if required
 if which ufw > /dev/null; then
         ufw allow "$PORT"/tcp
@@ -111,6 +112,7 @@ socks pass {
         log: error
 }
 EOF
+
 # Open port in firewall if required
 if which ufw > /dev/null; then
         ufw allow "$PORT"/tcp
