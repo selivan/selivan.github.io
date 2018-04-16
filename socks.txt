@@ -2,6 +2,8 @@
 layout: null
 ---
 #!/bin/bash
+# Homepage: selivan.github.io/socks
+
 source /etc/lsb-release
 if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 
