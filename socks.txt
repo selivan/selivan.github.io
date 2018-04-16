@@ -78,7 +78,6 @@ if [ -z "$PORT" ]; then
 fi
 
 if [ -z "$PASSWORD" ]; then
-        # -s    do not echo input
         export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=10 )
 fi
 
