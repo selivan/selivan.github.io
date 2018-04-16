@@ -7,4 +7,4 @@ title:  "Self-hosted socks5 server in one command"
 This creates self-hosted socks5 server powered by [Dante](http://www.inet.no/dante/). Supported Linux distributions:
 * Ubuntu 16.04 Xenial
 
-Feel free to send any issues or improvements [here](https://github.com/selivan/selivan.github.io-socks/issues)
+Feel free to send any issues or improvements [here](https://github.com/selivan/selivan.github.io-socks/issues).
