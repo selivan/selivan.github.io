@@ -26,8 +26,9 @@ PASSWD_FILE=/etc/danted.passwd
 # -1    generate md5-based password hash
 echo "$USER:$( openssl passwd -1 "$PASSWORD" )" > "$PASSWD_FILE"
 
+# nodelay: don't cause a delay on auth failure. Anti-DDOS
 cat > /etc/pam.d/sockd << EOF
-auth required pam_pwdfile.so debug pwdfile=$PASSWD_FILE
+auth required pam_pwdfile.so nodelay pwdfile=$PASSWD_FILE
 account required pam_permit.so
 EOF
 
