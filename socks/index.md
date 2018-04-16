@@ -1,7 +1,6 @@
 ---
 layout: default
 title:  "Self-hosted socks5 server in one command"
-tags: [socks,proxy]
 ---
 `curl {{ site.url }}/socks.txt | sudo bash`
 
