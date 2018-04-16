@@ -15,3 +15,5 @@ This creates self-hosted [SOCKS5](https://en.wikipedia.org/wiki/SOCKS) server po
 * Ubuntu 16.04 Xenial
 
 Feel free to send any issues or improvements [here](https://github.com/selivan/selivan.github.io-socks/issues).
+
+This is just a basic proxy, very simple to install and use. If you are interested in a more functional and complex soltion, you may check out [Streisand Effect](https://github.com/StreisandEffect/streisand).
