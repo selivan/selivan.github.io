@@ -5,10 +5,6 @@ tags: [socks,proxy]
 ---
 Due to recent block of Telegram by Russian Censorship, I created a script to get your own [SOCKS5](https://en.wikipedia.org/wiki/SOCKS) proxy in a single command: [{{ site.url }}/socks](/socks)
 
-Usage:
-
-`curl https://selivan.github.io/socks.txt | sudo bash`
-
 VPN is a also a good solution, but on mobile devices it consumes additional power. And since all traffic to Telegram servers is encrypted anyway, you may as well use SOCKS proxy which does not eat your battery.
 
 Of course, it is a bad practive to pipe into `sudo bash` something that you have found on the Internet. But if you use some expendable vm/container that serves only one purpose, it's fine.
