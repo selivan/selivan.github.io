@@ -1,6 +1,3 @@
----
-layout: null
----
 #!/bin/bash
 # Homepage: selivan.github.io/socks
 
@@ -45,6 +42,12 @@ user.notprivileged: nobody
 client pass {
         from: 0.0.0.0/0 to: 0.0.0.0/0
         log: error
+}
+
+# deny proxied to loopback
+block {
+    from: 0.0.0.0/0 to: 127.0.0.0/8
+    log: error
 }
 
 pass {
@@ -94,7 +97,10 @@ account required pam_permit.so
 EOF
 
 cat > /etc/danted.conf <<EOF
+# https://www.inet.no/dante/doc/1.4.x/config/ipv6.html
+internal.protocol: ipv4 ipv6
 internal: $IFACE port=$PORT
+external.protocol: ipv4 ipv6
 external: $IFACE
 
 socksmethod: pam.any
@@ -105,6 +111,22 @@ user.notprivileged: nobody
 client pass {
         from: 0.0.0.0/0 to: 0.0.0.0/0
         log: error
+}
+
+client pass {
+        from: ::/0 to: ::/0
+        log: error
+}
+
+# deny proxied to loopback
+socks block {
+    from: 0.0.0.0/0 to: 127.0.0.0/8
+    log: error
+}
+
+socks block {
+    from: ::/0 to: ::1/128
+    log: error
 }
 
 socks pass {
