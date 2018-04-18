@@ -6,9 +6,10 @@ source /etc/lsb-release
 # Ubuntu 16.06 Xenial
 if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 
+apt update
 apt install -y dante-server libpam-pwdfile openssl
-IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
 
+IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
 USER=user
 
 if [ -z "$PORT" ]; then
@@ -72,9 +73,10 @@ echo "Password: $PASSWORD"
 # Ubuntu 18.04 Bionic
 elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 
+apt update
 apt install -y dante-server libpam-pwdfile openssl
-IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
 
+IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
 USER=user
 
 if [ -z "$PORT" ]; then
