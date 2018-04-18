@@ -16,7 +16,7 @@ function generate_password_file() {
 	echo "$2:$( openssl passwd -1 "$3" )" > "$1"
 }
 
-# args: file password_file
+# args: file pwdfile
 function generate_pam() {
 # nodelay: don't cause a delay on auth failure. Anti-DDOS
 cat > "$1" << EOF
