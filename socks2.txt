@@ -1,0 +1,162 @@
+#!/bin/bash
+# Homepage: selivan.github.io/socks
+set -x
+source /etc/lsb-release
+
+# Ubuntu 16.06 Xenial
+if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
+
+apt update
+apt install -y dante-server libpam-pwdfile openssl
+
+IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
+USER=user
+
+if [ -z "$PORT" ]; then
+        export PORT=8080
+fi
+
+if [ -z "$PASSWORD" ]; then
+        export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=10 )
+fi
+
+PASSWD_FILE=/etc/danted.passwd
+
+# -1    generate md5-based password hash
+echo "$USER:$( openssl passwd -1 "$PASSWORD" )" > "$PASSWD_FILE"
+
+# nodelay: don't cause a delay on auth failure. Anti-DDOS
+cat > /etc/pam.d/sockd << EOF
+auth required pam_pwdfile.so nodelay pwdfile=$PASSWD_FILE
+account required pam_permit.so
+EOF
+
+cat > /etc/danted.conf <<EOF
+internal: $IFACE port=$PORT
+external: $IFACE
+
+method: pam
+
+user.privileged: root
+user.notprivileged: nobody
+
+client pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}
+
+# deny proxied to loopback
+block {
+    from: 0.0.0.0/0 to: 127.0.0.0/8
+    log: error
+}
+
+pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}
+EOF
+
+# Open port in firewall if required
+if which ufw > /dev/null; then
+        ufw allow "$PORT"/tcp
+fi
+
+systemctl restart danted.service
+
+echo "Your socks proxy configuration:"
+echo "IP: $( ip address show dev $IFACE | tr --squeeze-repeats ' ' | grep '^ inet ' | cut -d' ' -f3 | cut -d'/' -f1 )"
+echo "Port: $PORT"
+echo "User: $USER"
+echo "Password: $PASSWORD"
+
+# Ubuntu 18.04 Bionic
+elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
+
+apt update
+apt install -y dante-server libpam-pwdfile openssl
+
+IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
+USER=user
+
+if [ -z "$PORT" ]; then
+        export PORT=8080
+fi
+
+if [ -z "$PASSWORD" ]; then
+        export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=10 )
+fi
+
+PASSWD_FILE=/etc/danted.passwd
+
+# -1    generate md5-based password hash
+echo "$USER:$( openssl passwd -1 "$PASSWORD" )" > "$PASSWD_FILE"
+
+# nodelay: don't cause a delay on auth failure. Anti-DDOS
+cat > /etc/pam.d/sockd << EOF
+auth required pam_pwdfile.so nodelay pwdfile=$PASSWD_FILE
+account required pam_permit.so
+EOF
+
+cat > /etc/danted.conf <<EOF
+# https://www.inet.no/dante/doc/1.4.x/config/ipv6.html
+internal.protocol: ipv4 ipv6
+internal: $IFACE port=$PORT
+external.protocol: ipv4 ipv6
+external: $IFACE
+
+socksmethod: pam.any
+
+user.privileged: root
+user.notprivileged: nobody
+
+client pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}
+
+client pass {
+        from: ::/0 to: ::/0
+        log: error
+}
+
+# deny proxied to loopback
+socks block {
+    from: 0.0.0.0/0 to: 127.0.0.0/8
+    log: error
+}
+
+socks block {
+    from: ::/0 to: ::1/128
+    log: error
+}
+
+socks pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}
+EOF
+
+# Open port in firewall if required
+if which ufw > /dev/null; then
+        ufw allow "$PORT"/tcp
+fi
+
+systemctl restart danted.service
+
+echo "Your socks proxy configuration:"
+echo "IP: $( ip address show dev $IFACE | tr --squeeze-repeats ' ' | grep '^ inet ' | cut -d' ' -f3 | cut -d'/' -f1 )"
+echo "Port: $PORT"
+echo "User: $USER"
+echo "Password: $PASSWORD"
+
+else
+
+echo "Sorry, this distribution is not supported"
+echo "Feel free to send patches to selivan.github.io/socks to add support for more"
+echo "Supported distributions:"
+echo "- Ubuntu 16.04 Xenial"
+echo "- Ubuntu 18.04 Bionic"
+exit 1
+
+fi
