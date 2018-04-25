@@ -2,7 +2,7 @@
 layout: default
 title:  "Self-hosted socks5 or shadowsocks server in a single command"
 ---
-Create self-hosted socks5 or shadowsocks server in a single command.
+Create self-hosted [socks5](https://en.wikipedia.org/wiki/SOCKS) or [shadowsocks](https://shadowsocks.org/) server in a single command.
 
 Feel free to send any issues or improvements [here](https://github.com/selivan/selivan.github.io-socks/issues).
 
@@ -32,7 +32,7 @@ export PORT=8080; export PASSWORD=mypass
 curl {{ site.url }}/shadowsocks.txt | sudo --preserve-env bash
 ```
 
-This creates self-hosted [shadowsocks](https://shadowsocks.org/en/index.html) server. Supported Linux distributions:
+This creates self-hosted [shadowsocks](https://shadowsocks.org/) server. Supported Linux distributions:
 
 * Ubuntu 16.04 Xenial
 * Ubuntu 18.04 Bionic
