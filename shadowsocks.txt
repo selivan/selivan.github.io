@@ -26,7 +26,7 @@ EOF
 
 # args: method password
 function generate_hash() {
-	echo "$1":"$2" | base64 | tr -d '='
+	echo "$1":"$2" | base64
 }
 
 # args: port
