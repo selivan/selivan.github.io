@@ -15,9 +15,9 @@ function generate_config() {
 cat > "$1" <<EOF
 {
     "server":"0.0.0.0",
-    "server_port":8443,
+    "server_port":$2,
     "local_port":1080,
-    "password":"zoo9wupeequi1oi",
+    "password":"$3",
     "timeout":60,
     "method":"chacha20-ietf-poly1305"
 }
