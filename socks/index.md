@@ -33,8 +33,8 @@ curl {{ site.url }}/shadowsocks.txt | sudo --preserve-env bash
 ```
 
 This creates self-hosted [shadowsocks](https://shadowsocks.org/) server. Clients:
-* Android: https://play.google.com/store/apps/details?id=com.github.shadowsocks
-* Other devices: https://shadowsocks.org/en/download/clients.html
+* Android: [shadowsocks by Max Lv](https://play.google.com/store/apps/details?id=com.github.shadowsocks)
+* Other devices: [shadowsocks clients](https://shadowsocks.org/en/download/clients.html)
 
 Supported Linux distributions:
 
