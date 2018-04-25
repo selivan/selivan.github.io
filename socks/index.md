@@ -32,7 +32,11 @@ export PORT=8080; export PASSWORD=mypass
 curl {{ site.url }}/shadowsocks.txt | sudo --preserve-env bash
 ```
 
-This creates self-hosted [shadowsocks](https://shadowsocks.org/) server. Supported Linux distributions:
+This creates self-hosted [shadowsocks](https://shadowsocks.org/) server. Clients:
+* Android: https://play.google.com/store/apps/details?id=com.github.shadowsocks
+* Other devices: https://shadowsocks.org/en/download/clients.html
+
+Supported Linux distributions:
 
 * Ubuntu 16.04 Xenial
 * Ubuntu 18.04 Bionic
