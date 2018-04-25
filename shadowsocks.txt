@@ -50,7 +50,7 @@ if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 
 	apt update
 	apt install -y software-properties-common
-	apt-add-repository -y max-c-lv/shadowsocks-libev
+	apt-add-repository -y ppa:max-c-lv/shadowsocks-libev
 	apt update
 	apt install shadowsocks-libev
 
