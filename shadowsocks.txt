@@ -1,0 +1,96 @@
+#!/bin/bash
+# Homepage: selivan.github.io/socks
+
+function get_external_address() {
+	local addr=$( timeout 3 dig +short myip.opendns.com @resolver1.opendns.com || \
+	timeout 3 curl -s http://ipecho.net/plain || \
+	timeout 3 curl -s http://ident.me/ || \
+	timeout 3 curl -s http://whatismyip.akamai.com/ )
+	[ $? -ne 0 ] && addr="<this server IP address>"
+	echo "$addr"
+}
+
+# args: file port password
+function generate_config() {
+cat > "$1" <<EOF
+{
+    "server":"0.0.0.0",
+    "server_port":8443,
+    "local_port":1080,
+    "password":"zoo9wupeequi1oi",
+    "timeout":60,
+    "method":"chacha20-ietf-poly1305"
+}
+EOF
+}
+
+# args: method password
+function generate_hash() {
+	echo "$1":"$2" | base64 | tr -d '='
+}
+
+# args: port
+function open_ufw_port() {
+	# Open port in firewall if required
+	if which ufw > /dev/null; then
+	        ufw allow "$PORT"/tcp
+	fi
+}
+
+IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
+USER=user
+
+[ -z "$PORT" ] && export PORT=8080
+[ -z "$PASSWORD" ] && export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=12 )
+
+source /etc/lsb-release
+
+# Ubuntu 16.06 Xenial
+if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
+
+	apt update
+	apt install -y software-properties-common
+	apt-add-repository -y max-c-lv/shadowsocks-libev
+	apt update
+	apt install shadowsocks-libev
+
+	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
+
+	open_ufw_port "$PORT"
+
+	systemctl restart shadowsocks-libev
+
+	echo
+	echo "Your shadowsocks proxy configuration:"
+	echo "URL: ss://$( generate_hash chacha20-ietf-poly1305 $PASSWORD )@$( get_external_address ):$PORT"
+	echo "Android client: https://play.google.com/store/apps/details?id=com.github.shadowsocks"
+	echo "Clients for other devices: https://shadowsocks.org/en/download/clients.html"
+
+# Ubuntu 18.04 Bionic
+elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
+
+	apt update
+	apt install shadowsocks-libev
+
+	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
+
+	open_ufw_port "$PORT"
+
+	systemctl restart shadowsocks-libev
+
+	echo
+	echo "Your shadowsocks proxy configuration:"
+	echo "URL: ss://$( generate_hash chacha20-ietf-poly1305 $PASSWORD )@$( get_external_address ):$PORT"
+	echo "Android client: https://play.google.com/store/apps/details?id=com.github.shadowsocks"
+	echo "Clients for other devices: https://shadowsocks.org/en/download/clients.html"
+
+else
+
+	echo "Sorry, this distribution is not supported"
+	echo "Feel free to send patches to selivan.github.io/socks to add support for more"
+	echo "Supported distributions:"
+	echo "- Ubuntu 16.04 Xenial"
+	echo "- Ubuntu 18.04 Bionic"
+	exit 1
+
+fi
