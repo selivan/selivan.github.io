@@ -46,12 +46,13 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _HIDS_ | OSSEC |
 | _VPN_ | OpenVPN |
 | _Basic networking_ | static routing, VLANs, Firewalls |
+| _Virtualization_ | LXC/LXD |
 
 ## Optional skills. To use this I need to refresh my memory.
 
 Things I used to work with some time ago.
 
-| _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), LXC, Docker |
+| _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), Docker |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of workstations(2000, XP, Windows 7) |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of  Windows Server(2003, 2008r2). Terminal services. |
 | _Operating Systems_ | Windows: Active Directory: Group Polices, CIFS, WSUS |
