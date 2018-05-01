@@ -4,7 +4,7 @@ title:  "Self-hosted socks5 or shadowsocks server in a single command"
 ---
 Create self-hosted [socks5](https://en.wikipedia.org/wiki/SOCKS) or [shadowsocks](https://shadowsocks.org/) server in a single command.
 
-Feel free to send any issues or improvements [here](https://github.com/selivan/selivan.github.io-socks/issues).
+Feel free to send any issues or improvements to [github project](https://github.com/selivan/selivan.github.io-socks/issues).
 
 # socks5
 `curl {{ site.url }}/socks.txt | sudo bash`
