@@ -6,7 +6,8 @@ tags: [rsyslog,syslog,"multiline logs",linux]
 
 *This is translation of my original [article in russian](https://habrahabr.ru/post/321262/)*
 
-<!-- kramdown magick https://kramdown.gettalong.org/converter/html.html#toc -->
+{% comment %} kramdown magick https://kramdown.gettalong.org/converter/html.html#toc {% endcomment %}
+
 * TOC
 {:toc}
 
@@ -39,10 +40,10 @@ Unusual requrement, but sometimes it's necessary. For example, [PCI DSS](https:/
 
 *TLDR*: everything is broken
 
-<!-- <details>
-<summary> TLDR: everything is broken (click to view)</summary> -->
+{% comment %} <details>
+<summary> TLDR: everything is broken (click to view)</summary> {% endcomment %}
 Syslog appeared in 80-x, and quickly became logging standard for Unix-like OS and network hardware. There were no standard, everybody was writing code just to be compatible with existing software. In 2001 IETF described current situation in RFC 3164(status "informational"). Implementations vary a lot, so it states "The payload of any IP packet that has a UDP destination port of 514 MUST be treated as a syslog message". Later IETF tried to create standard format in RFC 3165, but this document was inconvenient, at this moment there is no any alive software implementation. In 2009 RFC 5424 was approved, defining structured messages, but it is rarely used.
-<!-- </details> -->
+{% comment %} </details> {% endcomment %}
 
 [Here](http://www.rsyslog.com/doc/syslog_parsing.html) you can read what rsyslog author Rainer Gerhards does think about syslog standard situation. In fact, everybody is implementing syslog as he likes, and syslog server has the task to interpret anything it receives. For example, rsyslog has [special module](http://www.rsyslog.com/doc/v8-stable/configuration/modules/pmciscoios.html) to parse format used by CISCO IOS. For the worst cases since rsyslog 5th version you can define custom parsers.
 
@@ -160,13 +161,13 @@ if $programname startswith "haproxy" then -/var/log/haproxy.log
 &~
 ```
 
-Config check command: `rsyslogd -N 1`. More examples: [one](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [two](http://wiki.rsyslog.com/index.php/Configuration_Samples).
+Config check command: `rsyslogd -N 1 -f /etc/rsyslog.conf`. More examples: [one](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [two](http://wiki.rsyslog.com/index.php/Configuration_Samples).
 
 ## Client: forward logs with file names
 
 We will save file names into `TAG` field. We want to include directories into names, not to watch single-level file mess: `haproxy/error.log`. If log is not read from file, but comes from program though standard syslog mechanism, it can reject writing `/` symbols into `TAG`, because it's against the standard. So we will encode this symbols as double underlines, and will decode back on log server.
 
-Let's create template for transferring logs over network. We want to forward messages with tags longer than 32 symbols, because we have long meaningful log names. We want to forward precise timestamp with timezone. Also, we will add local variable `$.suffix` to filename, I'll explain this later. Local variables in RainerScript have names starting from a dot. If variable is not defined, it will expand into empty string.
+Let's create a template for transferring logs over network. We want to forward messages with tags longer than 32 symbols, because we have long meaningful log names. We want to forward precise timestamp with timezone. Also we will add a local variable `$.suffix` to the filename, I'll explain this later. Local variables in RainerScript have names starting from a dot. If variable is not defined, it will expand into empty string.
 
 ```bash
 template (name="LongTagForwardFormat" type="string"
@@ -184,7 +185,7 @@ ruleset(name="sendToLogserver") {
 }
 ```
 
-Now create Input reading log file, and assign it our RuleSet.
+Now create Input to read log file, and assign it our RuleSet.
 
 ```bash
 input(type="imfile"
@@ -210,7 +211,7 @@ if( $syslogtag == 'nginx__access:')  then {
 }
 ```
 
-Last `stop` directive is required to stop processing this messages, otherwise they will get to common system syslog. Btw, if application can use socket for log messages than standard `/dev/log`(both nginx and haproxy can do this), then we can create separate Input for this socket with  [imuxsock](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imuxsock.html) module and assign it separate ruleset. So parsing whole log stream for some tags would not be required.
+Last `stop` directive is required to stop processing this messages, otherwise they will get to common system syslog. Btw, if application can use socket for log messages than standard `/dev/log`(both nginx and haproxy can do this), then we can create separate Input for this socket with  [imuxsock](http://www.rsyslog.com/doc/v8-stable/configuration/modules/imuxsock.html) module and assign it to separate ruleset. So parsing whole log stream for some tags would not be required.
 
 ### Reading log files set by wildcard
 
