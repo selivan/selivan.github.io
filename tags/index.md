@@ -39,3 +39,6 @@ to the `site_tags` variable. -->
     {% endif %}{% endfor %}
   {% endunless %}{% endfor %}
 </div>
+
+<br>
+*Tags page was created thanks to [this instruction](http://pavdmyt.com/how-to-implement-tags-at-jekyll-website/) by Pavel Dmytrenko.*
