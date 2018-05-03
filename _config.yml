@@ -3,7 +3,7 @@ title: selivan.github.io
 #email: selivan.at.github@gmail.com
 # > this means to ignore newlines until "baseurl:"
 description: >
-  Just another IT blog.
+  Just another IT blog
 # the subpath of your site, e.g. /blog
 baseurl: ""
 # the base hostname & protocol for your site
@@ -34,7 +34,7 @@ timezone: Europe/Moscow
 plugins:
   # RSS feeds
   - jekyll-feed
-  # https://help.github.com/articles/redirects-on-github-pages/ 
+  # https://help.github.com/articles/redirects-on-github-pages/
   # Google Bot treats <link rel=canonical href=...> as 301 redirect: https://stackoverflow.com/a/19717455/890863
   # Example:
   # redirect_from: "/foo"
