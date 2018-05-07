@@ -20,6 +20,7 @@ This creates self-hosted [SOCKS5](https://en.wikipedia.org/wiki/SOCKS) server po
 
 * Ubuntu 16.04 Xenial
 * Ubuntu 18.04 Bionic
+* CentOS 7 and Oracle Linux 7.5 (thanks to [Vlad Safronov](https://github.com/vladsf))
 
 # shadowsocks
 
