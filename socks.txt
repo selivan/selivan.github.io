@@ -209,7 +209,7 @@ elif [ "$ID $VERSION_ID" = "ol 7.5" -o "$ID $VERSION_ID" = "centos 7" ]; then
 	curl --progress-bar -O https://www.inet.no/dante/sslfiles/dante-1.4.2/$DANTE_TGZ
 	tar -C / -xzf $DANTE_TGZ
 
-    yum install -q -y openssl which bind-utils firewalld
+	yum install -q -y openssl which bind-utils firewalld
 
 	generate_password_file /etc/danted.passwd "$USER" "$PASSWORD"
 
