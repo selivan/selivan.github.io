@@ -1,6 +1,6 @@
 #!/bin/bash
 # Homepage: selivan.github.io/socks
-# Contributors: Vlad Safronov (Oracle Linux 7.5)
+# Contributors: Vlad Safronov (Oracle Linux 7.5, Centos 7)
 
 function get_external_address() {
 	local addr=$( timeout 3 dig +short myip.opendns.com @resolver1.opendns.com || \
@@ -203,11 +203,13 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 	echo "Password: $PASSWORD"
 
 # Oracle Linux 7.5
-elif [ "$ID $VERSION_ID" = "ol 7.5" ]; then
+elif [ "$ID $VERSION_ID" = "ol 7.5" -o "$ID $VERSION_ID" = "centos 7" ]; then
 
 	DANTE_TGZ="tgz-prod.dante-1.4.2-rhel72-amd64-64bit-gcc.tar.gz"
 	curl --progress-bar -O https://www.inet.no/dante/sslfiles/dante-1.4.2/$DANTE_TGZ
 	tar -C / -xzf $DANTE_TGZ
+
+    yum install -q -y openssl which bind-utils firewalld
 
 	generate_password_file /etc/danted.passwd "$USER" "$PASSWORD"
 
@@ -243,6 +245,7 @@ else
 	echo "- Ubuntu 16.04 Xenial"
 	echo "- Ubuntu 18.04 Bionic"
 	echo "- Oracle Linux 7.5"
+	echo "- Centos 7"
 	exit 1
 
 fi
