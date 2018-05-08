@@ -1,5 +1,6 @@
 #!/bin/bash
 # Homepage: selivan.github.io/socks
+# Author: Pavel Selivanov
 
 function get_external_address() {
 	local addr=$( timeout 3 dig +short myip.opendns.com @resolver1.opendns.com || \
@@ -12,6 +13,7 @@ function get_external_address() {
 
 # args: file port password
 function generate_config() {
+# "fast_open": true reduces connection latency. But it doesn't work on OpenVZ, on old kernels, and on kernels where this feature is disabled
 cat > "$1" <<EOF
 {
     "server":"0.0.0.0",
