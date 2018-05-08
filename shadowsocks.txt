@@ -60,6 +60,7 @@ if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 
 	open_ufw_port "$PORT"
 
+	systemctl enable shadowsocks-libev
 	systemctl restart shadowsocks-libev
 
 	echo
@@ -78,6 +79,7 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 
 	open_ufw_port "$PORT"
 
+	systemctl enable shadowsocks-libev
 	systemctl restart shadowsocks-libev
 
 	echo
