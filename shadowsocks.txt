@@ -56,6 +56,8 @@ if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 	apt update
 	apt install shadowsocks-libev
 
+	# package does not create config directory :(
+	mkdir /etc/shadowsocks-libev
 	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 
 	open_ufw_port "$PORT"
@@ -75,6 +77,8 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 	apt update
 	apt install shadowsocks-libev
 
+	# package does not create config directory :(
+	mkdir /etc/shadowsocks-libev
 	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 
 	open_ufw_port "$PORT"
