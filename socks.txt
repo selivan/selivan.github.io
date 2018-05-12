@@ -147,6 +147,7 @@ function open_firewalld_port() {
 	# Open port in firewall if required
 	if which firewall-cmd > /dev/null; then
 		firewall-cmd --zone=public --permanent --add-port="$1"/tcp
+		firewall-cmd --reload
 	fi
 }
 
@@ -221,8 +222,6 @@ elif [ "$ID $VERSION_ID" = "ol 7.5" -o "$ID $VERSION_ID" = "centos 7" ]; then
 	generate_config_v14 /etc/sockd.conf "$IFACE" "$PORT"
 
 	open_firewalld_port "$PORT"
-
-	systemctl is-active firewalld.service > /dev/null && systemctl restart firewalld.service
 
 	generate_systemd_file /etc/systemd/system/sockd.service
 
