@@ -124,7 +124,7 @@ After=network.target
 Type=forking
 PIDFile=/var/run/sockd.pid
 ExecStart=/usr/sbin/sockd -D -f /etc/sockd.conf
-ExecReload=/bin/kill -HUP ${MAINPID}
+ExecReload=/bin/kill -HUP \${MAINPID}
 KillMode=process
 Restart=on-failure
 
