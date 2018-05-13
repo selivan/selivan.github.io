@@ -417,6 +417,6 @@ Problems appear with logrotate `copytruncae` option, that truncates `smth.log` t
 
 ## Summary
 
-IMHO I created rather flexible and convenient configuration. Logs are forwarded from both files and syslog. Multi-line messages are forwarded correctly. Log server restart does not cause logging messages. To add new log files, you should re-configure only client, server stays as it is.
+IMHO I created rather flexible and convenient configuration. Logs are forwarded from both files and syslog. Multi-line messages are forwarded correctly. Log server restart does not cause losing messages. To add new log files, only client should be re-configured, server stays as it is.
 
 This works on rsyslog v8, I didn't check it on earlier version. For Ubuntu there is official ppa [adiscon/v8-stable](https://launchpad.net/~adiscon/+archive/ubuntu/v8-stable). For CentOS/RHEL you can use [official repository](http://www.rsyslog.com/rhelcentos-rpms/).
