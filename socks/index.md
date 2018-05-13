@@ -41,6 +41,7 @@ Supported Linux distributions:
 
 * Ubuntu 16.04 Xenial
 * Ubuntu 18.04 Bionic
+* CentOS 7 and RHEL 7 (thanks to Octavian Dodita)
 
 # P.S.
 
