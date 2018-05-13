@@ -208,8 +208,8 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 elif [ "$ID $VERSION_ID" = "ol 7.5" -o "$ID $VERSION_ID" = "centos 7" ]; then
 
 	DANTE_TGZ="tgz-prod.dante-1.4.2-rhel72-amd64-64bit-gcc.tar.gz"
-	curl --progress-bar -O https://www.inet.no/dante/sslfiles/dante-1.4.2/$DANTE_TGZ
-	tar -C / -xzf $DANTE_TGZ
+	curl --progress-bar -O https://www.inet.no/dante/sslfiles/dante-1.4.2/"$DANTE_TGZ"
+	tar -C / -xzf "$DANTE_TGZ"
 
 	yum install -q -y openssl which bind-utils
 
