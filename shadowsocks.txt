@@ -110,12 +110,11 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 # Example of /etc/os-release for RHEL: https://linuxconfig.org/how-to-check-redhat-version#h5-5-check-release-files
 elif [[ "$ID $VERSION_ID" == "centos 7"* || "$ID $VERSION_ID" == "rhel 7"* ]]; then
 
-	yum install -y bind-utils
-
 	yum install -y epel-release
 	curl --location --output "/etc/yum.repos.d/librehat-shadowsocks-epel-7.repo" "https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/repo/epel-7/librehat-shadowsocks-epel-7.repo"
-	#yum clean all
-	yum install -y mbedtls
+	# Sometimes cache is not completely updated after adding new repo
+	yum makecache
+	yum install -y bind-utils mbedtls
 	ln -sf /usr/lib64/libmbedcrypto.so.1 /usr/lib64/libmbedcrypto.so.0
 	yum install -y shadowsocks-libev
 
