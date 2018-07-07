@@ -62,7 +62,7 @@ echo -addr >/proc/net/xt_recent/SSH
 echo / >/proc/net/xt_recent/SSH
 ```
 
-Number of addresses and packets for address remembered per table and other setting may be changed as parameters of kernel module `xt_recent`:
+Number of addresses and packets for address remembered per table and other settings may be changed as parameters of kernel module `xt_recent`:
 
 ```bash
 modinfo xt_recent | grep ^parm
