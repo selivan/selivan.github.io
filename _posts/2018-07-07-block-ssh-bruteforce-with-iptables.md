@@ -42,9 +42,9 @@ Chain `INPUT`:
 
 Chain `ssh-check`:
 
-1. Add packet's source address with mask 255.255.255.255 to list named SSH; if it is already there - existing entry
+1. Add packet's source address with mask 255.255.255.255 to list named SSH; if it is already there - update existing entry
 1. If packet is already in the list and it was seen at least 3 times within 20 seconds:
-  * Redirect the packet to chain `block-ssh`
+  * Redirect it to the chain `block-ssh`
 1. Accept packet if it was not redirected by the previous rule
 
 Chain `ssh-block`:
