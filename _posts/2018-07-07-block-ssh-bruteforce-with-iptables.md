@@ -43,9 +43,9 @@ Chain `INPUT`:
 Chain `ssh-check`:
 
 1. Add packet's source address with mask 255.255.255.255 to list named SSH; if it is already there - update existing entry
-1. If packet is already in the list and it was seen at least 3 times within 20 seconds:
+1. If the packet is already in the list and it was seen at least 3 times within 20 seconds:
   * Redirect it to the chain `block-ssh`
-1. Accept packet if it was not redirected by the previous rule
+1. Accept the packet if it was not redirected by the previous rule
 
 Chain `ssh-block`:
 1. Log the blocked packet attempt to syslog with given prefix and severity.
