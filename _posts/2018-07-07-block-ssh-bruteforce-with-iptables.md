@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Block ssh or any other service brute-force attempts with iptables"
-tags: iptables, ssh
+tags: [iptables, ssh]
 ---
 *Disclaimer:* Blocking brute-force attempts may not help if weak passwords are used. You should better use ssh keys, or if that is impossible use strong passwords.
 
