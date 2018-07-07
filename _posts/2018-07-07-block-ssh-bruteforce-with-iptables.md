@@ -32,7 +32,7 @@ iptables-restore /etc/iptables/rules.v4
 
 This is a simple solution, if you want something more advanced, you may use [fail2ban](https://www.fail2ban.org/).
 
-Since ssh client makes more than one attempt to establish TCP connection, you may noitice that actual ban period is a couple times more than 20 seconds. And how it works.
+Since ssh client makes more than one attempt to establish TCP connection, you may noitice that actual ban period is a couple times more than 20 seconds. And let's see how it works.
 
 Chain `INPUT`:
 
