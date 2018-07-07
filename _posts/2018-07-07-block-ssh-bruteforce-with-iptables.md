@@ -48,7 +48,7 @@ Chain `ssh-check`:
 1. Accept the packet if it was not redirected by the previous rule
 
 Chain `ssh-block`:
-1. Log the blocked packet attempt to syslog with given prefix and severity.
+1. Log the blocked packet attempt to syslog with given message prefix and severity.
 1. Drop the blocked packet
 
 List of IP addresses is available in `/proc/net/xt_recent/SSH`. It can be manually altered:
