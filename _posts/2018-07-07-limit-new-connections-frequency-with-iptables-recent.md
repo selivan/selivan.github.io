@@ -38,7 +38,7 @@ Chain `INPUT`:
 
 1. Accept packets for already established connections without further filtering. It is required to not impede established ssh sessions.
 1. Reject packets that are not starting a new connection or associated with known one. Not necessary, just adds a little more security.
-1. For a packet initiating a new connection: redirect to chain `ssh-check`
+1. For a packet initiating a new connection to tcp post 22: redirect to chain `ssh-check`
 
 Chain `ssh-check`:
 
