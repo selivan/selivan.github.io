@@ -31,7 +31,7 @@ handlers:
 
 But **be careful**: handlers will always run in order they are defined, not in order they are listed in `notify:`
 
-**UPD3**: Since Ansible 2.2, handlers can "llisten" to some topic:
+**UPD3**: Since Ansible 2.2, handlers can "listen" to some topic:
 
 ```yaml
 handlers:
