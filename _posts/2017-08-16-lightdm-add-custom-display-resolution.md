@@ -28,8 +28,8 @@ fi
 mode=$( cvt "$x" "$y" "$freq" | grep -v '^#' | cut -d' ' -f3- )
 modename="${x}x${y}"
 
-xrandr --newmode $modename $mode &&\
-xrandr --addmode "$output" "$modename" &&\
+xrandr --newmode $modename $mode
+xrandr --addmode "$output" "$modename"
 xrandr --output "$output" --mode "$modename"
 
 # Always return success or lightdm goes into infinite loop
