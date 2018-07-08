@@ -21,7 +21,7 @@ cat > /etc/iptables/rules.v4 << EOF
 
 -A ssh-check -m recent --name SSH --set --mask 255.255.255.255 --rsource
 -A ssh-check -m recent --name SSH --rcheck --mask 255.255.255.255 --rsource --seconds 20 --hitcount 3 -j ssh-ban
--A ssh-check -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+-A ssh-check -j ACCEPT
 
 -A ssh-ban -j LOG --log-prefix "anti-bruteforce ssh:" --log-level info
 -A ssh-ban -j DROP
