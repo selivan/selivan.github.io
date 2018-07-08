@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Block ssh or any other service brute-force attempts with iptables"
+title:  "Limit frequency of new connection attempts with iptables module recent"
 tags: [iptables, ssh]
+redirect_from:
+    - '/2018/07/07/block-ssh-bruteforce-with-iptables.html'
 ---
-*Disclaimer:* Blocking brute-force attempts may not help if weak passwords are used. You should better use ssh keys, or if that is impossible use strong passwords.
-
 Block for 20 seconds IP addresses that made more than 3 new connection attempts per 20 seconds:
 
 ```bash
@@ -30,9 +30,9 @@ EOF
 iptables-restore /etc/iptables/rules.v4
 ```
 
-This is a simple solution, if you want something more advanced, you may use [fail2ban](https://www.fail2ban.org/).
+*Disclaimer:* Blocking brute-force attempts may not help much if weak passwords are used or if attackers use a large botnet. You should better use ssh keys, or if that is impossible use strong passwords. This is a simple solution, if you want something more advanced, you may use [fail2ban](https://www.fail2ban.org/).
 
-Since ssh client makes more than one attempt to establish TCP connection, you may noitice that actual ban period is a couple times more than 20 seconds. And let's see how it works.
+Since client software usually makes more than one attempt to establish TCP connection, you may noitice that actual ban period is a couple times more than 20 seconds. And let's see how it works.
 
 Chain `INPUT`:
 
