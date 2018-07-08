@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Limit frequency of new connection attempts with iptables module recent"
-tags: [iptables, ssh]
+tags: [iptables, xt_recent]
 redirect_from:
     - '/2018/07/07/block-ssh-bruteforce-with-iptables.html'
 ---
