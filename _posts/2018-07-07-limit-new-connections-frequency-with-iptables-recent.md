@@ -51,7 +51,7 @@ Chain `ssh-block`:
 1. Log the blocked packet attempt to syslog with given message prefix and severity.
 1. Drop the blocked packet
 
-List of IP addresses is available in `/proc/net/xt_recent/SSH`. It can be manually altered:
+List of recently seen IP addresses with timestamps for several last packets is available in `/proc/net/xt_recent/SSH`. It can be manually altered:
 
 ```bash
 # add addr
