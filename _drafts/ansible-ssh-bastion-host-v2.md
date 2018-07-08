@@ -11,7 +11,10 @@ Here is my second approach on this task.
 
 `inventory_file`:
 
+
 ```ini
+{% comment %}Stop interpreting ansible jinja syntax as jekyll liquid{% endcomment %}
+{% raw %}
 [all:vars]
 # HERE GOES MAGIC
 # To change used bastion host for host or group, set variable bastion_host
@@ -44,6 +47,7 @@ srv5 ansible_host=172.31.0.5
 srv6 ansible_host=172.31.0.6
 [hosts_accessable_directly:vars]
 bastion_host=''
+{% endraw %}
 ```
 
 *Downside*: this solution does not support chained bastion hosts. (? make it support them?)
