@@ -46,7 +46,7 @@ srv6 ansible_host=172.31.0.6
 bastion_host=''
 ```
 
-*Downside*: this solution does not support chained bastion hosts.
+*Downside*: this solution does not support chained bastion hosts. (? make it support them?)
 
 How it works.
 
