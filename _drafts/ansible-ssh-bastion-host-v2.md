@@ -13,7 +13,6 @@ Here is my second approach on this task.
 
 
 ```ini
-{% comment %}Stop interpreting ansible jinja syntax as jekyll liquid{% endcomment %}
 {% raw %}
 [all:vars]
 # HERE GOES MAGIC
