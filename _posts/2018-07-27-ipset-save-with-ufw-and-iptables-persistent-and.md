@@ -38,6 +38,8 @@ ConditionFileNotEmpty=/etc/iptables/ipset
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/sbin/ipset restore -file /etc/iptables/ipset
+# Uncomment to save changed sets on reboot
+# ExecStop=/sbin/ipset save -file /etc/iptables/ipset
 ExecStop=/bin/ipset flush
 ExecStopPost=/bin/ipset destroy
 
