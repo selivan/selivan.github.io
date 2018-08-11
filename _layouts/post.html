@@ -76,9 +76,9 @@ layout: default
   </div>
 {% else %}
 
- {% comment %}See https://shopify.github.io/liquid/filters/prepend/{% endcomment %}
- {% assign gpgc_post_title = page.id | prepend: 'Comments for ' %}
- {% include gpgc_comments.html post_title=gpgc_post_title %}
+{% comment %}See https://shopify.github.io/liquid/filters/prepend/{% endcomment %}
+{% comment %}page.id would be better, but {% endcomment %}
+{% include gpgc_comments.html post_title=page.title %}
 
 {% endif %}
 
