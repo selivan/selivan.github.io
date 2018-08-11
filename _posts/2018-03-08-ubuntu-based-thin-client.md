@@ -2,6 +2,7 @@
 layout: post
 title:  "Ubuntu based thin client made with your own hands"
 tags: [ubuntu,pxe,thinclient]
+comments_by_disqus: true
 ---
 
 *This article in russian: [habrahabr.ru/post/350780](https://habrahabr.ru/post/350780/)*

@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible: check before commit that all *.vault files are encrypted"
 tags: [ansible,ansible-vault,git]
+comments_by_disqus: true
 ---
 
 In our project we have an agreement: all vault-encrypted files should have suffix `.vault`. It's convenient to be able to see that all secret information, like keys and passwords, is stored properly.

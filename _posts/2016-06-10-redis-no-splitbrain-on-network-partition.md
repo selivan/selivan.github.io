@@ -2,6 +2,7 @@
 layout: post
 title:  "Redis replication: prevent split-brain (additional master) in case of network partition"
 tags: [redis]
+comments_by_disqus: true
 ---
 Redis replication group can go multi-master on network partition, if old master restarts automatically. Sentinels will eventually fix it to become slave of new one, but that takes some time. If some application continues writing to old master, some data will be lost. To prevent this issue, write this line in every `redis.conf`:
 

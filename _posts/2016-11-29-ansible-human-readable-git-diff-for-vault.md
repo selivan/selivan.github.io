@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible: human readable git diff for vault encrypted files"
 tags: [ansible,git]
+comments_by_disqus: true
 ---
 
 Ansible vault can be used transparently with `copy` module and variable files: `include_vars`, `vars_files`. IMHO that's bad architecture. "Explicit is better than implicit" (c) Python Zen. In our project we agreed to keep vault encrypted files with extension `.vault` and vault encrypted variable files with `.vault.yml`.

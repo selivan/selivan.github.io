@@ -2,6 +2,7 @@
 layout: post
 title:  "GRUB 2: password protection for all but default menu entries"
 tags: [grub,linux]
+comments_by_disqus: true
 ---
 
 **WARNING**: Playing with grub can make your system unbootable. Be careful.

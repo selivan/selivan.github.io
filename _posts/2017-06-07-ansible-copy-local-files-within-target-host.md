@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible: properly copy local files within the target host"
 tags: [ansible,rsync]
+comments_by_disqus: true
 ---
 Ansible dosn't have convenient way to copy files within target host. At least, I didn't find any. Directly using `cp` command is not the best option. Files will be copied every time and task will always be marked as changed. Other downside is that check mode won't work for `command` and `shell` modules.
 

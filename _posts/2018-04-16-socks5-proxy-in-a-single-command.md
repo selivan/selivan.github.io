@@ -2,6 +2,7 @@
 layout: post
 title:  "Setup a SOCKS5 proxy in a single command"
 tags: [socks,proxy]
+comments_by_disqus: true
 ---
 Due to recent block of Telegram by Russian Censorship, I created a script to get your own [SOCKS5](https://en.wikipedia.org/wiki/SOCKS) proxy in a single command: [{{ site.url }}/socks](/socks)
 

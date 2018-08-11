@@ -42,6 +42,7 @@ layout: default
   </div>
 
   <div class="post-content">
+{% if page.comments_by_disqus | default: false %}
   <div id="disqus_thread"></div>
   <script>
   /**
@@ -73,5 +74,12 @@ layout: default
   </noscript>
 
   </div>
+{% else %}
+
+ {% comment %}See https://shopify.github.io/liquid/filters/prepend/{% endcomment %}
+ {% assign gpgc_post_title = page.id | prepend: 'Comments for ' %}
+ {% include gpgc_comments.html post_title=gpgc_post_title %}
+
+{% endif %}
 
 </article>

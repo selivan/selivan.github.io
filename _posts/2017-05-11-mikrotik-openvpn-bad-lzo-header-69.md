@@ -2,6 +2,7 @@
 layout: post
 title:  "Mikrotik and OpenVPN 2.3 compatibility: error 'Bad LZO decompression header byte: 69'"
 tags: [mikrotik,routeros,openvpn]
+comments_by_disqus: true
 ---
 
 Mikrotik RoutesOS has limited [OpenVPN support](https://wiki.mikrotik.com/wiki/OpenVPN#Supported): only TCP connections, no UDP, and no [LZO](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Oberhumer) compression.
