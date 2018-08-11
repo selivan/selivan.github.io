@@ -10,3 +10,7 @@ My name is Pavel Selivanov. Here I write down notes on my Linux sysadmin/devops 
 When I happen to create some probably useful stuff that is not under NDA, I put it on my [github](https://github.com/selivan).
 
 This blog is made with [Jekyll](https://jekyllrb.com/) and hosted on [Github Pages](https://pages.github.com/).
+
+Comments are hosted in github issues thanks to [ghpages-ghcomments](http://downtothewire.io/ghpages-ghcomments/) and [gatekeeper](https://github.com/prose/gatekeeper), application to process adding comments is hosted for free on [Heroku](https://www.heroku.com/).
+
+For old posts [Disqus](https://disqus.com/) comments were used.
