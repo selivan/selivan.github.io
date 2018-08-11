@@ -4,6 +4,8 @@ title:  "Persistent ipset for Ubuntu/Debian compatible with ufw and iptables-per
 tags: [iptables,ipset,ufw,iptables-persistent]
 ---
 
+**UPD**: Added optional saving of changed ipset sets on service stop, thanks to comment by [CameronNemo](https://www.reddit.com/user/CameronNemo)
+
 I could not find any standard solution for saving [ipset]((http://ipset.netfilter.org/)) rules together with iptables. Apparently, everybody who uses them have to create custom shell scripts for this task.
 
 There are two most popular solutions for managing firewall in Ubuntu/Debian:
@@ -38,6 +40,8 @@ ConditionFileNotEmpty=/etc/iptables/ipset
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/sbin/ipset restore -file /etc/iptables/ipset
+# Uncomment to save changed sets on reboot
+# ExecStop=/sbin/ipset save -file /etc/iptables/ipset
 ExecStop=/bin/ipset flush
 ExecStopPost=/bin/ipset destroy
 
