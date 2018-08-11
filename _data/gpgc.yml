@@ -8,4 +8,4 @@ github_application:
   client_id: ff9c39dda1c33b90644e
   code_authenticator: https://selivan-github-io-comments.herokuapp.com/authenticate/
   callback_url: https://selivan.github.io/public/html/gpgc_redirect/index.html
-enable_diagnostics: false
+enable_diagnostics: true
