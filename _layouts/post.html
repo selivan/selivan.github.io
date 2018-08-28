@@ -42,7 +42,8 @@ layout: default
   </div>
 
   <div class="post-content">
-{% if page.comments_by_disqus | default: false %}
+{% comment %} Using undefined variables in Liquid is not an error {% endcomment %}
+{% if page.comments_by_disqus %}
   <div id="disqus_thread"></div>
   <script>
   /**
