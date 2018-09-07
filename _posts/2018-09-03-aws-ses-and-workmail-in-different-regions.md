@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "AWS SES and WorkMail for one domain in different regions"
+title:  "AWS SES and WorkMail for the same domain in different regions"
 tags: [aws,ses,workmail]
 ---
 
