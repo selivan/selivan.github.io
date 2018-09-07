@@ -15,11 +15,12 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/public/css/gpgc_styles.css">
   <link rel="stylesheet" href="{{ site.baseurl }}/public/css/gpgc_styles.override.css">
 
-  <!-- this links are now made by jekyll-seo-plugin
+  {% comment %}
+  <!-- this links are now made by jekyll-seo-plugin -->
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  -->
   <!-- jekyll-seo-tag plugin -->
+  {% endcomment %}
   {% seo title=false %}
 
   <!-- Google Analytics. It is bad, global data collection voilates user's privacy :( -->
