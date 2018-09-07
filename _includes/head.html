@@ -22,4 +22,15 @@
   <!-- jekyll-seo-tag plugin -->
   {% seo title=false %}
 
+  <!-- Google Analytics. It is bad, global data collection voilates user's privacy :( -->
+  <!-- I totally understand if you disable it with smth. like  Ghostery or Disconnect.me -->
+  <!-- But Google Search better likes sites that have the analytics installed -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125424718-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-125424718-1');
+  </script>
+
 </head>
