@@ -30,7 +30,6 @@ Here is mode precise options to use ansible and yaml+jinja syntax only for right
     "**/meta/*.yml": "ansible",
     "**/roles/**/*.yml": "ansible",
     "**/playbooks/**/*.yml": "ansible",
-    "**/ansible/*.yml": "ansible",
     "**/ansible/**/hosts": "ini",
     "**/ansible/**/inventory": "ini",
     "ansible.cfg": "ini",
