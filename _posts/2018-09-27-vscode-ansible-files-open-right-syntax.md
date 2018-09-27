@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "VSCode: open ansible files with right syntax"
-tags: [aws,ses,workmail]
+tags: [vscode,ansbile]
 ---
 
 VSCode [extension for Ansible](https://marketplace.visualstudio.com/items?itemName=vscoss.vscode-ansible#user-content-syntax-highlighting) from Microsoft suggestes to open all `*.yml` files with ansible syntax:
