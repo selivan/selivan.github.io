@@ -5,7 +5,7 @@ tags: [systemd]
 ---
 Just using `Restart` and `RestartSec` is not enough: systemd services have start rate limiting enabled by default. If service is started more than `StartLimitBurst` times in `StartLimitIntervalSec` seconds is it not permitted to start any more. This parameters are inherited from `DefaultStartLimitIntervalSec`(default 10s) and `DefaultStartLimitBurst`(default 5) in `systemd-system.conf`.
 
-Use `systemctl edit foobar.service` or manually edit `/etc/systemd/system/foobar.service.d/override.conf` and run `systemctl deamon-reload`.
+Use `systemctl edit foobar.service` or manually edit `/etc/systemd/system/foobar.service.d/override.conf` and run `systemctl daemon-reload`.
 
 ```ini
 [Service]
