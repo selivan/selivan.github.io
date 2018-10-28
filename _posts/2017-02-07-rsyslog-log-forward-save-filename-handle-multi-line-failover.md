@@ -410,7 +410,7 @@ Can be rotated perfectly well with default scheme: `smth.log` is renamed to `smt
 
 ### Logs written by application and read by rsyslog
 
-For application than can re-open files on request(SIGHUP or something alike) no additional configuration is required: rsyslog will notice file inode change and re-open it.
+For application that can re-open files on request(SIGHUP or something alike) no additional configuration is required: rsyslog will notice file inode change and re-open it.
 
 Problems appear with logrotate `copytruncae` option, that truncates `smth.log` to zero after  creating copy `smth.log.1`. rsyslog just stops reading lines from that file. Starting from version 8.16.0, imfile module has option `reopenOnTruncate` (default `"off"`, to enable switch to `"on"`). This option tells rsyslog to reopen input file on truncate(inode unchanged but file size on disk is less than current offset in memory). It is marked as "experimental", but works fine for me in production. For versions older than 8.16.0, you can fix `copytruncate` rotating by sending SIGHUP to rsyslogd process in post-rotate action.
 
