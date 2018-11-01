@@ -41,7 +41,7 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _In-memory storage_ | Redis |
 | _Monitoring_ | Zabbix |
 | _Cloud services_ | AWS |
-| _Log shipping and analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana) |
+| _Log shipping and analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana), rsyslog |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
 | _HIDS_ | OSSEC |
 | _VPN_ | OpenVPN |
@@ -59,7 +59,7 @@ Things I used to work with some time ago.
 | _Operating Systems_ | FreeBSD |
 | _Hardware_ | Linux Software RAID(mdadm), “fake” RAID(dmraid) |
 | _Network equipment_ | CISCO, HP ProCurve, Mikrotik |
-| _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), syslog(rsyslog), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
+| _Miscelanneous Unix services_ | FTP(vsftpd), HTTP(Apache2), logrotate, HTTP Proxy(squid+lightsquid), fail2ban, Mail(postfix). |
 | _VCS_ | svn |
 | _VPN_ | PPTP, L2TP, ipsec |
 | _NIDS_ | Suricata |
