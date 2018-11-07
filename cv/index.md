@@ -14,6 +14,8 @@ Github: <a href="https://github.com/{{ include.username }}"><span class="icon ic
 
 # Summary
 
+*I am not looking for a new job now.*
+
 I like to create reliable well-automated systems, that require minimal manual maintenance. I prefer Linux technology stack, but know Windows as well. I am passionate about Open Source.
 
 # Contacts
