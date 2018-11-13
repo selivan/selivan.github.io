@@ -4,6 +4,8 @@ title:  "VSCode: open ansible files with right syntax"
 tags: [vscode,ansbile]
 ---
 
+**UPD**: Added identation settings for ansible.
+
 VSCode [extension for Ansible](https://marketplace.visualstudio.com/items?itemName=vscoss.vscode-ansible#user-content-syntax-highlighting) from Microsoft suggestes to open all `*.yml` files with ansible syntax:
 
 ```json
@@ -33,6 +35,16 @@ Here is mode precise options to use ansible and yaml+jinja syntax only for right
     "**/ansible/**/hosts": "ini",
     "**/ansible/**/inventory": "ini",
     "ansible.cfg": "ini",
+},
+```
+
+Also you might like to set identation settings for "ansible" language:
+
+```json
+"[ansible]": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
 },
 ```
 
