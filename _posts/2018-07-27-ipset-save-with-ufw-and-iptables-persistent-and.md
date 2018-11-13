@@ -56,5 +56,5 @@ Now all that's left is to install it:
 
 ```bash
 systemctl daemon-reload
-systemctl enable ipset.service
+systemctl enable ipset-persistent.service
 ```
