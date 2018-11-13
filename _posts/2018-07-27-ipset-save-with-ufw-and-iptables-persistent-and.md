@@ -4,7 +4,7 @@ title:  "Persistent ipset for Ubuntu/Debian compatible with ufw and iptables-per
 tags: [iptables,ipset,ufw,iptables-persistent]
 ---
 
-**UPD**: Added optional saving of changed ipset sets on service stop, thanks to [comment](https://www.reddit.com/r/linuxadmin/comments/92fkn5/persistent_ipset_for_ubuntudebian_compatible_with/e3agg55) by [Derhomp](https://www.reddit.com/user/Derhomp)
+**UPD**: Added optional saving of changed ipset sets on service stop, thanks to the [comment](https://www.reddit.com/r/linuxadmin/comments/92fkn5/persistent_ipset_for_ubuntudebian_compatible_with/e3agg55) by [Derhomp](https://www.reddit.com/user/Derhomp)
 
 I could not find any standard solution for saving [ipset]((http://ipset.netfilter.org/)) rules together with iptables. Apparently, everybody who uses them have to create custom shell scripts for this task.
 
