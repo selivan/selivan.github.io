@@ -14,7 +14,6 @@ I nailed together a couple of scripts that allow you to keep the keys encrypted 
 
 Usage:
 
-
 `new-cadir.sh roles/vpnserver/files/ca` - creates new ca in given directory:
 
 ```
