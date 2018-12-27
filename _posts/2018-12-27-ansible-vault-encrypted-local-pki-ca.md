@@ -4,7 +4,7 @@ title:  "Encrypted local PKI CA for SSL/TLS keys and certificates with ansible v
 tags: [ansible,ansible-vault,openssl,easy-rsa,pki]
 ---
 
-Sometimes you may need a local PKI CA, for example to use it with an OpenVPN server or to secure HTTPS traffic between your hosts in private network. Easiest and popular way to do it is [easy-rsa](https://github.com/OpenVPN/easy-rsa).
+Sometimes you may need a local PKI CA, for example to use it with an OpenVPN server or to secure HTTPS traffic between your hosts in private network. Easiest and most popular way to do it is [easy-rsa](https://github.com/OpenVPN/easy-rsa).
 
 It keeps ca and client keys in unencrypted files, and it requires this files to manage the PKI. To keep this PKI files in your Ansible repository in a secure way, encrypted with ansible-vault, you have to do a lot of manual work.
 
