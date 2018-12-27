@@ -42,8 +42,8 @@ RemainAfterExit=yes
 ExecStart=/sbin/ipset restore -file /etc/iptables/ipset
 # Uncomment to save changed sets on reboot
 # ExecStop=/sbin/ipset save -file /etc/iptables/ipset
-ExecStop=/bin/ipset flush
-ExecStopPost=/bin/ipset destroy
+ExecStop=/sbin/ipset flush
+ExecStopPost=/sbin/ipset destroy
 
 [Install]
 WantedBy=multi-user.target
