@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "VSCode: open ansible files with right syntax"
-tags: [vscode,ansbile]
+tags: [vscode,ansible]
 ---
 
 **UPD**: Added identation settings for ansible.
