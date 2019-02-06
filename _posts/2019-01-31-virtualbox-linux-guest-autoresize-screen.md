@@ -16,7 +16,7 @@ And of course, you should install virtualbox-guest utils and video drivers on th
 sudo apt install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 ```
 
-Or, if you use HWE(Hardware Enablement) kernel:
+Or, if you use [HWE](https://wiki.ubuntu.com/Kernel/LTSEnablementStack) kernel:
 
 ```
 sudo apt install virtualbox-guest-dkms-hwe virtualbox-guest-utils-hwe virtualbox-guest-x11-hwe
