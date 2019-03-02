@@ -81,13 +81,13 @@ Things I used to work with some time ago.
 # Expirience
 
 * 2017 - now: Freelance
-* 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)
-  * Development and support of AWS-based infrastructure that was certified for PCI DSS Compliance Level 1
-  * Securing web application that deals with sensitive financial information
+* 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru), system architect
+  * Development and support of AWS-based infrastructure certified for PCI DSS Compliance Level 1
+  * Securing web application processing sensitive financial information
   * Support of development and deploy cycle for rapidly developing web application
 * 2014 - 2015: [Yandex](https://yandex.ru), engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
-  * _Signed pretty strict NDA, sorry, no more details_ :(
+  * _Signed very strict NDA, can not give any more details_ :(
 * 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(the company was closed), leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
   * Deploy of central software configuration system Ansible (example: [github.com/selivan/ansible_ipmi_lan_manage](https://github.com/selivan/ansible_ipmi_lan_manage))
