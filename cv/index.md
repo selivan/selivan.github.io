@@ -83,8 +83,8 @@ Things I used to work with some time ago.
 * 2017 - now: Freelance
 * 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)
   * Development and support of AWS-based infrastructure that was certified for PCI DSS Compliance Level 1
-  * Support of development and deploy cycle for rapidly developing web application
   * Securing web application that deals with sensitive financial information
+  * Support of development and deploy cycle for rapidly developing web application
 * 2014 - 2015: [Yandex](https://yandex.ru), engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
   * _Signed pretty strict NDA, sorry, no more details_ :(
