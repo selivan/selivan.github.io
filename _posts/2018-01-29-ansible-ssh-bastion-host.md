@@ -42,7 +42,7 @@ HostName 10.0.0.2
 ProxyCommand none
 ```
 
-Somewhere in inventory, to avoid repeating IP addresses twice:
+Somewhere in inventory, to avoid repeating bastion IP addresses twice:
 
 ```ini
 [bastion]
@@ -55,7 +55,9 @@ bastion2 ansible_ssh_host=bastion2
 **UPD**: [stemid85](https://www.reddit.com/user/stemid85) on Reddit [pointed out](https://www.reddit.com/r/linuxadmin/comments/7tp0q1/using_ansible_with_bastion_host/dtfp057/) the way to use a chain of bation hosts:
 
 ```
-Host bastion1                                                                                                                   HostName 192.168.1.1
+Host bastion1
+  HostName 192.168.1.1
+  ProxyCommand none
 
 Host bastion2
   HostName 192.168.2.2
