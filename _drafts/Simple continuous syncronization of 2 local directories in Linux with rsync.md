@@ -1,5 +1,7 @@
 For example, backup mysql binary logs.
 
+Note: if you need redundancy, you should use RAID.
+
 ```bash
 #!/bin/bash
 
