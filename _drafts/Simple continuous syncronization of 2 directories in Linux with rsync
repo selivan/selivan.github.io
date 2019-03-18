@@ -1,3 +1,5 @@
+For example, backup mysql binary logs.
+
 ```bash
 #!/bin/bash
 
