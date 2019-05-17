@@ -3,9 +3,9 @@ layout: post
 title:  "Ansible: print role name inside template"
 tags: ansible
 ---
-**UPDATE 3**: starting from ansible 2.8 there is a special variable `role_name`
+**UPDATE 3**: Starting from ansible 2.8 there is a special variable `role_name`
 
-**UPDATE 2**: @sivel noticed much easier way to do it: {% raw %}`{{ role_path | basename }}`{% endraw %}. Seems that whatever you are trying to do, already there is a jinja filter to do it. {% raw %}`template: dest=/etc/mysql/my.cnf content="{{ 'mysql' | make_config_fast_reliable_and_secure }}"`{% endraw %} :))
+**UPDATE 2**: @sivel noticed much easier way to do it: {% raw %}`{{ role_path | basename }}`{% endraw %}.
 
 **UPDATE**: I created a feature request, asking for ansible guys to make special variable `ansible_role`: [#25447](https://github.com/ansible/ansible/issues/25447).
 
