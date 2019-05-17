@@ -3,7 +3,7 @@ layout: post
 title:  "Ansible: print role name inside template"
 tags: ansible
 ---
-**UPDATE 3**: Starting from ansible 2.8 there is a special variable `role_name`
+**UPDATE 3**: Starting from ansible 2.8 there is a special variable `role_name`.
 
 **UPDATE 2**: @sivel noticed much easier way to do it: {% raw %}`{{ role_path | basename }}`{% endraw %}.
 
