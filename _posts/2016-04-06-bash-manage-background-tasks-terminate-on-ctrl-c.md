@@ -32,7 +32,7 @@ Terminate all background tasks if main script was interrupted by Ctrl+C:
 function term_all_processes() {
 	echo "Sending SIGTERM to all background jobs..."
 	for proc in $(jobs -lp); do
-		echo "PID $proc"
+		echo "Stopping PID $proc"
 		kill -15 $proc
 	done
 	exit 1
