@@ -8,7 +8,7 @@ tags: [logstash,grok,nginx,naxsi]
 
 Here is Logstash config to parse it. I tried making it complaint to [Elastic Common Schema](https://www.elastic.co/guide/en/ecs/current/) - open specification on set of fields to use when storing logs and metrics in Elasticsearch.
 
-```ini
+```shell
 filter {
     # Condition to separate nginx error logs from other logs in your configuration
         grok {
