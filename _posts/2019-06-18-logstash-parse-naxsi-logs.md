@@ -4,7 +4,7 @@ title:  "Parsing Naxsi messages in nginx error log with Logstash"
 tags: [logstash,grok,nginx,naxsi]
 ---
 
-[Naxsi](https://github.com/nbs-system/naxsi) Web Application Firewall by [nbs-system](https://www.nbs-system.com/en/) prints it's error messages to nginx error log.
+[Naxsi](https://github.com/nbs-system/naxsi) open-source Web Application Firewall by [nbs-system](https://www.nbs-system.com/en/) prints it's error messages to nginx error log.
 
 Here is Logstash config to parse it. I tried making it complaint to [Elastic Common Schema](https://www.elastic.co/guide/en/ecs/current/) - open specification on set of fields to use when storing logs and metrics in Elasticsearch.
 
