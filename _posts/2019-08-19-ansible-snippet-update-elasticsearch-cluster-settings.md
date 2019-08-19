@@ -11,6 +11,7 @@ Updates settings only if required, works correctly with check mode.
 Uses curl, because ansible get_url does not support saving request result anywhere except a file.
 
 ```yaml
+{% raw %}
 - name: get elasticsearch settings
   shell: curl --silent "http://127.0.0.1:9200/_cluster/settings"
   args:
@@ -34,4 +35,5 @@ Uses curl, because ansible get_url does not support saving request result anywhe
   loop: "{{ elk_elasticsearch_cluster_settings | dict2items }}"
   when: es_settings['persistent'].{{ item.key }} != "{{ item.value }}"
   tags: elk-elasticsearch-cluster-settings
+{% endraw %}
 ```
