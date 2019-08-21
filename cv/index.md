@@ -87,7 +87,7 @@ Things I used to work with some time ago.
   * Support and develop infrastructure for development, testing and deploy cycles for web applications
 * 2017 - 2019: Freelance
 * 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)(web payment integrator)\
-  System architect:
+  Senior System Engeneer:
   * Development and support of AWS-based infrastructure certified for [PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)(Payment Card Industry Data Security Standard) Compliance Level 1
   * Securing web application processing sensitive financial information
   * Support of development and deploy cycle for rapidly developing web application
