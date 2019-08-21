@@ -41,20 +41,20 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _Configuration management_ | Ansible |
 | _SQL DB_ | MySQL, Percona XtraDB Cluster |
 | _In-memory storage_ | Redis |
-| _Monitoring_ | Zabbix |
+| _Monitoring_ | Zabbix, Elastic Stack(ELK) |
 | _Cloud services_ | AWS |
 | _Log shipping and analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana), rsyslog |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
 | _HIDS_ | OSSEC |
 | _VPN_ | OpenVPN |
 | _Basic networking_ | static routing, VLANs, Firewalls |
-| _Virtualization_ | LXC/LXD |
+| _Virtualization_ | Docker, LXC/LXD |
 
 ## Optional skills. To use this I need to refresh my memory.
 
 Things I used to work with some time ago.
 
-| _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox), Docker |
+| _Virtualization_ | VMWare Server, VMWare ESXi,KVM/libvirt(Proxmox) |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of workstations(2000, XP, Windows 7) |
 | _Operating Systems_ | Windows: Installation, configuration, maintenance of  Windows Server(2003, 2008r2). Terminal services. |
 | _Operating Systems_ | Windows: Active Directory: Group Polices, CIFS, WSUS |
@@ -80,16 +80,21 @@ Things I used to work with some time ago.
 
 # Expirience
 
-* 2017 - now: Freelance
+* 2019 - now: [kassa.com](https://kassa.com)(web payment integrator and other financial instruments for business)\
+  Senior DevOps Engeneer:
+  * Cloud-based infrastructure
+  * Support and develop infrastructure compliant to [PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)(Payment Card Industry Data Security Standard) Level 1
+  * Support and develop infrastructure for development, testing and deploy cycles for web applications
+* 2017 - 2019: Freelance
 * 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)(web payment integrator)\
   System architect:
-  * Development and support of AWS-based infrastructure certified for PCI DSS Compliance Level 1
+  * Development and support of AWS-based infrastructure certified for [PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)(Payment Card Industry Data Security Standard) Compliance Level 1
   * Securing web application processing sensitive financial information
   * Support of development and deploy cycle for rapidly developing web application
 * 2014 - 2015: [Yandex](https://yandex.ru) (search engine, advertizing, "russian google",)\
   Engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
-  * _Signed very strict NDA, can not give any more details_ :(
+  * _Signed very strict NDA, forbiding me to provide any more details_
 * 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(Bank. The company is closed now)\
   Leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
