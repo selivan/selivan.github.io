@@ -1,14 +1,14 @@
 ---
 layout: default
-title:  "CV - Pavel Selivanov, sysadmin/devops"
-description: "CV: Pavel Selivanov, sysadmin/devops, Linux and OpenSource enthusiast"
+title:  "CV - Pavel Selivanov, DevOps/SysOps"
+description: "CV: Pavel Selivanov, DevOps/SysOps, Linux and OpenSource enthusiast"
 redirect_from:
   - /CV
   - /CV/
 ---
 ![photo](/cv/my_profile_picture_small.jpg)
 
-Pavel Selivanov, sysadmin/devops.\\
+Pavel Selivanov, DevOps/SysOps.\\
 Blog: [selivan.github.io](https://selivan.github.io)\\
 Github: <a href="https://github.com/{{ include.username }}"><span class="icon icon--github">{% include icon-github.svg %}</span>selivan</a>
 
