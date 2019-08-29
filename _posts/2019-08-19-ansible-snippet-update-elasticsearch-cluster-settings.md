@@ -8,7 +8,7 @@ Ansible snippet to update Elasticsearch [cluster settings](https://www.elastic.c
 
 Updates settings only if required, works correctly with check mode.
 
-Uses curl, because ansible get_url does not support saving request result anywhere except a file.
+Uses curl, because ansible `get_url` module does not support saving request result anywhere except a file.
 
 ```yaml
 {% raw %}
@@ -26,7 +26,7 @@ Uses curl, because ansible get_url does not support saving request result anywhe
   check_mode: no
   tags: elk-elasticsearch-cluster-settings
 
-- name: set elasticsearch settings
+- name: set elasticsearch settings only if it differs
   shell: >-
     curl --silent -XPUT 'http://127.0.0.1:9200/_cluster/settings' -H 'Content-Type: application/json'
     --data '{ "persistent": { "{{ item.key }}": "{{ item.value }}" } }'
