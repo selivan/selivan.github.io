@@ -80,22 +80,22 @@ Things I used to work with some time ago.
 
 # Expirience
 
-* 2019 - now: [kassa.com](https://kassa.com)(web payment integrator and other financial instruments for business)\
+* 2019 - now: [kassa.com](https://kassa.com)(web payment integrator and other financial instruments for business)\\
   Senior DevOps Engeneer:
   * Cloud-based infrastructure
   * Support and develop infrastructure compliant to [PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)(Payment Card Industry Data Security Standard) Level 1
   * Support and develop infrastructure for development, testing and deploy cycles for web applications
 * 2017 - 2019: Freelance
-* 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)(web payment integrator)\
+* 2015 - 2017: [s.r.o. Unitpay](https://unitpay.ru)(web payment integrator)\\
   Senior System Engeneer:
   * Development and support of AWS-based infrastructure certified for [PCI DSS](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)(Payment Card Industry Data Security Standard) Compliance Level 1
   * Securing web application processing sensitive financial information
   * Support of development and deploy cycle for rapidly developing web application
-* 2014 - 2015: [Yandex](https://yandex.ru) (search engine, advertizing, "russian google",)\
+* 2014 - 2015: [Yandex](https://yandex.ru) (search engine, advertizing, "russian google",)\\
   Engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
   * _Signed very strict NDA, forbiding me to provide any more details_
-* 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(Bank. The company is closed now)\
+* 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(Bank. The company is closed now)\\
   Leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
   * Deploy of central software configuration system Ansible (example: [github.com/selivan/ansible_ipmi_lan_manage](https://github.com/selivan/ansible_ipmi_lan_manage))
@@ -103,21 +103,21 @@ Things I used to work with some time ago.
   * Upgrade of system for automatic installation and configuration of servers for new branch offices
   * Administration of internal services(ticket system OTRS, wiki, jabber)
   * Assigning tasks to technical support engineers and monitoring their performance
-* 2011 - 2013: [Ircos](http://ircos.ru/) (developer of radiofrequency monitoring hardware and software)\
+* 2011 - 2013: [Ircos](http://ircos.ru/) (developer of radiofrequency monitoring hardware and software)\\
   Engineer-programmer:
   * Almost all job duties from "Radix-Tools", because it entirely became new "Ircos" department, staying in the same office.
   * Participated in development and support of distributed radio-monitoring system. Heterogeneous infrastructure: Linux, Windows, Mikrotik, HP. This system was working at [2013 Summer Universiade](https://en.wikipedia.org/wiki/2013_Summer_Universiade).
 * 2012 - 2013: additional job: [Voronezh State University](http://www.vsu.ru/), teacher. Unofficial job, I was replacing official teacher.
   * Course "Operating System GNU/Linux Introduction". Learning materials: [github.com/selivan/gnu_linux_intro](https://github.com/selivan/gnu_linux_intro)
   * Course "Administration of information systems", actually  extension of previous course and networking basics. Learning materials: [github.com/selivan/gnu_linux_intro](https://github.com/selivan/gnu_linux_intro) Video of lectures: [youtube](http://www.youtube.com/playlist?list=PL8RrqJgewWmHQOk7EdKByYD3uUUDk6OUG)
-* 2009 - 2011: [Radix-Tools](http://www.radixtools.ru/) (software development company)\
+* 2009 - 2011: [Radix-Tools](http://www.radixtools.ru/) (software development company)\\
   Engineer-programmer:
   * Administration of network and servers: Linux(Debian, Fedora), Windows 2003
   * Proxy, firewall, VPN
   * Collaboration services: wiki, bug tracker, task tracker, VCS(svn, mercurial), jabber, mail
   * Configuration and support of monitoring system(Zabbix) and backup system(Bacula)
   * Purchase and repair of computers and office equipment
-* 2008 - 2009: [BITS](http://www.b-it-s.ru/) (system integrator)\
+* 2008 - 2009: [BITS](http://www.b-it-s.ru/) (system integrator and technical support)\\
   Support engineer:
   * Administration of Linux servers(basically Suse), Windows 2003
   * Maintenance of Windows(2000, XP) workstations: network, office programs, bank clients, printers/scanners
