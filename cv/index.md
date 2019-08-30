@@ -95,7 +95,7 @@ Things I used to work with some time ago.
   Engineer in operations department of [Yandex.Direct](https://direct.yandex.ru/)
   * Support and development of infrastructure for Yandex.Direct high load web services
   * _Signed very strict NDA, forbiding me to provide any more details_
-* 2013 - 2014: [Zapadni bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(Bank. The company is closed now)\\
+* 2013 - 2014: [Zapadny bank](http://www.cbr.ru/credit/coinfo.asp?id=450000522)(Bank. The company is closed now)\\
   Leading specialist in department of banking telecommunication systems:
   * Support and development of infrastructure for multiple branch offices
   * Deploy of central software configuration system Ansible (example: [github.com/selivan/ansible_ipmi_lan_manage](https://github.com/selivan/ansible_ipmi_lan_manage))
