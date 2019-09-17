@@ -4,6 +4,8 @@ title:  "Auto-resize screen in Virtualbox guest Linux system"
 tags: [virtualbox, desktop, screen resolution]
 ---
 
+**UPDATE**: Also you may look at alternative solution for VBoxSVGA from @vitalyrepin in comments.
+
 To enable auto-resizing screen resolution for Linux guest you should use the VBoxVGA virtual graphics controller(Machine Settings - Display - Graphics Controller).
 
 This is a tricky part, because "Create Virtual Machine" dialog by default chooses the VMSVGA controler for new Linux machines.
