@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Jinja 2 delete item from dictionary inside a template"
+title:  "Jinja 2 delete an item from dictionary inside a template"
 tags: [ jinja, jinja2, ansible ]
 ---
 
