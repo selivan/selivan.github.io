@@ -10,7 +10,7 @@ I couldn't find it in [jinja2 documentation](https://jinja.palletsprojects.com/e
 
 ```jinja
 {% raw %}
-{% set _dummy = mydict.pop('key') %}
+{% set _dummy=mydict.pop('key') %}
 {% if 'key' not in mydict %}
 'key' was deleted
 {% endif %}
