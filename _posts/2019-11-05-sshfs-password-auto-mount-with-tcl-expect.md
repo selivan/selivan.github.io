@@ -81,4 +81,4 @@ ExecStop=/bin/fusermount -u /srv/sftp-mount
 WantedBy=multi-user.target
 ```
 
-`ConditionPathIsMountPoint` prevents from trying to mount over already mounted directory. `RemainAfterExit=true` notifies systemd that service should be considered running after start script has stopped working.
+`ConditionPathIsMountPoint` prevents from trying to mount over already mounted directory. `RemainAfterExit` notifies systemd that service should be considered running after start script has stopped working.
