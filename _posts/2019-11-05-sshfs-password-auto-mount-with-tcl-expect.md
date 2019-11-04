@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Auto-mount sshfs protected by password with tcl expect."
+title:  "Auto-mount sshfs protected by password with tcl expect"
 tags: [ssh,sshfs,sftp,expect]
 ---
 
