@@ -63,7 +63,7 @@ And here is systemd unit to create this mount on system start:
 
 ```ini
 [Unit]
-Description=Mount sshfs for wb with password
+Description=Mount sshfs with password
 After=network.target auditd.service
 ConditionPathIsMountPoint=!/srv/sftp-mount
 
