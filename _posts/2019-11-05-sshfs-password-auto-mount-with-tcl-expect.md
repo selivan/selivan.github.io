@@ -43,6 +43,8 @@ sleep 1
 expect "shell:"
 ```
 
+*Note: script containing cleartext password should not have world-readable permissions.*
+
 First line(sha-bang) tells that this is `expect` script. `-d` option is great for debuging, it makes `expect` verbose about it's actions.
 
 Program output like password prompt may depend on current locale, so it's better to explicitly set the default one with `LC_ALL` variable.
