@@ -71,8 +71,9 @@ ConditionPathIsMountPoint=!/srv/sftp-mount
 Type=oneshot
 RemainAfterExit=true
 
-User=sftp-mount
-Group=sftp-mount
+# Do not run services under root account unless necessary
+#User=sftp-mount
+#Group=sftp-mount
 
 ExecStart=/usr/local/bin/sftp-mount
 ExecStop=/bin/fusermount -u /srv/sftp-mount
