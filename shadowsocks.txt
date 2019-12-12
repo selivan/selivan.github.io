@@ -93,7 +93,7 @@ if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 
 	apt update
-	apt install shadowsocks-libev
+	apt install -y shadowsocks-libev
 
 	# package does not create config directory :(
 	mkdir -p /etc/shadowsocks-libev
