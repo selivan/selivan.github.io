@@ -76,7 +76,7 @@ if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 	apt install -y software-properties-common
 	apt-add-repository -y ppa:max-c-lv/shadowsocks-libev
 	apt update
-	apt install shadowsocks-libev
+	apt install -y shadowsocks-libev
 
 	# package does not create config directory :(
 	mkdir -p /etc/shadowsocks-libev
