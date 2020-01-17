@@ -66,7 +66,8 @@ And here is systemd unit to create this mount on system start:
 ```ini
 [Unit]
 Description=Mount sshfs with password
-After=network.target auditd.service
+After=network-online.target
+Wants=network-online.target
 ConditionPathIsMountPoint=!/srv/sftp-mount
 
 [Service]
@@ -85,3 +86,6 @@ WantedBy=multi-user.target
 ```
 
 `ConditionPathIsMountPoint` prevents from trying to mount over already mounted directory. `RemainAfterExit` notifies systemd that service should be considered running after start script has stopped working.
+
+**UPDATE**:
+`After` and `Wants` instructs systemd to start service after `network-online.target`, that delays execution until network is sufficiently set up. `network.target` indicates that network functionality is available, but does not mean it is fully configured already. Thanks @christeasdale for this update.
