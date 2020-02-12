@@ -28,9 +28,10 @@ sub   rsa4096/4F77679369475BAA 2019-01-11 [S] [expires: 2021-02-03]
 
 If there are multiple subkeys, use the one that expires later. To remove apt key, use the id of public master key(pub).
 
-So together installing apt repository in ansible should look like this:
+So installing apt repository in ansible should look like this:
 
 ```yaml
+{% raw %}
 - name: yarn apt key
   apt_key:
     id: 4F77679369475BAA
@@ -49,6 +50,7 @@ So together installing apt repository in ansible should look like this:
     state: present
     pkg:
       - yarn
+{% endraw %}
 ```
 
 I prefer using separate file in `/etc/apt/trusted.gpg.d` to storing all keys in `/etc/apt/trusted.gpg`. It's more obvious and easier to manage.
