@@ -401,7 +401,7 @@ Can be rotated perfectly well with default scheme: `smth.log` is renamed to `smt
     create 0644 syslog adm
     sharedscripts
     postrotate
-        test -s run/rsyslogd.pid && kill -HUP $(cat /run/rsyslogd.pid)
+        test -s /run/rsyslogd.pid && kill -HUP $(cat /run/rsyslogd.pid)
         # postrotate script should always return 0
         true
     endscript
