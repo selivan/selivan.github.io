@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Removing all unnecessary bloatware from Xiaomi MIUI 11 (Android 9)"
+title:  "Removing all unnecessary bloatware from Xiaomi MIUI 11 (Android 9) without root"
 tags: [android,xiaomi,miui]
 ---
 
