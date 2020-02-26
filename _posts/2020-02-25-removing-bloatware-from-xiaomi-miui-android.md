@@ -4,7 +4,7 @@ title:  "Removing all unnecessary bloatware from Xiaomi MIUI 11 (Android 9) with
 tags: [android,xiaomi,miui]
 ---
 
-*TLDR*: If you just want the list of unnecessary apps on Xiaomi MIUI - it is in the end of the artice.
+*TLDR*: If you just want the list of bloatware app package names on Xiaomi MIUI - it is in the end of the artice.
 
 Xiaomi phones have impressive parameters for given price, but they come with a lot of unnecessary software. It eats battery and memory, sometimes shows annoying advertisement, and may have security issues. You can not uninstall this pre-installed apps like usual ones, and you can not even disable them from settings like in earlier Android versions.
 
