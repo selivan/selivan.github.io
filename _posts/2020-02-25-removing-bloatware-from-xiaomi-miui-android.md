@@ -10,7 +10,7 @@ Here is how to remove or disable unnecessary software without rooting phone. Wor
 
 **NOTE**: I do not guarantee that this instructions won't break your phone, blow it to flaming pieces or cause a sentient machines rebellion against humanity. You were warned.
 
-To manage phone from command-line via USB you need `adb` - Android Debug Bridge, part of Android platform-tools. You can download the recent one for your OS [here](https://developer.android.com/studio/releases/platform-tools).
+To manage phone from command-line via USB you need `adb` - Android Debug Bridge, part of Android platform-tools. You can download the recent one for your OS [here](https://developer.android.com/studio/releases/platform-tools). If you are on Windows, you also need [USB drivers](https://developer.android.com/studio/run/oem-usb.html) for your device.
 
 * ⚙️ Settings - About phone. Tap "MIUI version" multiple times. Now Developer Options are unlocked.
 * ⚙️ Settings - Additional settings - Developer Options. Turn on [x] USB debugging.
