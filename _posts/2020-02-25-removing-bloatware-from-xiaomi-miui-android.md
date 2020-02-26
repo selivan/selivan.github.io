@@ -33,9 +33,12 @@ pm disable-user app.package.name
 pm enable app.package.name
 
 # Uninstall app
+# Sometimes uninstall command may not work without -k option on un-rooted devices
 pm uninstall --user 0 app.package.name
 # Install uninstalled system app
 pm install --user 0 $(pm dump app.package.name | awk '/path/{ print $2 }')
+# Another way to install uninstalled system app
+pm install-existing app.package.name
 ```
 To be able to install apps back, you need to enable
 
@@ -99,4 +102,3 @@ What the @#$%? I just got a fresh phone, didn't install any Facebook apps and I 
 `com.facebook.system`
 * Facebook app manager  
 `com.facebook.appmanager`
-
