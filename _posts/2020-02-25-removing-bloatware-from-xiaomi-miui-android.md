@@ -44,11 +44,11 @@ pm install-existing app.package.name
 ```
 To be able to install apps back, you need to enable
 
-* Settings(⚙️) - Additional settings - Developer Options - [x] Install via USB
+* ⚙️ Settings - Additional settings - Developer Options - [x] Install via USB
 
 On Xiaomi phone to enable this setting you need to sign in into Mi Account. You may just use your Google account to sign into it and then sign-out when you don't need it anymore:
 
-* Settings(⚙️) - Mi Account - sign-out.
+* ⚙️ Settings - Mi Account - sign-out.
 
 Here is a list of Xiaomi and Google apps that I find unnecessary:
 
@@ -104,3 +104,9 @@ What the @#$%? I just got a fresh phone, didn't install any Facebook apps and I 
 `com.facebook.system`
 * Facebook app manager  
 `com.facebook.appmanager`
+
+And some additional steps to disable Xiaomi ads and collecting data:
+
+* ⚙️ Settings - Passwords & Security - Authorization & revocation. Revoke authorization from msa(MIUI System Ads) application.
+* ⚙️ Settings - Passwords & Security - Privacy. Disable "User Experience Program" and "Send diagnostic data automatically".
+* ⚙️ Settings - Passwords & Security - Privacy - Ad services. Disable "Personalized ad recommendations".
