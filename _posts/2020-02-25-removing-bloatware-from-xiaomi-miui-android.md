@@ -56,6 +56,8 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 
 * GetApps - app store like Google Play from Xiaomi. The most annoying one, periodically shows advertisement.  
 `com.xiaomi.mipicks`
+* MIUI Ad Services - also responsible for showing ads.
+`com.miui.msa.global`
 * Cloud  
 `com.miui.cloudservice`
 * Cloud Backup  
@@ -107,6 +109,6 @@ What the @#$%? I just got a fresh phone, didn't install any Facebook apps and I 
 
 And some additional steps to disable Xiaomi ads and collecting data:
 
-* ⚙️ Settings - Passwords & Security - Authorization & revocation. Revoke authorization from msa(MIUI System Ads) application.
+* ⚙️ Settings - Passwords & Security - Authorization & revocation. Revoke authorization from msa(MIUI System Ads) application. Not necessary if you already disabled `com.miui.msa.global`.
 * ⚙️ Settings - Passwords & Security - Privacy. Disable "User Experience Program" and "Send diagnostic data automatically".
 * ⚙️ Settings - Passwords & Security - Privacy - Ad services. Disable "Personalized ad recommendations".
