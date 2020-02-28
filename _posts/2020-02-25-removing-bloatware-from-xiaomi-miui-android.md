@@ -56,7 +56,7 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 
 * GetApps - app store like Google Play from Xiaomi. The most annoying one, periodically shows advertisement.  
 `com.xiaomi.mipicks`
-* MIUI Ad Services - also responsible for showing ads.
+* MIUI Ad Services - also responsible for showing ads.  
 `com.miui.msa.global`
 * Cloud  
 `com.miui.cloudservice`
