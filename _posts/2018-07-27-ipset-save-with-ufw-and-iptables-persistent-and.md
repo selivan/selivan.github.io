@@ -4,7 +4,9 @@ title:  "Persistent ipset for Ubuntu/Debian compatible with ufw and iptables-per
 tags: [iptables,ipset,ufw,iptables-persistent]
 ---
 
-**UPD**: Added optional saving of changed ipset sets on service stop, thanks to the [comment](https://www.reddit.com/r/linuxadmin/comments/92fkn5/persistent_ipset_for_ubuntudebian_compatible_with/e3agg55) by [Derhomp](https://www.reddit.com/user/Derhomp)
+**UPDATE 2018-07-30**: Added optional saving of changed ipset sets on service stop. Thanks to this [comment](https://www.reddit.com/r/linuxadmin/comments/92fkn5/persistent_ipset_for_ubuntudebian_compatible_with/e3agg55) by [Derhomp](https://www.reddit.com/user/Derhomp).
+
+**UPDATE 2020-04-14**: Removed unnecessary `DefaultDependencies=no` line, that prevented ExecStop commands from running on shutdown/reboot. Thanks to @pepoluan.
 
 I could not find any standard solution for saving [ipset]((http://ipset.netfilter.org/)) rules together with iptables. Apparently, everybody who uses them have to create custom shell scripts for this task.
 
@@ -25,8 +27,6 @@ Here is a systemd service to do that:
 ```ini
 [Unit]
 Description=ipset persistent configuration
-#
-DefaultDependencies=no
 Before=network.target
 
 # ipset sets should be loaded before iptables
