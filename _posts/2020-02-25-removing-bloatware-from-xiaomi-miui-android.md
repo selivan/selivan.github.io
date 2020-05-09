@@ -6,6 +6,8 @@ tags: [android,xiaomi,miui]
 
 *TLDR: If you just want the list of bloatware app package names on Xiaomi MIUI - it is in the end of the artice.*
 
+** UPDATE 2020-05-09**: Added SIM Toolkit descripton.
+
 Xiaomi phones have impressive parameters for given price, but they come with a lot of unnecessary software. It eats battery and memory, sometimes shows annoying advertisement, and may have security issues. You can not uninstall this pre-installed apps like usual ones, and you can not even disable them from settings like in earlier Android versions.
 
 Here is how to remove or disable unnecessary software without rooting phone. Works for MIUI 11 (based on Android 9), should work for other phones for recent Android versions. Thanks to [this](https://stackoverflow.com/a/56968886/890863) very useful but severely under-voted stackoverflow answer.
@@ -112,3 +114,12 @@ And some additional steps to disable Xiaomi ads and collecting data:
 * ⚙️ Settings - Passwords & Security - Authorization & revocation. Revoke authorization from msa(MIUI System Ads) application. Not necessary if you already disabled `com.miui.msa.global`.
 * ⚙️ Settings - Passwords & Security - Privacy. Disable "User Experience Program" and "Send diagnostic data automatically".
 * ⚙️ Settings - Passwords & Security - Privacy - Ad services. Disable "Personalized ad recommendations".
+
+**SIM Toolkit**
+
+Some Russian mobile operators use SIM card built-in application to promote paid services. They show pop-up windows with OK/Cancel buttons. Hit the wrong button - and you are suddenly subscribed to some freaking SMS horoscope with daily fee.
+
+You can get rid of it by disabling the 'SIM Toolkit' application: `com.android.stk`.  
+Sometimes for the second SIM card in the phone it is `com.android.stk2`.
+
+Note, that some mobile operators may use SIM toolkit for useful things, and you will lose that functions. In my experience I have never seen anything useful there.
