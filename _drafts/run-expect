@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+
+set env(PS1) "shell:"
+spawn /bin/sh
+expect "shell:"
+send -- "tty\r"
+expect "shell:"
