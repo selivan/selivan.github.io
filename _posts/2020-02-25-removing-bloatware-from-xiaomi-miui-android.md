@@ -6,7 +6,7 @@ tags: [android,xiaomi,miui]
 
 *TLDR: If you just want the list of bloatware app package names on Xiaomi MIUI - it is in the end of the artice.*
 
-**UPDATE 2020-05-09**: Added SIM Toolkit descripton.
+**UPDATE 2020-05-09**: Added SIM Toolkit description.
 
 Xiaomi phones have impressive parameters for given price, but they come with a lot of unnecessary software. It eats battery and memory, sometimes shows annoying advertisement, and may have security issues. You can not uninstall this pre-installed apps like usual ones, and you can not even disable them from settings like in earlier Android versions.
 
