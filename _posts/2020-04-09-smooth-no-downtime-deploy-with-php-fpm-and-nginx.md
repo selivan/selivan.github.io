@@ -110,7 +110,7 @@ set('repository', 'git@gitlab.local:my/example-com.git');
 ... // some other perameters
 ```
 
-And with cachetool:
+And example with cachetool:
 
 `deploy-example-com.php:`
 
