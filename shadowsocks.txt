@@ -69,6 +69,8 @@ USER=user
 [ -e /etc/lsb-release ] && source /etc/lsb-release
 [ -e /etc/os-release ] && source /etc/os-release
 
+[ -e /etc/debian_version ] && export DISTRIB_ID=Debian && export DISTRIB_CODENAME=$(dpkg --status tzdata|grep Provides|cut -f2 -d'-')
+
 # Ubuntu 16.06 Xenial
 if [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu xenial" ]; then
 
@@ -121,6 +123,24 @@ elif [[ "$ID $VERSION_ID" == "centos 7"* || "$ID $VERSION_ID" == "rhel 7"* ]]; t
 	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 
 	systemctl daemon-reload
+	systemctl enable shadowsocks-libev
+	systemctl restart shadowsocks-libev
+
+	print_config "$PASSWORD" "$PORT"
+	
+# Debian 8
+elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Debian jessie" ]; then
+
+	echo "deb http://archive.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
+	apt-get -o Acquire::Check-Valid-Until=false update
+	apt-get -t jessie-backports install -y shadowsocks-libev
+
+	# package does not create config directory :(
+	mkdir -p /etc/shadowsocks-libev
+	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
+
+	open_ufw_port "$PORT"
+
 	systemctl enable shadowsocks-libev
 	systemctl restart shadowsocks-libev
 
