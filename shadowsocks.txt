@@ -4,8 +4,7 @@
 # Contributor: Octavian Dodita(CentOS 7, RHEL 7)
 
 function get_external_address() {
-	local addr=$( timeout 3 dig +short myip.opendns.com @resolver1.opendns.com || \
-	timeout 3 curl -s http://whatismyip.akamai.com/ || \
+	local addr=$( timeout 3 curl -s http://whatismyip.akamai.com/ || \
 	timeout 3 curl -s http://ifconfig.io/ip || \
 	timeout 3 curl -s http://ipecho.net/plain || \
 	timeout 3 curl -s http://ident.me/
