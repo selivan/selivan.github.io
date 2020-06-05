@@ -133,7 +133,7 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Debian jessie" ]; then
 	echo "deb http://archive.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
 	echo "deb http://archive.debian.org/debian jessie-backports-sloppy main" | tee -a /etc/apt/sources.list
 	apt-get -o Acquire::Check-Valid-Until=false update
-	apt-get -t oldstable-backports-sloppy install -y shadowsocks-libev
+	aptitude -t jessie-backports-sloppy install --add-user-tag shadowsocks -y shadowsocks-libev
 
 	# package does not create config directory :(
 	mkdir -p /etc/shadowsocks-libev
