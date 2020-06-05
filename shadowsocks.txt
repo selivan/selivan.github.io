@@ -139,7 +139,8 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Debian jessie" ]; then
 	mkdir -p /etc/shadowsocks-libev
 	generate_config /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
 
-	open_ufw_port "$PORT"
+	ufw allow "$PORT"/tcp
+	ufw allow "$PORT"/udp
 
 	systemctl enable shadowsocks-libev
 	systemctl restart shadowsocks-libev
