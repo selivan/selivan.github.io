@@ -1,7 +1,7 @@
 #!/bin/bash
 # Homepage: selivan.github.io/socks
 # Author: Pavel Selivanov
-# Contributor: Octavian Dodita(CentOS 7, RHEL 7)
+# Contributors: Octavian Dodita(CentOS 7, RHEL 7), Konstantin Kuchinin(Debian 8)
 
 function get_external_address() {
 	local addr=$( timeout 3 curl -s http://whatismyip.akamai.com/ || \
@@ -157,6 +157,7 @@ else
 	echo "- Ubuntu 18.04 Bionic"
 	echo "- CentOS 7"
 	echo "- RHEL 7"
+	echo "- Debian 8"
 	exit 1
 
 fi
