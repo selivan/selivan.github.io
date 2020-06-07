@@ -204,6 +204,28 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 	echo "User: $USER"
 	echo "Password: $PASSWORD"
 
+# Ubuntu 20.04 Focal
+elif [ "$ID $VERSION_CODENAME" = "ubuntu focal" ]; then
+
+	apt update
+	apt install -y dante-server libpam-pwdfile openssl
+
+	generate_password_file /etc/danted.passwd "$USER" "$PASSWORD"
+
+	generate_pam /etc/pam.d/sockd /etc/danted.passwd
+
+	generate_config_v14 /etc/danted.conf "$IFACE" "$PORT"
+
+	open_ufw_port "$PORT"
+
+	systemctl restart danted.service
+
+	echo "Your socks proxy configuration:"
+	echo "Address: $( get_external_address )"
+	echo "Port: $PORT"
+	echo "User: $USER"
+	echo "Password: $PASSWORD"
+
 # CentOS 7 and Oracle Linux 7.5
 elif [ "$ID $VERSION_ID" = "ol 7.5" -o "$ID $VERSION_ID" = "centos 7" ]; then
 
@@ -244,6 +266,7 @@ else
 	echo "Supported distributions:"
 	echo "- Ubuntu 16.04 Xenial"
 	echo "- Ubuntu 18.04 Bionic"
+	echo "- Ubuntu 20.04 Focal"
 	echo "- Oracle Linux 7.5"
 	echo "- Centos 7"
 	exit 1
