@@ -29,6 +29,23 @@ cat > "$1" <<EOF
 EOF
 }
 
+# args: file port password
+# for more recent versions of shadowsocks
+function generate_config_v2() {
+# "fast_open": true reduces connection latency. But it doesn't work on OpenVZ, on old kernels, and on kernels where this feature is disabled
+cat > "$1" <<EOF
+{
+    "server":["::", "0.0.0.0"],
+    "mode": "tcp_and_udp",
+    "server_port":$2,
+    "local_port":1080,
+    "password":"$3",
+    "timeout":60,
+    "method":"chacha20-ietf-poly1305"
+}
+EOF
+}
+
 # args: method password
 function generate_hash() {
 	echo -n "$1":"$2" | base64
@@ -39,6 +56,15 @@ function open_ufw_port() {
 	# Open port in firewall if required
 	if type ufw > /dev/null; then
 	        ufw allow "$PORT"/tcp
+	fi
+}
+
+# args: port
+function open_ufw_port_tcp_and_udp() {
+	# Open port in firewall if required
+	if type ufw > /dev/null; then
+	        ufw allow "$PORT"/tcp
+			ufw allow "$PORT"/udp
 	fi
 }
 
@@ -106,6 +132,21 @@ elif [ "$DISTRIB_ID $DISTRIB_CODENAME" = "Ubuntu bionic" ]; then
 
 	print_config "$PASSWORD" "$PORT"
 
+# Ubuntu 20.04 Focal
+elif [ "$ID $VERSION_CODENAME" = "ubuntu focal" ]; then
+
+	apt update
+	apt install -y shadowsocks-libev
+
+	generate_config_v2 /etc/shadowsocks-libev/config.json "$PORT" "$PASSWORD"
+
+	open_ufw_port_tcp_and_udp "$PORT"
+
+	systemctl enable shadowsocks-libev
+	systemctl restart shadowsocks-libev
+
+	print_config "$PASSWORD" "$PORT"
+
 # CentOS 7 and RHEL 7
 # Example of /etc/os-release for RHEL: https://linuxconfig.org/how-to-check-redhat-version#h5-5-check-release-files
 elif [[ "$ID $VERSION_ID" == "centos 7"* || "$ID $VERSION_ID" == "rhel 7"* ]]; then
@@ -133,6 +174,7 @@ else
 	echo "Supported distributions:"
 	echo "- Ubuntu 16.04 Xenial"
 	echo "- Ubuntu 18.04 Bionic"
+	echo "- Ubuntu 20.04 Focal"
 	echo "- CentOS 7"
 	echo "- RHEL 7"
 	exit 1
