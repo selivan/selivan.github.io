@@ -45,10 +45,11 @@ Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba
 | _Cloud services_ | AWS |
 | _Log shipping and analysis_ | Elastic Stack(Elasticsearch, Logstash, Kibana), rsyslog |
 | _Security_ | Developing and maintaining PCI DSS Level 1 complaint infrastructure |
-| _HIDS_ | OSSEC |
+| _HIDS_ | OSSEC, [Wazuh](https://wazuh.com/) |
 | _VPN_ | OpenVPN |
-| _Basic networking_ | static routing, VLANs, Firewalls |
-| _Virtualization_ | Docker, LXC/LXD |
+| _Basic networking_ | static routing, VLANs, Firewalls: iptables |
+| _Virtualization, cintainers_ | LXC/LXD, Docker |
+| _CI/CD_ | Gitlab |
 
 ## Optional skills. To use this I need to refresh my memory.
 
