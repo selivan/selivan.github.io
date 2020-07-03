@@ -80,6 +80,9 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 `com.miui.android.fashiongallery`
 * Default Browser - not necessary if you use Firefox or Chrome  
 `com.android.browser`
+* Mi Bug Report - if you not using this features
+`com.miui.bugreport`
+`com.miui.miservice`
 
 **WARNING**: you should not uninstall or disable "Xiaomi Find Device" `com.xiaomi.finddevice`. On next reboot your phone will enter endless loop, and after some time it will ask to erase device and start over. Guess how I learned that?
 
@@ -97,6 +100,10 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 `com.google.android.apps.tachyon`
 * Google Lens  
 `com.google.ar.lens`
+* Google search box - I prever use firefox or widget
+`com.google.android.googlequicksearchbox`
+* Digital wellbeing
+`com.google.android.apps.wellbeing`
 
 **Facebook**:
 
@@ -108,6 +115,14 @@ What the @#$%? I just got a fresh phone, didn't install any Facebook apps and I 
 `com.facebook.system`
 * Facebook app manager  
 `com.facebook.appmanager`
+
+**Default Android Apps**
+
+* Wallpaper live picker
+`com.android.wallpaper.livepicker`
+* Photo table
+`com.android.dreams.phototable
+
 
 And some additional steps to disable Xiaomi ads and collecting data:
 
