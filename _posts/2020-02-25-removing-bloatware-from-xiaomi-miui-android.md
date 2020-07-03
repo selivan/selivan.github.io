@@ -6,7 +6,8 @@ tags: [android,xiaomi,miui]
 
 *TLDR: If you just want the list of bloatware app package names on Xiaomi MIUI - it is in the end of the artice.*
 
-**UPDATE 2020-05-09**: Added SIM Toolkit description.
+**UPDATE 2020-05-09**: Added SIM Toolkit description.  
+**UPDATE 2020-07-04** Added some apps, thanks to @thecrazyblack.
 
 Xiaomi phones have impressive parameters for given price, but they come with a lot of unnecessary software. It eats battery and memory, sometimes shows annoying advertisement, and may have security issues. You can not uninstall this pre-installed apps like usual ones, and you can not even disable them from settings like in earlier Android versions.
 
@@ -100,7 +101,7 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 `com.google.android.apps.tachyon`
 * Google Lens  
 `com.google.ar.lens`
-* Google search box - I prever use firefox or widget
+* Google search box - I prever to use a browser or widget
 `com.google.android.googlequicksearchbox`
 * Digital wellbeing
 `com.google.android.apps.wellbeing`
