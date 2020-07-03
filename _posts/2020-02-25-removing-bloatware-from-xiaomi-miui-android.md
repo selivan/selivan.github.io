@@ -55,6 +55,8 @@ On Xiaomi phone to enable this setting you need to sign in into Mi Account. You 
 
 Here is a list of Xiaomi and Google apps that I find unnecessary:
 
+**WARNING**: you should not uninstall or disable "Xiaomi Find Device" `com.xiaomi.finddevice`. On next reboot your phone will enter endless loop, and after some time it will ask to erase device and start over. Guess how I learned that?
+
 **Xiaomi**:
 
 * GetApps - app store like Google Play from Xiaomi. The most annoying one, periodically shows advertisement.  
@@ -75,7 +77,7 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 `com.xiaomi.midrop`
 * Mi YellowPages  
 `com.miui.yellowpage`
-* MIUI Gallery - if you use another gallery app  
+* MIUI Gallery - if you use another gallery app *WARNING*: @nihalanand697 reports disabling it isn't safe.  
 `com.miui.gallery`
 * Wallpaper Carousel  
 `com.miui.android.fashiongallery`
@@ -84,8 +86,6 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 * Mi Bug Report - if you not using this features
 `com.miui.bugreport`
 `com.miui.miservice`
-
-**WARNING**: you should not uninstall or disable "Xiaomi Find Device" `com.xiaomi.finddevice`. On next reboot your phone will enter endless loop, and after some time it will ask to erase device and start over. Guess how I learned that?
 
 **Google**:
 
