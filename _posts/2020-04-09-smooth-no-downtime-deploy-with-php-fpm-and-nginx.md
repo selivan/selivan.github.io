@@ -39,7 +39,7 @@ root $root_dir;
 `/var/www/example.com/root_dir.nginx.conf:`
 
 ```
-set $root_dir /var/www/example.com/2020-05-09-12-00-00/public;
+set $root_dir /var/www/example.com/2020-04-08-15-00-00/public;
 ```
 
 File `root_dir.nginx.conf` is updated on deploy, then nginx is reloaded. Nginx reload is done very carefully, all requests in progress are completed by old workers with the old config version, pointing to the old application version. Users won't experience any errors or slowdown.
