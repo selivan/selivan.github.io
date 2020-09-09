@@ -16,11 +16,11 @@ After deploying the application(with [deployer](https://deployer.org) or whateve
 /var/www/example.com:
 
 releases/
-    2020-05-08-17-00-00/
-    2020-05-09-12-00-00/
+    2020-04-08-12-00-00/
+    2020-04-08-15-00-00/
 shared/
     logs/
-current -> releases/2020-05-09-12-00-00
+current -> releases/2020-04-08-15-00-00
 ```
 
 Using the `current` symlink directly in nginx config may cause some troubles.
