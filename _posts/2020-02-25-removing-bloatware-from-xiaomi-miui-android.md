@@ -122,7 +122,7 @@ What the @#$%? I just got a fresh phone, didn't install any Facebook apps and I 
 * Wallpaper live picker
 `com.android.wallpaper.livepicker`
 * Photo table
-`com.android.dreams.phototable
+`com.android.dreams.phototable`
 
 
 And some additional steps to disable Xiaomi ads and collecting data:
