@@ -3,11 +3,11 @@ layout: post
 title:  "Console autologin for Ubuntu with systemd(15.04 and higher)"
 tags: [autologin,console,ubuntu,systemd]
 ---
-`agetty` version from `util-linux` in Ubuntu Xenial has option `--autologin`, but for some reason it doesn't work for me: creates empty non-responsive terminal. So let's use `mingetty` instead.
+`agetty` version from `util-linux` starting from Ubuntu 16.04 has option `--autologin`, but for some reason it doesn't work for me: creates empty non-responsive terminal. So let's use `mingetty` instead.
 
 `apt install mingetty`
 
-Use `systemctl edit getty@tty1` or manually edit `/etc/systemd/system/getty@tty1.service.d/override.conf` and run `systemctl deamon-reload`.
+Use `systemctl edit getty@tty1` or manually edit `/etc/systemd/system/getty@tty1.service.d/override.conf` and run `systemctl daemon-reload`.
 
 ```ini
 [Service]

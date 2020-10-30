@@ -162,7 +162,7 @@ if $programname startswith "haproxy" then -/var/log/haproxy.log
 &~
 ```
 
-Config check command: `rsyslogd -N 1 -f /etc/rsyslog.conf`. More examples: [one](http://www.rsyslog.com/doc/v8-stable/configuration/examples.html), [two](http://wiki.rsyslog.com/index.php/Configuration_Samples).
+Config check command: `rsyslogd -N 1 -f /etc/rsyslog.conf`. More examples: [here](https://www.rsyslog.com/doc/v8-stable/configuration/examples.html).
 
 ## Client: forward logs with file names
 
