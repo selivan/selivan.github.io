@@ -6,7 +6,7 @@ tags: [ansible,ssh,bastion]
 
 Sometimes due to network configuration or security reasons you can't access a host directly, but should use intermediate host, so-called bastion or jump host.
 
-My presious article on thos topic, using ssh config file: [Using Ansible with bastion host](/2018/01/29/ansible-ssh-bastion-host.html).
+My presious article on this topic, using ssh config file: [Using Ansible with bastion host](/2018/01/29/ansible-ssh-bastion-host.html).
 
 Another option is using variables. This approach is more flexible: it is easier to define different bastion hosts for different hosts and groups with variables.
 
