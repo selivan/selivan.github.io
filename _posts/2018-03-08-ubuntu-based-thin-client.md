@@ -5,6 +5,8 @@ tags: [ubuntu,pxe,thinclient]
 comments_by_disqus: true
 ---
 
+**NEWS**: Check out new [20.04](https://github.com/selivan/thinclient/tree/20.04) branch with Ubuntu 20.04 Focal and an option to use VMWare Horizon. It still needs some polishing, though.
+
 *This article in russian: [habrahabr.ru/post/350780](https://habrahabr.ru/post/350780/)*
 
 ![logo ubuntu plus windows](/images/2018-03-08-ubuntu-based-thin-client/ubuntu-and-windows-250x250.jpg)
