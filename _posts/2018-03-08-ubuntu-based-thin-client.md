@@ -15,7 +15,7 @@ comments_by_disqus: true
 
 ## History
 
-Far in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember it right mounting root file system over network did not work very well in large offices with weak network. My good friend [@efim-a-efim](https://github.com/efim-a-efim) created first version of thin client, that could boot completely into RAM, without requiring something to be mounted over network.
+Long ago in 2013 one bank used custom thin clients based on [DisklessUbuntu](https://help.ubuntu.com/community/DisklessUbuntuHowto). Thay had some problems, if I remember it right, mounting root file system over network did not work very well in large offices with laggy network. My good friend [@efim-a-efim](https://github.com/efim-a-efim) created first version of thin client, that could boot completely into RAM, without mounting anything over network.
 
 Then I worked with that project. It had a lot of custom features, specific for our use case. Then the bank was closed(it's license was revoked),  source codes for the client were moved to my github: [thunclient](https://github.com/selivan/thinclient). A couple of times I modified it for a bit of money.
 
