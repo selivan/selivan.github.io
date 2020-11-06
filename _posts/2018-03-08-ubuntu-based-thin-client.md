@@ -5,7 +5,7 @@ tags: [ubuntu,pxe,thinclient]
 comments_by_disqus: true
 ---
 
-**NEWS**: Check out new [20.04](https://github.com/selivan/thinclient/tree/20.04) branch with Ubuntu 20.04 Focal and an option to use VMWare Horizon. It still needs some polishing, though.
+**NEWS**: [Now](https://github.com/selivan/thinclient/commit/2e0ad63404027dfdcdb0b997a0b6c7d382048f86) this project supports Ubuntu 20.04 Focal Fossa (LTS release) and offers an option to use VMWare Horizon, besides FreeRDP.
 
 *This article in russian: [habrahabr.ru/post/350780](https://habrahabr.ru/post/350780/)*
 
