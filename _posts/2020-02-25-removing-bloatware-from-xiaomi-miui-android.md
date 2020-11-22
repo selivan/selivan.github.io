@@ -4,7 +4,7 @@ title:  "Removing all unnecessary bloatware from Xiaomi MIUI 11/12 (Android 9/10
 tags: [android,xiaomi,miui]
 ---
 
-*TLDR: If you just want the list of bloatware app package names on Xiaomi MIUI - it is in the end of the artice.*
+*TLDR: If you just want the list of bloatware app package names for Xiaomi MIUI - scroll to the end of the artice.*
 
 **UPDATE 2020-05-09**: Added SIM Toolkit description.  
 **UPDATE 2020-07-04** Added some apps, thanks to @thecrazyblack.  
