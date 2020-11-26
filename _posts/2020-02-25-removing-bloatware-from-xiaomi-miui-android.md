@@ -8,7 +8,7 @@ tags: [android,xiaomi,miui]
 
 **UPDATE 2020-05-09**: Added SIM Toolkit description.  
 **UPDATE 2020-07-04** Added some apps, thanks to @thecrazyblack.  
-**UPDATE 2020-11-23** Updated list of apps, thanks to new comments by @toast254, @swiesmann, @MarcelloDM.  
+**UPDATE 2020-11-23** Updated list of apps, thanks to new comments by @toast254, @swiesmann, @MarcelloDM, @satnited.
 
 Xiaomi phones have impressive parameters for given price, but they come with a lot of unnecessary software. It eats battery and memory, sometimes shows annoying advertisement, and may have security issues. You can not uninstall this pre-installed apps like usual ones, and you can not even disable them from settings like in earlier Android versions.
 
@@ -65,6 +65,7 @@ Here is a list of Xiaomi and Google apps that I find unnecessary:
 | `com.xiaomi.finddevice` | Result: endless boot loop, some time after it will ask to erase the phone and start over. Guess how I learned that? |
 | `com.miui.securitycenter` | Result: phone reboots only in recovery mode |
 | `com.android.contacts` | Result: you lose the phone icon |
+| `com.mi.android.globalminusscreen` | Xiaomi App Vault. Result: if you are logged in with Mi account, device becomes locked, to unlock you should bring it to Xiaomi Services Center. Settings -> Home Screen crashes Settings app. See comment by @satnited. |
 
 ---
 **Xiaomi**:
