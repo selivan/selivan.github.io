@@ -10,7 +10,7 @@ Ansible [apt_key](https://docs.ansible.com/ansible/latest/modules/apt_key_module
 OpenPGP key fingerprint is usually written as 10 groups of 4 hexadecimal characters(160-bit value): `72EC F46A 56B4 AD39 C907  BBB7 1646 B01B 86E5 0310`. OpenPGP long key id is last 16 characters(4 groups), and short key id is last 8 characters(2 groups). Short keys are [not recommended](https://security.stackexchange.com/questions/74009/what-is-an-openpgp-key-id-collision) for security reasons.
 
 ```
-curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | tee yarn.gpg | gpg --keyid-format long
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | tee yarn.asc | gpg --keyid-format long
 
 gpg: WARNING: no command supplied.  Trying to guess what you mean ...
 pub   rsa4096/1646B01B86E50310 2016-10-05 [SC]
@@ -34,7 +34,7 @@ So installing apt repository in ansible should look like this:
 - name: yarn apt key
   apt_key:
     id: 4F77679369475BAA
-    data: "{{ lookup('file', 'yarn.gpg') }}"
+    data: "{{ lookup('file', 'yarn.asc') }}"
     keyring: /etc/apt/trusted.gpg.d/yarn.gpg
 
 - name: yarn apt repository
