@@ -26,7 +26,7 @@ Type=oneshot
 RemainAfterExit=True
 # Ugly workaround for not working properly network-online.target
 ExecStart=sh -c "while ! ip r | grep ^default; do sleep 0.5; done"
-# -t <timeout in seconds>  tinmeout after that chronyd will exit, even if clock is not syncronized
+# -t <timeout in seconds>  timeout after which chronyd will exit even if clock is not syncronized
 ExecStart=/usr/sbin/chronyd -q -t 30
 
 [Install]
