@@ -152,8 +152,8 @@ function open_firewalld_port() {
 }
 
 IFACE=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f5)
-USER=user
 
+[ -z "$USER" ] && export USER=user
 [ -z "$PORT" ] && export PORT=8080
 [ -z "$PASSWORD" ] && export PASSWORD=$( cat /dev/urandom | tr --delete --complement 'a-z0-9' | head --bytes=10 )
 
