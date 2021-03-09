@@ -18,7 +18,7 @@ filter {
             # From most specific pattern to least specific
             match => {
                 "message" => [
-                    "(?<nginx.error.time>%{YEAR}/%{MONTHNUM}/%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}) \[%{WORD:log.level}\] %{POSINT:process.pid:int}#%{NUMBER:process.thread.id:int}\: \*%{NUMBER:nginx.error.connection_id:int} (?<message>(?<[@metadata][naxsi_log_type]>NAXSI_EXLOG|NAXSI_FMT): %{GREEDYDATA:[@metadata][naxsi_message]}), client: %{IP:nginx.error.client}, server: %{GREEDYDATA:nginx.error.server}, request: \"(?<request>[^\"]*)\", host: \"%{HOSTNAME:nginx.error.host}(:{INT:nginx.error.host_port:int})?\"(, referrer: \"(?<nginx.error.referrer>[^\"]*)\")?",
+                    "(?<nginx.error.time>%{YEAR}/%{MONTHNUM}/%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}) \[%{WORD:log.level}\] %{POSINT:process.pid:int}#%{NUMBER:process.thread.id:int}\: \*%{NUMBER:nginx.error.connection_id:int} (?<message>(?<[@metadata][naxsi_log_type]>NAXSI_EXLOG|NAXSI_FMT): %{GREEDYDATA:[@metadata][naxsi_message]}), client: %{IP:nginx.error.client}, server: %{GREEDYDATA:nginx.error.server}, request: \"(?<request>[^\"]*)\", host: \"%{HOSTNAME:nginx.error.host}(:{NONNEGINT:nginx.error.host_port:int})?\"(, referrer: \"(?<nginx.error.referrer>[^\"]*)\")?",
 
                     "(?<nginx.error.time>%{YEAR}/%{MONTHNUM}/%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}) \[%{WORD:log.level}\] %{POSINT:process.pid:int}#%{NUMBER:process.thread.id:int}\: \*%{NUMBER:nginx.error.connection_id:int} %{GREEDYDATA:message}, client: %{IP:nginx.error.client}, server: %{GREEDYDATA:nginx.error.server}, request: \"%{GREEDYDATA:request}\", upstream: \"%{GREEDYDATA:nginx.error.upstream}\"",
 
