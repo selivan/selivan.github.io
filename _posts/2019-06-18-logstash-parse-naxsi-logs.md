@@ -4,7 +4,7 @@ title:  "Parsing Naxsi messages in nginx error log with Logstash"
 tags: [logstash,grok,nginx,naxsi]
 ---
 
-**UPDATE 2021-03-10**: Catch `nginx.error.server` if server name is set by a regexp. Catch `nginx.error.host_port` if port number is present after `nginx.error.host`. Thanks to contribution by Thomas Basilien.
+**UPDATE 2021-03-10**: Catch `nginx.error.server` if server name is set by a regexp. Catch `nginx.error.host_port` if port number is present after `nginx.error.host`. Thanks to contribution by Thomas Basilien and Jean Lutz.
 
 [Naxsi](https://github.com/nbs-system/naxsi) open-source Web Application Firewall by [nbs-system](https://www.nbs-system.com/en/) prints it's error messages to nginx error log.
 
