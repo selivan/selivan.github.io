@@ -24,7 +24,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=sh -c "while ! ip r | grep ^default; do echo waiting for default route to appear; sleep 0.5; done"
+ExecStart=sh -c "while ! ip -4 r | grep ^default; do echo waiting for ipv4 default route to appear; sleep 0.5; done"
 ExecStart=<actual service here>
 ```
 
