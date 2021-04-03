@@ -5,3 +5,10 @@
 [Liquid markup](https://shopify.github.io/liquid/basics/introduction/)
 
 [Jekyll additional Liquid tags](https://jekyllrb.com/docs/liquid/tags/)
+
+[Rouge highlighter available languages](http://rouge.jneen.net/)
+```
+{% highlight shell %}
+
+{% endhighlight %}
+```
