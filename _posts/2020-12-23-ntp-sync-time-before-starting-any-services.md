@@ -8,7 +8,7 @@ Servers often have wrong clock on startup. NTP services, like `ntp`, `chrony` an
 
 In my experience, AWS instances may have clock error up to 5 minutes on startup. Server writing log timestamps 5 minutes in the past or in the future is not always a good idea.
 
-Solution is to force NTP time syncronization once before starting any other services. I prefer to use `chrony`: it can act both as always runnig NTP client and one-time syncronization tool; `chronyc` clearly reports syncronization status, making it easy to monitor; it is [recommended by AWS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html).
+Solution is to force NTP time syncronization once before starting any other services. I prefer to use [chrony](https://chrony.tuxfamily.org/): it can act both as always runnig NTP client and one-time syncronization tool; `chronyc` clearly reports syncronization status, making it easy to monitor; it is [recommended by AWS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html).
 
 All other services in `multi-user.target` will start after time is syncronized or failed to syncronize after given timeout.
 
