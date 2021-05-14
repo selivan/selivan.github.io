@@ -8,6 +8,8 @@ tags: [iptables,ipset,ufw,iptables-persistent]
 
 **UPDATE 2020-04-14**: Removed unnecessary `DefaultDependencies=no` line, that prevented ExecStop commands from running on shutdown/reboot. Thanks to @pepoluan.
 
+**UPDATE 2021-05-14**: Add `-exist` option, allowing correct service restart when ip sets are already in use by iptables. Thanks to @stefanlasiewski.
+
 I could not find any standard solution for saving [ipset]((http://ipset.netfilter.org/)) rules together with iptables. Apparently, everybody who uses them have to create custom shell scripts for this task.
 
 There are two most popular solutions for managing firewall in Ubuntu/Debian:
@@ -39,7 +41,7 @@ ConditionFileNotEmpty=/etc/iptables/ipset
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/sbin/ipset restore -file /etc/iptables/ipset
+ExecStart=/sbin/ipset restore -exist -file /etc/iptables/ipset
 # Uncomment to save changed sets on reboot
 # ExecStop=/sbin/ipset save -file /etc/iptables/ipset
 ExecStop=/sbin/ipset flush
