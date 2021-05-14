@@ -8,7 +8,7 @@ tags: [iptables,ipset,ufw,iptables-persistent]
 
 **UPDATE 2020-04-14**: Removed unnecessary `DefaultDependencies=no` line, that prevented ExecStop commands from running on shutdown/reboot. Thanks to @pepoluan.
 
-**UPDATE 2021-05-14**: Add `-exist` option, allowing correct service restart when ip sets are already in use by iptables. Thanks to @stefanlasiewski.
+**UPDATE 2021-05-14**: Added `-exist` option, allowing correct service restart when ip sets are already in use by iptables. Thanks to @stefanlasiewski.
 
 I could not find any standard solution for saving [ipset]((http://ipset.netfilter.org/)) rules together with iptables. Apparently, everybody who uses them have to create custom shell scripts for this task.
 
