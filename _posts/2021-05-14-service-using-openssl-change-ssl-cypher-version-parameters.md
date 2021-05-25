@@ -8,7 +8,7 @@ Sometimes you need to change TLS/SSL parameters for a service using `libssl` lib
 
 `libssl` and applications using it take configuration parameters from configuration file set by environment variable `OPENSSL_CONF` or from default file `/etc/ssl/openssl.cnf`. 
 
-Openssl documentation is not the easiest one to read, but `man 5ssl config` and some Google got me what I wanted.
+Openssl documentation is not the easiest one to read, but `man 5ssl config` and some googling got me what I wanted.
 
 `/etc/ssl/openssl.no-tls13.cnf`:
 
