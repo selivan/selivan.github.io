@@ -4,7 +4,7 @@ title:  "Change TLS/SSL version and cypher parameters for Linux service using op
 tags: [ openssl, ssl, tls, systemd ]
 ---
 
-Sometimes you need to change TLS/SSL parameters for a service using `libssl` from [openssl](https://www.openssl.org/), but the service config does not accept that parameters. In this example, I had to change rsyslog forwarder parameters to send logs to the target that wasn't playing nice with TLS 1.3 and modern encryption protocols.
+Sometimes you need to change TLS/SSL parameters for a service using `libssl` library from [openssl](https://www.openssl.org/), but the service config does not accept that parameters. In this example, I had to change rsyslog forwarder parameters to send logs to the target that wasn't playing nice with TLS 1.3 and modern encryption protocols.
 
 `libssl` and applications using it take configuration parameters from configuration file set by environment variable `OPENSSL_CONF` or from default file `/etc/ssl/openssl.cnf`. 
 
