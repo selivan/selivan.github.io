@@ -8,7 +8,7 @@ I was surprised to not get instant answer googling "letsencrypt automatically ge
 
 So here it is, to save 5 minutes of your time.
 
-Generates bundle(fullchain + privkey) certificates for everything in `/etc/letserncrypt/live/*`, does not update generated files if not necessary.
+Generates bundle(fullchain + privkey) certificates for everything in `/etc/letserncrypt/live/*/fullchain_and_privkey.pem`, does not update generated files if not necessary.
 
 *NOTE*: renew hooks are not triggered when you run `certbot certonly`, so for the first time you should run it manually.
 
