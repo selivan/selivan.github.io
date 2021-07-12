@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "WSL fix using random private subnets"
-tags: [ Windows, WSL, ]
+tags: [ Windows, WSL ]
 ---
 
 WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other weird magic.
@@ -49,8 +49,8 @@ Create New Task
 
 * General
     * Name: WSL-subnet-fix
-    * (*) Run only when user is logged in
-    * [x] Run with highest privileges
+    * `(*)` Run only when user is logged in
+    * `[x]` Run with highest privileges
 * Triggers
     * At log on: Specific user: your user
 * Actions
