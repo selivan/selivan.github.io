@@ -12,7 +12,7 @@ Unfortunately, it has one serious problem: subnet for WSL is selected randomly f
 
 Funny thing, VirtualBox selects random private subnet for host-only networking adapters. But these subnets are fixed after initial creation and easily can be changed later. Newbies are happy, advanced users are happy, and nobody is having problems. But 
 
-WSL selects random private subnet on first start, subnet will not be changed after `wsl --shutdown`, only reboot will help. But it does ignore subnets that are already in use. In comments to [the issue](https://github.com/microsoft/WSL/issues/4467) people proposed to create dummy network interfaces using all subnets except what we need WSL to start using. @jgregmac made this script: https://github.com/jgregmac/hyperv-fix-for-devs
+WSL selects random private subnet on first start, subnet will not be changed after `wsl --shutdown`, only reboot will help. But it does ignore subnets that are already in use. In comments to [the issue](https://github.com/microsoft/WSL/issues/4467) people proposed to create dummy network interfaces using all subnets except what we need WSL to start using. @jgregmac made this script: [github.com/jgregmac/hyperv-fix-for-devs](https://github.com/jgregmac/hyperv-fix-for-devs).
 
 For some reason it does not work for me, so I made my own version. It brings up dummy network interfaces, starts WSL and then brings them down.
 
