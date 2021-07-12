@@ -6,11 +6,11 @@ tags: [ Windows, WSL ]
 
 WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other weird magic.
 
-Unfortunately, it has one serious problem: subnet for WSL is selected randomly from all available private subnets, preferably from `172.16.0.0/12` range. So you turn on your notebook, start WSL, then connect to work VPN and oops - that subnet is already used 🤷‍♂️.
+Unfortunately, it has one serious problem: subnet for WSL is selected randomly from all available private subnets, preferably from `172.16.0.0/12` range. So you turn on your notebook, start WSL, then connect to your work VPN and oops - that subnet is already used 🤷‍♂️.
 
-[Issue on Github](https://github.com/microsoft/WSL/issues/4467) to add subnet configuration support in WSL is open since 2019. People in comments contacted developers and their position is that this  by design, to make WSL networking transparent for newbies, and that won't be changed.
+[Issue on Github](https://github.com/microsoft/WSL/issues/4467) to add subnet configuration support in WSL is opened since 2019. People in comments contacted developers and their position is that this  by design, to make WSL networking transparent for newbies, and this won't be changed.
 
-Funny thing, VirtualBox selects random private subnet for host-only networking adapters. But these subnets are fixed after initial creation and easily can be changed later. Newbies are happy, advanced users are happy, and nobody is having problems.
+Funny thing, VirtualBox selects random private subnet for host-only networking adapters. But these subnets are fixed after initial creation and easily can be changed later. Newbies are happy, advanced users are happy, and nobody is having problems. But 
 
 WSL selects random private subnet on first start, subnet will not be changed after `wsl --shutdown`, only reboot will help. But it does ignore subnets that are already in use. In comments to [the issue](https://github.com/microsoft/WSL/issues/4467) people proposed to create dummy network interfaces using all subnets except what we need WSL to start using. @jgregmac made this script: https://github.com/jgregmac/hyperv-fix-for-devs
 
@@ -58,6 +58,6 @@ Create New Task
         * `powershell.exe`
         * Arguments: `-windowstyle hidden -file "C:\Users\<YOUR USERNAME>\bin\WSL-subnet-fix.ps1"`
 
-Voila, you can use WSL and don't have it f up your work VPN.
+Voila, you can use WSL and don't have it screw up your work VPN.
 
 If you need fixed static IP for your WSL machine, you may look at [this solution](https://github.com/microsoft/WSL/issues/4210#issuecomment-648570493) by @protang. It adds secondary fixed private subnet to WSL network interface.
