@@ -6,7 +6,7 @@ tags: [ Windows, WSL ]
 
 WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other weird magic.
 
-Unfortunately, it has one serious problem: subnet for WSL is selected randomly from all available private subnets, preferably from `172.16.0.0/12` range. So you turn on your notebook, start WSL, then connect to your work VPN and oops - that subnet is already used 🤷‍♂️.
+Unfortunately, it has one serious problem: subnet for WSL is selected randomly from all available private subnets, preferably from `172.16.0.0/12` range. So you turn on your notebook, start WSL, connect to your work VPN and oops - that subnet is already used 🤷‍♂️.
 
 [Issue on Github](https://github.com/microsoft/WSL/issues/4467) to add subnet configuration support in WSL is opened since 2019. People in comments contacted developers and their position is that this  by design, to make WSL networking transparent for newbies, and this won't be changed.
 
