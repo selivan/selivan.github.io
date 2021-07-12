@@ -4,7 +4,7 @@ title:  "WSL fix to not use random subnets"
 tags: [ Windows, WSL, ]
 ---
 
-WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other heavy magic.
+WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other weird magic.
 
 Unfortunately, it has one serious problem: subnet for WSL is selected randomly from all possible private subnets, preeferably from `172.16.0.0/12` range. So you turn on your notebook, start WSL, then connect to work VPN and oops - that subnet is already used. Subnet is selected on first WSL start, restarting with `wsl --shutdown` does not help, only complete machine reboot does.
 
