@@ -55,7 +55,7 @@ Create New Task
     * At log on: Specific user: your user
 * Actions
     * Start a program
-        * `powershell.exe`
+        * Program: `powershell.exe`
         * Arguments: `-windowstyle hidden -file "C:\Users\<YOUR USERNAME>\bin\WSL-subnet-fix.ps1"`
 
 Voila, you can use WSL and don't have it screw up your work VPN.
