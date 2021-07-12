@@ -10,7 +10,7 @@ Unfortunately, it has one serious problem: subnet for WSL is selected randomly f
 
 [Issue on Github](https://github.com/microsoft/WSL/issues/4467) to add subnet configuration support in WSL is opened since 2019. People in comments contacted developers and their position is that this  by design, to make WSL networking transparent for newbies, and this won't be changed.
 
-Funny thing, VirtualBox selects random private subnet for host-only networking adapters. But these subnets are fixed after initial creation and easily can be changed later. Newbies are happy, advanced users are happy, and nobody is having problems. But 
+Funny thing, VirtualBox selects random private subnet for host-only networking adapters. But these subnets are fixed after initial creation and easily can be changed later. Newbies are happy, advanced users are happy, and nobody is having problems. But that's not how WSL developers like to do it.
 
 WSL selects random private subnet on first start, subnet will not be changed after `wsl --shutdown`, only reboot will help. But it does ignore subnets that are already in use. In comments to [the issue](https://github.com/microsoft/WSL/issues/4467) people proposed to create dummy network interfaces using all subnets except what we need WSL to start using. @jgregmac made this script: [github.com/jgregmac/hyperv-fix-for-devs](https://github.com/jgregmac/hyperv-fix-for-devs).
 
