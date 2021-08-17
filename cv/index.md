@@ -22,7 +22,6 @@ I like to create reliable well-automated systems, that require minimal manual ma
 <span class="icon">{% include point-on-map.svg %}</span>Voronezh, Russia. Relocation is possible.
 
 Mail: [selivan.at.github@gmail.com](mailto:selivan.at.github@gmail.com)\\
-Skype: [selivanovpavel](skype:selivanovpavel)\\
 Linkedin: [pavel-selivanov](https://www.linkedin.com/in/pavel-selivanov-9b8398ba/)
 
 # Languages
