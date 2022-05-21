@@ -4,7 +4,7 @@ title:  "Simple bash debugger using trap DEBUG"
 tags: [ bash ]
 ---
 
-Inspired by [this post](https://habr.com/ru/users/tminnigaliev/) by [ @tminnigaliev](https://habr.com/ru/users/tminnigaliev/).
+Inspired by [this post](https://habr.com/ru/post/666982/) by [ @tminnigaliev](https://habr.com/ru/users/tminnigaliev/).
 
 Besides traps(handlers) for signals, bash have 4 special traps:
 
