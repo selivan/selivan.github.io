@@ -3,3 +3,4 @@ _site
 .jekyll-metadata
 # idea/pycharm cache
 .idea
+.obsidian
