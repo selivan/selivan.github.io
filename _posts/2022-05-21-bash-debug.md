@@ -18,7 +18,7 @@ Besides traps(handlers) for signals, bash have 4 special traps:
 ```bash
 function _trap_DEBUG() {
     echo "# $BASH_COMMAND";
-    while read -e -p "debug> " _command; do
+    while read -r -e -p "debug> " _command; do
         if [ -n "$_command" ]; then
             eval "$_command";
         else
