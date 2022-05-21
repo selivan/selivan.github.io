@@ -8,10 +8,10 @@ Inspired by [this post](https://habr.com/ru/users/tminnigaliev/) by [ @tminnigal
 
 Besides traps(handlers) for signals, bash have 4 special traps:
 
-* EXIT to run on exit from the shell.
-* RETURN to run each time a function or a sources script finishes.
-* ERR to run each time command failure would cause the shell to exit if `set -e` is used.
-* DEBUG to execute before every command.
+* `EXIT` to run on exit from the shell.
+* `RETURN` to run each time a function or a sources script finishes.
+* `ERR` to run each time command failure would cause the shell to exit if `set -e` is used.
+* `DEBUG` to execute before every command.
 
  The last one allows to create a simple debugger inside a bash script:
 
