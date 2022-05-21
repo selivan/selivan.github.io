@@ -30,7 +30,7 @@ function _trap_DEBUG() {
 trap '_trap_DEBUG' DEBUG
 ```
 
-Now before executing next command, that command is printed and we have a command prompt. There we can print any command that will be executed in the script context or an empty line to continue.
+Now before executing every command, it is printed and we have a command prompt. There we can print any command to execute in the script context or an empty line to continue.
 
 Also it is possible to run another script in this debugging mode without modifying it. The only catch is that bash functions and scripts inlined by `source` do not inherit DEBUG, RETURN and ERR traps. We can use `set -T` to allow inheriting DEBUG and RETURN traps.
 
