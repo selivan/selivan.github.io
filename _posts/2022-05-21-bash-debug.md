@@ -34,4 +34,4 @@ Now before executing every command, it is printed and we have a command prompt. 
 
 Also it is possible to run another script in this debugging mode without modifying it. The only catch is that bash functions and scripts inlined by `source` do not inherit DEBUG, RETURN and ERR traps. We can use `set -T` to allow inheriting DEBUG and RETURN traps.
 
-Here is such a simple debugger with some bells and whistles added: https://github.com/selivan/bash-debug
+Here is such a simple debugger with some bells and whistles added: [selivan/bash-debug](https://github.com/selivan/bash-debug)
