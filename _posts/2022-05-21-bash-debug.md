@@ -2,6 +2,7 @@
 layout: post
 title:  "Simple bash debugger using trap DEBUG"
 tags: [ bash ]
+comments_by_utterance: true
 ---
 
 Inspired by [this post](https://habr.com/ru/post/666982/) by [ @tminnigaliev](https://habr.com/ru/users/tminnigaliev/).
