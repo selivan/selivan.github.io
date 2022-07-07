@@ -74,6 +74,17 @@ layout: default
       Comments <a href="https://disqus.com/?ref_noscript" rel="nofollow">powered by Disqus</a> are not loaded because you disabled JavaScript or block it with extenshions like Ghostery and Disconnect.me
   </noscript>
 
+{% elsif page.comments_by_utterance }
+
+<script src="https://utteranc.es/client.js"
+        repo="selivan/selivan.github.io"
+        issue-term="pathname"
+        label="Post Comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
 {% else %}
 
 {% comment %}See https://shopify.github.io/liquid/filters/prepend/{% endcomment %}

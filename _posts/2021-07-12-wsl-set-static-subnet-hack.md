@@ -2,6 +2,7 @@
 layout: post
 title:  "WSL fix using random private subnets"
 tags: [ Windows, WSL ]
+comments_by_utterance: true
 ---
 
 WSL is a nice way to work with Linux development environment from Windows. It works pretty decently after version 2, that switched to using proper virtualization instead of translating syscalls and other weird magic.
