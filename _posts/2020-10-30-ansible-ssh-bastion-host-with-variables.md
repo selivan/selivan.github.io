@@ -2,6 +2,7 @@
 layout: post
 title:  "Using Ansible with bastion or jump host with variables"
 tags: [ansible,ssh,bastion]
+comments_by_utterance: true
 ---
 
 Sometimes due to network configuration or security reasons you can't access a host directly, but should use intermediate host, so-called bastion or jump host.
