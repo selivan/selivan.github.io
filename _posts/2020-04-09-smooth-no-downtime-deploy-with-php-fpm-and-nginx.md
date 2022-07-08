@@ -2,6 +2,7 @@
 layout: post
 title:  "Smooth deploy of a loaded PHP web application with php-fpm and nginx, without downtime or errors"
 tags: [php,nginx,deploy]
+comments_by_utterance: true
 ---
 
 **UPDATE 2020-05-10** Added the cachetool option, thanks to reddit users [ds11](https://www.reddit.com/u/ds11) and [SevereHeight](https://www.reddit.com/u/SevereHeight) for mentioning it.
