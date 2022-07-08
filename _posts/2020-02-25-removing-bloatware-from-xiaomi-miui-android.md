@@ -2,6 +2,7 @@
 layout: post
 title:  "Removing all unnecessary bloatware from Xiaomi MIUI 11/12 (Android 9/10) without root"
 tags: [android,xiaomi,miui]
+comments_by_utterance: true
 ---
 
 *TLDR: If you just want the list of bloatware app package names for Xiaomi MIUI - scroll to the end of the artice.*
