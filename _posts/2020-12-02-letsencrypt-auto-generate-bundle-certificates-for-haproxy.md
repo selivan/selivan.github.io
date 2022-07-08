@@ -2,6 +2,7 @@
 layout: post
 title:  "Letsencrypt: auto generate bundle certificates for Haproxy"
 tags: [ letsencrypt, ssl, tls, haproxy ]
+comments_by_utterance: true
 ---
 
 I was surprised to not get instant answer googling "letsencrypt automatically generate bundle certificates for haproxy".
