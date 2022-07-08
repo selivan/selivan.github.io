@@ -2,6 +2,7 @@
 layout: post
 title:  "APT repository signing key id for ansible"
 tags: [ansible,apt,gpg]
+comments_by_utterance: true
 ---
 I've got tired of googling each time I manage apt repositories with ansible, so I put it here.
 
