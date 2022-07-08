@@ -2,6 +2,7 @@
 layout: post
 title:  "Jinja 2 delete an item from dictionary inside a template"
 tags: [ jinja, jinja2, ansible ]
+comments_by_utterance: true
 ---
 
 How to delete an item from a dictionary inside jinja2 template?

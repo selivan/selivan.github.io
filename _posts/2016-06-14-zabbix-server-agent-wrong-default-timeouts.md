@@ -2,6 +2,7 @@
 layout: post
 title:  "Zabbix: unawailable items and hosts caused by wrong default timeout settings"
 tags: zabbix
+comments_by_utterance: true
 ---
 
 I am using zabbix for a long time, it is good monitoring system, simple enough and powerful. Recently I found a subtle problem with it's default settings, which occures very occasionally and leads to temporal stale items data or quick whole host unavailability, monitored by triggers like `agent.ping.nodata()`.

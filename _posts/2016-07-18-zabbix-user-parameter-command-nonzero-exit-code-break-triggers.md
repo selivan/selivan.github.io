@@ -3,6 +3,7 @@ layout: post
 title:  "Zabbix: user parameter command non-zero exit code silently breaks triggers"
 tags: zabbix
 reddit: https://www.reddit.com/r/zabbix/comments/4tgnd8/user_parameter_command_nonzero_exit_code_silently/
+comments_by_utterance: true
 ---
 
 If zabbix userparameter command returns non-zero exit code, item becomes "unsupported". Triggers depending on this item become broken **without any alert**. Here is a good example: you monitor number of active php_fpm processes by getting and parsing URL specified in [pm.status_path](http://php.net/manual/en/install.fpm.configuration.php) . But when number of active processes reaches maximum, it won't work: to display status, you need new php process, and it can not start any more.

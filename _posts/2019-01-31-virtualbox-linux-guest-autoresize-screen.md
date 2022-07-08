@@ -2,6 +2,7 @@
 layout: post
 title:  "Auto-resize screen in Virtualbox guest Linux system"
 tags: [virtualbox, desktop, screen resolution]
+comments_by_utterance: true
 ---
 
 **UPDATE**: There is an alternative solution from @vitalyrepin for VBoxSVGA controller, see it in comments.

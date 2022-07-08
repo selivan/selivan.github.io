@@ -2,6 +2,7 @@
 layout: post
 title:  "Parsing Naxsi messages in nginx error log with Logstash"
 tags: [logstash,grok,nginx,naxsi]
+comments_by_utterance: true
 ---
 
 **UPDATE 2021-03-10**: Catch `nginx.error.server` if server name is set by a regexp. Catch `nginx.error.host_port` if port number is present after `nginx.error.host`. Thanks to contribution by Thomas Basilien and Jean Lutz.

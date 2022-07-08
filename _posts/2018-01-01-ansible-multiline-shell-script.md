@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible: multi-line shell script inside playbook"
 tags: [ansible, bash]
+comments_by_utterance: true
 ---
 Sometimes ansible is not enough, and you want to unleash the raw shell power. But long one-line scripts look totally unreadable. Here is how you can do it with YAML multi-line representation:
 

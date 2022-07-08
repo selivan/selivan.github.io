@@ -2,6 +2,7 @@
 layout: post
 title:  "Building McAfee mysql audit plugin for Percona XtraDB Cluster 5.5 on Ubuntu 14.04.Trusty"
 tags: [mysql,pxc,audit]
+comments_by_utterance: true
 ---
 Percona XtraDB Cluster already includes audit plugin: [Percona Server 5.5 Audit Log Plugin](https://www.percona.com/doc/percona-server/5.5/management/audit_log_plugin.html). It is alternative implementation of [MySQL Enterprise Audit Log Plugin](https://dev.mysql.com/doc/refman/5.5/en/audit-log.html) by Oracle. Unfortunately, in 5.5 version it can not exclude some users from logging. For some use cases this feature is crucial.
 

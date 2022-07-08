@@ -2,6 +2,7 @@
 layout: post
 title:  "Perona XtraDB Cluster 5.5 work over IPv6"
 tags: [mysql,pxc]
+comments_by_utterance: true
 ---
 
 PXC 5.5 does not work with IPv6 out-of-the-box: SST is broken and it can not parse IPv6 addresses from config.

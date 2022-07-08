@@ -2,6 +2,7 @@
 layout: post
 title:  "Using Ansible with bastion host"
 tags: [ansible,ssh,bastion]
+comments_by_utterance: true
 ---
 
 **UPD** Another article on the this topic, using variables instead of ssh config file: [Using Ansible with bastion or jump host with variables](/2020/10/30/ansible-ssh-bastion-host-with-variables.html).

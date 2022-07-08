@@ -2,6 +2,7 @@
 layout: post
 title:  "Zabbix: aggregate check for text items workaround"
 tags: [zabbix]
+comments_by_utterance: true
 ---
 
 In Zabbix you can check things like total disk space or average CPU load for a whole host group using [aggregate checks](https://www.zabbix.com/documentation/4.0/manual/config/items/itemtypes/aggregate). Available aggregate functions are `grpavg`, `grpmax`, `grpmin`, `grpsum`.

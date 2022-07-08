@@ -4,6 +4,7 @@ title:  "Limit frequency of new connection attempts with iptables module recent"
 tags: [iptables, xt_recent]
 redirect_from:
     - '/2018/07/07/block-ssh-bruteforce-with-iptables.html'
+comments_by_utterance: true
 ---
 Block for 20 seconds IP addresses that made more than 3 new connection attempts per 20 seconds:
 

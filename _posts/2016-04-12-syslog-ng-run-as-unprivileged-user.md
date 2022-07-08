@@ -2,6 +2,7 @@
 layout: post
 title:  "Running syslog-ng as unprivileged user"
 tags: [syslog,syslog-ng]
+comments_by_utterance: true
 ---
 By default, at least in Debian/Ubuntu, syslog-ng is launched with root privileges. This is not good. Let's try to run it from `syslog` user, like rsyslog.
 

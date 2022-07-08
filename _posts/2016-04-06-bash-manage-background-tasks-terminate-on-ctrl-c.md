@@ -2,6 +2,7 @@
 layout: post
 title:  "bash: manage background tasks and terminate them all on Ctrl+C"
 tags: bash
+comments_by_utterance: true
 ---
 Run multiple background tasks in bash and gather every task exit code:
 

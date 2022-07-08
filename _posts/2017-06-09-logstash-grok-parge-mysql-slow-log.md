@@ -2,6 +2,7 @@
 layout: post
 title:  "Logstash: parse mysql slow log"
 tags: [logstash,grok,mysql]
+comments_by_utterance: true
 ---
 We send mysql slow log to logstash with rsyslog, as a whole multi-line message. So it should be parsed as single message, logstash [multiline plugin](https://www.elastic.co/guide/en/logstash/current/plugins-codecs-multiline.html) is useless in this case.
 

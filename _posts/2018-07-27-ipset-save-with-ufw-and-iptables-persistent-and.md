@@ -2,6 +2,7 @@
 layout: post
 title:  "Persistent ipset for Ubuntu/Debian compatible with ufw and iptables-persistent"
 tags: [iptables,ipset,ufw,iptables-persistent]
+comments_by_utterance: true
 ---
 
 **UPDATE 2018-07-30**: Added optional saving of changed ipset sets on service stop. Thanks to this [comment](https://www.reddit.com/r/linuxadmin/comments/92fkn5/persistent_ipset_for_ubuntudebian_compatible_with/e3agg55) by [Derhomp](https://www.reddit.com/user/Derhomp).

@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible running multiple handlers subtelty"
 tags: ansible
+comments_by_utterance: true
 ---
 
 In ansible, to run multiple handlers for a task you can chain handlers by `notify` dependencies, like in [this stackoverflow answer](http://stackoverflow.com/a/31618968/890863). There is a small subtelty here. Notify action is triggered only if task was changed. Some tasks do not change at all(like `debug: msg=...`), some tasks do not always change. To run all required handlers surely you should set `changed_when: True` for all of them except the last one:

@@ -2,6 +2,7 @@
 layout: post
 title:  "Console autologin for Ubuntu with systemd(15.04 and higher)"
 tags: [autologin,console,ubuntu,systemd]
+comments_by_utterance: true
 ---
 `agetty` version from `util-linux` starting from Ubuntu 16.04 has option `--autologin`, but for some reason it doesn't work for me: creates empty non-responsive terminal. So let's use `mingetty` instead.
 

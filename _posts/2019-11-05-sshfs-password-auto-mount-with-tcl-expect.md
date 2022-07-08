@@ -2,6 +2,7 @@
 layout: post
 title:  "Auto-mount sshfs protected by password with tcl expect"
 tags: [ssh,sshfs,sftp,mount,pexpect,expect]
+comments_by_utterance: true
 ---
 
 *Note: [SFTP](https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol) is SSH File Transefer Protocol, don't confuse it with [FTPS](https://en.wikipedia.org/wiki/FTPS) - FTP over SSL.*

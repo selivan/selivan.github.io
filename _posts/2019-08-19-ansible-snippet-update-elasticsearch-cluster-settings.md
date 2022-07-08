@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible snippet to update Elasticsearch cluster settings"
 tags: [ ansible, elasticsearch ]
+comments_by_utterance: true
 ---
 
 Ansible snippet to update Elasticsearch [cluster settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html).

@@ -2,6 +2,7 @@
 layout: post
 title:  "Ansible: print role name inside template"
 tags: ansible
+comments_by_utterance: true
 ---
 **UPDATE 3**: Starting from ansible 2.8 there is a special variable `role_name`.
 

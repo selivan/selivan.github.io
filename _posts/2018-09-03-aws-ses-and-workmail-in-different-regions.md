@@ -2,6 +2,7 @@
 layout: post
 title:  "AWS SES and WorkMail for the same domain in different regions"
 tags: [aws,ses,workmail]
+comments_by_utterance: true
 ---
 
 Let's say you are already using SES to send out mail for your domain `example.com`. You verified the domain ownership by creating DNS TXT record `_amazonses.example.com` with required value. After some arguing with AWS support you got it out of sandbox. (Sometimes they refuse to do it for a long time, sometimes they do it on a first request. I supppose, they just roll a dice).
