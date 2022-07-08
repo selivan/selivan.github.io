@@ -2,6 +2,7 @@
 layout: post
 title:  "Syncronize time by NTP before starting any services in Linux"
 tags: [ ntp, chrony, systemd ]
+comments_by_utterance: true
 ---
 
 Servers often have wrong clock on startup. NTP services, like `ntp`, `chrony` and `systemd-timesyncd` try to correct clock gradually to avoid weird bugs in software. Therefore, if server has a large clock offset on startup, it works with incorrect clock for several minutes.
