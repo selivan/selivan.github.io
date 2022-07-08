@@ -2,6 +2,7 @@
 layout: post
 title:  "Systemd broken network.online target workaround"
 tags: [ systemd ]
+comments_by_utterance: true
 ---
 
 [man systemd.special](https://www.freedesktop.org/software/systemd/man/systemd.special.html) says: 
