@@ -42,6 +42,6 @@ Environment="OPENSSL_CONF=/etc/ssl/openssl.cnf.no-tls13"
 And finally applying the new configuration:
 
 {% highlight shell %}
-systemd daemon-reload
-systemd restart rsyslog
+systemctl daemon-reload
+systemctl restart rsyslog
 {% endhighlight %}
