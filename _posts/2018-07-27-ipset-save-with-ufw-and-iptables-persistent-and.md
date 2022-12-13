@@ -55,9 +55,11 @@ RequiredBy=netfilter-persistent.service
 RequiredBy=ufw.service
 ```
 
-Now all that's left is to install it:
+Enable our new systemd service unit:
 
 ```bash
 systemctl daemon-reload
 systemctl enable ipset-persistent.service
 ```
+
+Now all that's left is to create ipsets you need and save them to `/etc/iptables/ipset`.
