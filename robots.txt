@@ -1,11 +1,11 @@
 ---
 layout: null
 ---
-# http://vdaubry.github.io/2014/10/21/SEO-for-your-Jekyll-blog
 User-agent: GPTBot
 Disallow: /
 User-agent: Google-Extended
 Disallow: /
+# http://vdaubry.github.io/2014/10/21/SEO-for-your-Jekyll-blog
 User-agent: *
 Allow: /
 Sitemap: {{ site.url }}/sitemap.xml
