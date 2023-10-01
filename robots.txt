@@ -7,5 +7,6 @@ Disallow: /
 User-agent: Google-Extended
 Disallow: /
 User-agent: *
+Allow: /
 Sitemap: {{ site.url }}/sitemap.xml
 Host: {{ site.url }}
