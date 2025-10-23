@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SOURCE_REPO: https://github.com/selivan/ai.robots.txt.git
+      SOURCE_REPO: https://github.com/ai-robots-txt/ai.robots.txt.git
       SOURCE_BRANCH: main
       SOURCE_FILE: robots.txt                   # File to sync
       TARGET_FILE: robots.txt                 # Destination in this repo
