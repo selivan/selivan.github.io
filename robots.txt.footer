@@ -1,0 +1,7 @@
+# ! keep this empty line
+
+# http://vdaubry.github.io/2014/10/21/SEO-for-your-Jekyll-blog
+User-agent: *
+Allow: /
+Sitemap: {{ site.url }}/sitemap.xml
+Host: {{ site.url }}
