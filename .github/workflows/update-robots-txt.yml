@@ -1,0 +1,65 @@
+name: Get robots.txt from external repo and merge with local header and footer
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+    - cron: "43 14 * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-robots-txt:
+    runs-on: ubuntu-latest
+
+    env:
+      SOURCE_REPO: https://github.com/selivan/ai.robots.txt.git
+      SOURCE_BRANCH: main
+      SOURCE_FILE: robots.txt                   # File to sync
+      TARGET_FILE: robots.txt                 # Destination in this repo
+      TARGET_HEADER: robots.txt.header                 # Destination in this repo
+      TARGET_FOOTER: robots.txt.footer                 # Destination in this repo
+      LAST_HASH_FILE: .robots.txt_last_synced_hash
+      COMMIT_USER: github-actions[bot]
+      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
+
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Get latest commit hash from external repo
+        id: external
+        run: |
+          LATEST_HASH=$(git ls-remote --branches ${SOURCE_REPO} | grep "refs/heads/${SOURCE_BRANCH}\$" | tr '\t' ' ' | cut -d' ' -f1)
+          echo "latest_hash=$LATEST_HASH" >> $GITHUB_OUTPUT
+
+      - name: Check if last synced hash matches
+        id: check
+        run: |
+          LAST_HASH=$(cat "$LAST_HASH_FILE" || echo -n '')
+          echo "last_hash=$LAST_HASH" >> $GITHUB_OUTPUT
+          if [[ "$LAST_HASH" == "${{ steps.external.outputs.latest_hash }}" ]]; then
+            echo "No update needed."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Download robots.txt from external repo and update last synced hash
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          dir=$(mktemp -d --tmpdir=.)
+          git clone --depth=1 "${SOURCE_REPO}" -b "${SOURCE_BRANCH}" "$dir"
+          cat "${TARGET_HEADER:-/dev/null}" "$dir"/"${SOURCE_FILE}" "${TARGET_FOOTER:-/dev/null}" > "${TARGET_FILE}"
+          rm "$dir" -fr
+          echo "${{ steps.external.outputs.latest_hash }}" > "${LAST_HASH_FILE}"
+
+      - name: Commit and push changes
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          git config user.name "$COMMIT_USER"
+          git config user.email "$COMMIT_EMAIL"
+          git add "${TARGET_FILE}" "${LAST_HASH_FILE}"
+          git commit -m "Updated ${TARGET_FILE} from ${SOURCE_REPO}@${{ steps.external.outputs.latest_hash }}"
+          git push
