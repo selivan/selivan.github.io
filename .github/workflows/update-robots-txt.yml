@@ -2,8 +2,7 @@ name: Get robots.txt from external repo and merge with local header and footer
 
 on:
   schedule:
-    - cron: "17 2 * * *"
-    - cron: "43 14 * * *"
+    - cron: "17 23 * * *"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -23,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout target repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
