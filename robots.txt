@@ -2,10 +2,6 @@
 layout: null
 ---
 # Some known AI learning bots from https://github.com/ai-robots-txt/ai.robots.txt
-User-agent: nbot
-User-agent: GrokAppAndroid
-User-agent: GrokBot
-User-agent: ExaSearchBot
 User-agent: AddSearchBot
 User-agent: AgentDataBot
 User-agent: AgentTimes
@@ -71,6 +67,7 @@ User-agent: Echobot Bot
 User-agent: EchoboxBot
 User-agent: ERNIEBot
 User-agent: ExaBot
+User-agent: ExaSearchBot
 User-agent: FacebookBot
 User-agent: facebookexternalhit
 User-agent: Factset_spyderbot
@@ -90,6 +87,8 @@ User-agent: GoogleOther
 User-agent: GoogleOther-Image
 User-agent: GoogleOther-Video
 User-agent: GPTBot
+User-agent: GrokAppAndroid
+User-agent: GrokBot
 User-agent: HenkBot
 User-agent: iAskBot
 User-agent: iaskspider
@@ -128,6 +127,7 @@ User-agent: MistralAI-User/1.0
 User-agent: Mozilla-Tabstack
 User-agent: MyCentralAIScraperBot
 User-agent: NagetBot
+User-agent: nbot
 User-agent: netEstate Imprint Crawler
 User-agent: newsai
 User-agent: NotebookLM
